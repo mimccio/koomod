@@ -1,0 +1,48 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      # the Docker image with Cypress preinstalled
+      - image: cypress/internal:cy-0.19.2
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
+    parallelism: 1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Running Unit tests
+          command: yarn test
+      - run:
+          name: Running Cypress E2E and integration tests
+          command: cypress run --reporter junit --reporter-options "mochaFile=results/my-test-output.xml"
+      - store_test_results:
+          path: results
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots  
+      - run:
+          name: Create build if tests pass
+          command: npm run build
+      - deploy:
+          name: Deploy branch Master, Develop or Feature (komi, komi-dev, komi-feature)
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./node_modules/.bin/surge --project ./build --domain https://komi.surge.sh
+            else
+              if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+                ./node_modules/.bin/surge --project ./build --domain https://komi-dev.surge.sh
+              else
+                ./node_modules/.bin/surge --project ./build --domain https://komi-feature.surge.sh
+              fi
+            fi
