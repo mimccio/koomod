@@ -32,7 +32,7 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots  
       - run:
-          name: Create build if tests pass and branch is Master or Develop
+          name: Create build if tests pass
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               npm run build
@@ -44,7 +44,7 @@ jobs:
               fi
             fi
       - deploy:
-          name: Deploy branch Master or Develop (komi-dev)
+          name: Deploy branch Master, Develop or Feature (komi, komi-dev, komi-feature)
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               ./node_modules/.bin/surge --project ./build --domain komi.surge.sh
