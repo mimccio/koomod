@@ -9,7 +9,7 @@
 
 ## Development
 
-### Creating the app
+### Creating the app
 
 1. Create a new github repo
 
@@ -38,7 +38,7 @@
 
    - initiate gitflow
 
-## Setup test driven development environment
+### Setup test driven development environment
 
 1. eject CRA
 
