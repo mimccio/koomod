@@ -1,4 +1,11 @@
 // @flow
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-export default ({ message = 'hello' }: { message?: string }) => <p>{message}</p>
+import Routes from '../views'
+
+export default () => (
+  <Router>
+    <Routes />
+  </Router>
+)
