@@ -63,6 +63,7 @@
    node_modules/
    config/
    scripts/
+   build/
    ```
 
    - `yarn add eslint-plugin-prettier`
