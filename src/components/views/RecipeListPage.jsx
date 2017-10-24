@@ -1,4 +1,12 @@
 // @flow
 import React from 'react'
 
-export default () => <p>Recipes List Page</p>
+import RecipeListData from '../containers/RecipeListData'
+
+export default () => (
+  <div>
+    <RecipeListData spinner={<p>Loading...</p>}>
+      {Recipes => Recipes.map(recipe => <p key={recipe.id}>{recipe.name}</p>)}
+    </RecipeListData>
+  </div>
+)
