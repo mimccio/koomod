@@ -102,9 +102,7 @@
          }
        ],
        "react/prop-types": 0,
-       "jsx-quotes": [2, "prefer-single"],
-       "react/require-default-props": 0,
-       "react/no-unused-prop-types": 0
+       "jsx-quotes": [2, "prefer-single"]
      }
    }
    ```
