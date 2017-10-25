@@ -1,7 +1,14 @@
 # A noob is making a web app
 
-## Librairies
+## Librairies added
 
+- react
+- react-router-dom
+- react-apollo
+- styled-components
+- flow-bin
+
+- babel-preset-flow
 - eslint-plugin-prettier
 - raf
 - cypress
@@ -114,6 +121,19 @@
    - Run `npm install --save flow-bin` (or `yarn add flow-bin`).
    - Add `"flow": "flow"` to the `scripts` section of your `package.json`.
    - Run `npm run flow init` (or `yarn flow init`) to create a [`.flowconfig` file](https://flowtype.org/docs/advanced-configuration.html) in the root directory.
+   - `yarn add babel-preset-flow`
+
+   - add flow to babel presets in package.json (or babelrc)
+
+     ```json
+     "babel": {
+         "presets": [
+           "react-app",
+           "flow"
+         ]
+       },
+     ```
+
    - Add `// @flow` to any files you want to type check (for example, to `src/App.js`).
 
 
