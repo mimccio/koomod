@@ -31,7 +31,8 @@ class Login extends Component {
         },
       })
       console.log('result', result)
-      const { id, token } = result.data.signinUser.user
+      const { id } = result.data.signinUser.user
+      const { token } = result.data.signinUser
       this.saveUserData(id, token)
     } else {
       console.log('login', this.state.login)
@@ -43,7 +44,8 @@ class Login extends Component {
         },
       })
       console.log('result', result)
-      const { id, token } = result.data.signinUser.user
+      const { id } = result.data.signinUser.user
+      const { token } = result.data.signinUser
       console.log('id', id)
       this.saveUserData(id, token)
     }
