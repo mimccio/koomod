@@ -22,6 +22,7 @@ class Login extends Component {
     evt.persist()
     const { name, email, password } = this.state
     try {
+      console.log('login', this.state.login)
       if (this.state.login) {
         const result = await this.props.signinUserMutation({
           variables: {
@@ -29,9 +30,12 @@ class Login extends Component {
             password,
           },
         })
-        const { id, token } = result.data.signinUser.user
+        console.log('result', result)
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
         this.saveUserData(id, token)
       } else {
+        console.log('login', this.state.login)
         const result = await this.props.createUserMutation({
           variables: {
             name,
@@ -39,13 +43,17 @@ class Login extends Component {
             password,
           },
         })
-        const { id, token } = result.data.signinUser.user
+        console.log('result', result)
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
+        console.log('id', id)
         this.saveUserData(id, token)
       }
 
       this.props.history.push('/recipes')
     } catch (error) {
-      this.setState({ error })
+      console.log('error', error)
+      this.setState({ error: error.message })
       evt.target.blur()
     }
   }
@@ -53,6 +61,7 @@ class Login extends Component {
   saveUserData = (id, token) => {
     localStorage.setItem(GC_USER_ID, id)
     localStorage.setItem(GC_AUTH_TOKEN, token)
+    console.log(id)
   }
 
   toggleLogin = () => {
