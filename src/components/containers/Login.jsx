@@ -21,40 +21,41 @@ class Login extends Component {
   confirm = async (evt) => {
     evt.persist()
     const { name, email, password } = this.state
-    // try {
-    console.log('login', this.state.login)
-    if (this.state.login) {
-      const result = await this.props.signinUserMutation({
-        variables: {
-          email,
-          password,
-        },
-      })
-      console.log('result', result)
-      const { id } = result.data.signinUser.user
-      const { token } = result.data.signinUser
-      this.saveUserData(id, token)
-    } else {
+    try {
       console.log('login', this.state.login)
-      const result = await this.props.createUserMutation({
-        variables: {
-          name,
-          email,
-          password,
-        },
-      })
-      console.log('result', result)
-      const { id } = result.data.signinUser.user
-      const { token } = result.data.signinUser
-      console.log('id', id)
-      this.saveUserData(id, token)
-    }
+      if (this.state.login) {
+        const result = await this.props.signinUserMutation({
+          variables: {
+            email,
+            password,
+          },
+        })
+        console.log('result', result)
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
+        this.saveUserData(id, token)
+      } else {
+        console.log('login', this.state.login)
+        const result = await this.props.createUserMutation({
+          variables: {
+            name,
+            email,
+            password,
+          },
+        })
+        console.log('result', result)
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
+        console.log('id', id)
+        this.saveUserData(id, token)
+      }
 
-    this.props.history.push('/recipes')
-    // } catch (error) {
-    //   this.setState({ error })
-    //   evt.target.blur()
-    // }
+      this.props.history.push('/recipes')
+    } catch (error) {
+      console.log('error', error)
+      this.setState({ error: error.message })
+      evt.target.blur()
+    }
   }
 
   saveUserData = (id, token) => {

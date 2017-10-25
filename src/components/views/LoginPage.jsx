@@ -7,7 +7,7 @@ type Data = {
   name: string,
   email: string,
   password: string,
-  error: {},
+  error: string,
   onChange: Function,
   toggleLogin: Function,
   confirm: Function
@@ -24,7 +24,12 @@ export default ({ history }: { history: {} }) => (
         return (
           <div>
             <h4>{login ? 'Login' : 'Sign Up'}</h4>
-            {error && <p>User already exist with that email</p>}
+            {error &&
+              (error === 'GraphQL error: User already exists with that information' ? (
+                <p>User already exist with that email</p>
+              ) : (
+                <p>{error}</p>
+              ))}
             <div className='flex flex-column'>
               {!login && <input name='name' value={name} onChange={onChange} type='text' placeholder='Your name' />}
               <input name='email' value={email} onChange={onChange} type='text' placeholder='Your email address' />
