@@ -21,38 +21,39 @@ class Login extends Component {
   confirm = async (evt) => {
     evt.persist()
     const { name, email, password } = this.state
-    try {
-      if (this.state.login) {
-        const result = await this.props.signinUserMutation({
-          variables: {
-            email,
-            password,
-          },
-        })
-        const { id, token } = result.data.signinUser.user
-        this.saveUserData(id, token)
-      } else {
-        const result = await this.props.createUserMutation({
-          variables: {
-            name,
-            email,
-            password,
-          },
-        })
-        const { id, token } = result.data.signinUser.user
-        this.saveUserData(id, token)
-      }
-
-      this.props.history.push('/recipes')
-    } catch (error) {
-      this.setState({ error })
-      evt.target.blur()
+    // try {
+    if (this.state.login) {
+      const result = await this.props.signinUserMutation({
+        variables: {
+          email,
+          password,
+        },
+      })
+      const { id, token } = result.data.signinUser.user
+      this.saveUserData(id, token)
+    } else {
+      const result = await this.props.createUserMutation({
+        variables: {
+          name,
+          email,
+          password,
+        },
+      })
+      const { id, token } = result.data.signinUser.user
+      this.saveUserData(id, token)
     }
+
+    this.props.history.push('/recipes')
+    // } catch (error) {
+    //   this.setState({ error })
+    //   evt.target.blur()
+    // }
   }
 
   saveUserData = (id, token) => {
     localStorage.setItem(GC_USER_ID, id)
     localStorage.setItem(GC_AUTH_TOKEN, token)
+    console.log(id)
   }
 
   toggleLogin = () => {
