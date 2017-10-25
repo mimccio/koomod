@@ -22,6 +22,7 @@ class Login extends Component {
     evt.persist()
     const { name, email, password } = this.state
     // try {
+    console.log('login', this.state.login)
     if (this.state.login) {
       const result = await this.props.signinUserMutation({
         variables: {
@@ -29,9 +30,11 @@ class Login extends Component {
           password,
         },
       })
+      console.log('result', result)
       const { id, token } = result.data.signinUser.user
       this.saveUserData(id, token)
     } else {
+      console.log('login', this.state.login)
       const result = await this.props.createUserMutation({
         variables: {
           name,
@@ -39,7 +42,9 @@ class Login extends Component {
           password,
         },
       })
+      console.log('result', result)
       const { id, token } = result.data.signinUser.user
+      console.log('id', id)
       this.saveUserData(id, token)
     }
 
