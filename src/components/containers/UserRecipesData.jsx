@@ -1,5 +1,8 @@
 import React from 'react'
-import { withUserRecipesData } from '../../graphql/queries'
+import { graphql } from 'react-apollo'
+
+import { USER_RECIPES_QUERY } from '../../graphql/queries'
+import { GC_USER_ID } from '../../lib/constants'
 
 export const UserRecipesHOC = ({ userRecipesQuery: { loading, error, User }, children, spinner }) => {
   if (loading) {
@@ -8,8 +11,15 @@ export const UserRecipesHOC = ({ userRecipesQuery: { loading, error, User }, chi
   if (error) {
     return <p>{error.message}</p>
   }
-  console.log(User.recipes)
   return children(User.recipes)
 }
+
+export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
+  name: 'userRecipesQuery',
+  options: () => ({
+    variables: { userId: localStorage.getItem(GC_USER_ID) },
+    fetchPolicy: 'cache-first',
+  }),
+})
 
 export default withUserRecipesData(UserRecipesHOC)
