@@ -10,6 +10,7 @@ class Login extends Component {
     email: '',
     password: '',
     name: '',
+    error: '',
   }
 
   onChange = (evt) => {
@@ -18,29 +19,33 @@ class Login extends Component {
 
   confirm = async () => {
     const { name, email, password } = this.state
+    try {
+      if (this.state.login) {
+        const result = await this.props.signinUserMutation({
+          variables: {
+            email,
+            password,
+          },
+        })
+        const { id, token } = result.data.signinUser.user
+        this.saveUserData(id, token)
+      } else {
+        const result = await this.props.createUserMutation({
+          variables: {
+            name,
+            email,
+            password,
+          },
+        })
+        const { id, token } = result.data.signinUser.user
+        this.saveUserData(id, token)
+      }
 
-    if (this.state.login) {
-      const result = await this.props.signinUserMutation({
-        variables: {
-          email,
-          password,
-        },
-      })
-      const { id, token } = result.data.signinUser.user
-      this.saveUserData(id, token)
-    } else {
-      const result = await this.props.createUserMutation({
-        variables: {
-          name,
-          email,
-          password,
-        },
-      })
-      const { id, token } = result.data.signinUser.user
-      this.saveUserData(id, token)
+      this.props.history.push('/recipes')
+    } catch (error) {
+      console.log('error', error)
+      this.setState({ error })
     }
-
-    this.props.history.push('/recipes')
   }
 
   saveUserData = (id, token) => {
@@ -54,7 +59,14 @@ class Login extends Component {
 
   render() {
     const data = {
-      state: this.state, onChange: this.onChange, toggleLogin: this.toggleLogin, confirm: this.confirm,
+      login: this.state.login,
+      email: this.state.email,
+      password: this.state.password,
+      name: this.state.name,
+      onChange: this.onChange,
+      toggleLogin: this.toggleLogin,
+      confirm: this.confirm,
+      error: this.state.error,
     }
     return this.props.children(data)
   }
