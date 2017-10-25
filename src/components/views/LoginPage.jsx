@@ -48,7 +48,7 @@ export default ({ history }: { history: {} }) => (
                 aria-checked='false'
                 tabIndex='0'
               >
-                {login ? 'need to create an account?' : 'already have an account?'}
+                {login ? 'need to create an account?' : `${error && '⇾'} already have an account?`}
               </div>
             </div>
           </div>

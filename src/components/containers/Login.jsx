@@ -14,10 +14,12 @@ class Login extends Component {
   }
 
   onChange = (evt) => {
+    if (evt.target.name === 'email') this.setState({ error: '' })
     this.setState({ [evt.target.name]: evt.target.value })
   }
 
-  confirm = async () => {
+  confirm = async (evt) => {
+    evt.persist()
     const { name, email, password } = this.state
     try {
       if (this.state.login) {
@@ -43,8 +45,8 @@ class Login extends Component {
 
       this.props.history.push('/recipes')
     } catch (error) {
-      console.log('error', error)
       this.setState({ error })
+      evt.target.blur()
     }
   }
 
