@@ -25,6 +25,8 @@ export const fontSizeConfig = {
 // Spacing (px)
 export const baseSpacingConfig = 50
 
+export const topbarHeightConfig = 50
+
 // Radius (px)
 export const baseRadiusConfig = 60
 

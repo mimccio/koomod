@@ -33,6 +33,14 @@
     "jsx-quotes": [2, "prefer-single"],
     "react/require-default-props": 0,
     "import/prefer-default-export": 1,
-    "no-console": 0
+    "no-console": 0,
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight", "to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ]
   }
 }

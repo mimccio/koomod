@@ -1,11 +1,15 @@
 // @flow
 import React from 'react'
 
-import styled from 'styled-components'
+import { GC_USER_ID } from '../../lib/constants'
+import { PageLayout } from '../comps/layouts'
+import { Topbar } from '../comps/nav'
 
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-`
-
-export default () => <Wrapper><p>Home Page</p></Wrapper>
+export default () => {
+  const userId = localStorage.getItem(GC_USER_ID)
+  return (
+    <PageLayout topbar={<Topbar to='/recipes' rightIconName={userId ? 'restaurant_menu' : 'restaurant_menu'} />}>
+      <p>Home</p>
+    </PageLayout>
+  )
+}
