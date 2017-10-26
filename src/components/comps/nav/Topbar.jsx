@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import { TransitionGroup } from 'react-transition-group'
-import { Fade } from '../animations'
+// import { Fade } from '../animations'
 
 import MenuToggler from '../../containers/MenuToggler'
 import Menu from './Menu'
 import leftIcon from './leftIcon'
+import rightIcon from './rightIcon'
 import BarTitle from './BarTitle'
-import { RightBarIcon } from './BarIcon'
+// import { RightBarIcon } from './BarIcon'
 import { topbarHeight } from '../../../style/config'
 
 const Bar = styled.div`
@@ -29,26 +30,14 @@ const Bar = styled.div`
   color: white;
 `
 
-export default ({ to, rightIconName, title }) => (
+export default ({ to, title }) => (
   <MenuToggler>
     {({ menuIsOpen, toggleMenu }) => (
       <div>
         <Bar>
           <TransitionGroup>{leftIcon(menuIsOpen, toggleMenu)}</TransitionGroup>
-
           <BarTitle>{title}</BarTitle>
-
-          <TransitionGroup>
-            <Fade key={rightIconName}>
-              {status => (
-                <Link to={to}>
-                  <RightBarIcon status={status}>
-                    <i className='material-icons'>{rightIconName}</i>
-                  </RightBarIcon>
-                </Link>
-              )}
-            </Fade>
-          </TransitionGroup>
+          <TransitionGroup>{rightIcon(to)}</TransitionGroup>
         </Bar>
 
         <Menu menuIsOpen={menuIsOpen} />
