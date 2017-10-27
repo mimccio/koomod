@@ -41,9 +41,20 @@ const Slider = styled.div`
   );
 `
 
-export default ({ menuIsOpen, history, toggleMenu }) => {
+export default ({
+  menuIsOpen, history, location, toggleMenu,
+}) => {
   const userId = localStorage.getItem(GC_USER_ID)
-
+  const login =
+    location.pathname === '/login' || location.pathname === '/sign-up' ? (
+      <Link onClick={toggleMenu} to='/'>
+        Home
+      </Link>
+    ) : (
+      <Link onClick={toggleMenu} to='/login'>
+        Login
+      </Link>
+    )
   return (
     <div onBlur={() => console.log('blur')}>
       <Transition in={menuIsOpen} timeout={0}>
@@ -62,9 +73,7 @@ export default ({ menuIsOpen, history, toggleMenu }) => {
                 logout
               </button>
             ) : (
-              <Link onClick={toggleMenu} to='/login'>
-                login
-              </Link>
+              login
             )}
           </Slider>
         )}

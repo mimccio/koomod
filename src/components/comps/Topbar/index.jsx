@@ -38,7 +38,7 @@ export default withRouter(({ location, history }) => (
           <RightIcon location={location} />
         </Bar>
 
-        <Menu menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} history={history} />
+        <Menu menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} history={history} location={location} />
       </div>
     )}
   </MenuToggler>
