@@ -22,14 +22,20 @@ export default ({ location }) => (
     <FadeTransition key={`title-${location.key}`}>
       {status => (
         <Switch location={location}>
-          <Route exact path='/' render={() => <Title status={status}>Home</Title>} />
+          <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />
           <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
           <Route exact path='/shopping-List' render={() => <Title status={status}>Shopping List</Title>} />
           <Route
             exact
             path='/recipe/:id'
             render={({ match }) => (
-              <RecipeNameData match={match}>{recipeName => <Title status={status}>{recipeName}</Title>}</RecipeNameData>
+              <RecipeNameData match={match}>
+                {recipeName => (
+                  <Title small status={status}>
+                    {recipeName}
+                  </Title>
+                )}
+              </RecipeNameData>
             )}
           />
         </Switch>

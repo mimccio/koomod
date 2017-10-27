@@ -8,8 +8,8 @@ export const FadeTransition = ({ children, ...props }) => (
     appear
     {...props}
     timeout={{
-      enter: 150,
-      exit: 150,
+      enter: 100,
+      exit: 100,
     }}
   >
     {status => children(status)}
@@ -18,7 +18,7 @@ export const FadeTransition = ({ children, ...props }) => (
 
 export const FadeComp = styled.div`
   position: absolute;
-  transition: all 150ms ease-in-out;
+  transition: all 100ms ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;

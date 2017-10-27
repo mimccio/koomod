@@ -2,19 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
-import { TransitionGroup } from 'react-transition-group'
-// import { Fade } from '../animations'
-
 import MenuToggler from '../../containers/MenuToggler'
 import Menu from './Menu'
-import leftIcon from './leftIcon'
+import LeftIcon from './LeftIcon'
 import RightIcon from './RightIcon'
-import BarTitle from './BarTitle'
-// import { RightBarIcon } from './BarIcon'
+import Title from './Title'
+
 import { topbarHeight } from '../../../style/config'
+import palette from '../../../style/palette'
 
 const Bar = styled.div`
-  background-color: #8e24aa;
+  background-color: ${palette.primary.main};
   position: fixed;
   top: 0;
   left: 0;
@@ -30,13 +28,13 @@ const Bar = styled.div`
   color: white;
 `
 
-export default withRouter(({ location, history }) => (
+export default withRouter(({ location }) => (
   <MenuToggler>
     {({ menuIsOpen, toggleMenu }) => (
       <div>
         <Bar>
-          <TransitionGroup>{leftIcon(menuIsOpen, toggleMenu)}</TransitionGroup>
-          <BarTitle location={location} history={history} />
+          <LeftIcon menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} />
+          <Title location={location} />
           <RightIcon location={location} />
         </Bar>
 

@@ -20,3 +20,12 @@ export const USER_RECIPES_QUERY = gql`
     }
   }
 `
+
+export const RECIPE_NAME_QUERY = gql`
+  query RecipeNameQuery($recipeId: ID) {
+    Recipe(id: $recipeId) {
+      id
+      name
+    }
+  }
+`
