@@ -28,7 +28,7 @@ const Bar = styled.div`
   color: white;
 `
 
-export default withRouter(({ location }) => (
+export default withRouter(({ location, history }) => (
   <MenuToggler>
     {({ menuIsOpen, toggleMenu }) => (
       <div>
@@ -38,7 +38,7 @@ export default withRouter(({ location }) => (
           <RightIcon location={location} />
         </Bar>
 
-        <Menu menuIsOpen={menuIsOpen} />
+        <Menu menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} history={history} />
       </div>
     )}
   </MenuToggler>

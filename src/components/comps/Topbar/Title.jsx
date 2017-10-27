@@ -24,6 +24,8 @@ export default ({ location }) => (
         <Switch location={location}>
           <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />
           <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
+          <Route exact path='/login' render={() => <Title status={status}>Login</Title>} />
+          <Route exact path='/sign-up' render={() => <Title status={status}>Sign Up</Title>} />
           <Route exact path='/shopping-List' render={() => <Title status={status}>Shopping List</Title>} />
           <Route
             exact

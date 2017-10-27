@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
+import { Link } from 'react-router-dom'
+
+import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
 
 const Slider = styled.div`
   // display: flex;
@@ -38,10 +41,34 @@ const Slider = styled.div`
   );
 `
 
-export default ({ menuIsOpen }) => (
-  <div onBlur={() => console.log('blur')}>
-    <Transition in={menuIsOpen} timeout={0}>
-      {status => <Slider status={status}>hello msh gseiy gesih gesorhgoiseh gosleihoiesh mohrse</Slider>}
-    </Transition>
-  </div>
-)
+export default ({ menuIsOpen, history, toggleMenu }) => {
+  const userId = localStorage.getItem(GC_USER_ID)
+
+  return (
+    <div onBlur={() => console.log('blur')}>
+      <Transition in={menuIsOpen} timeout={0}>
+        {status => (
+          <Slider status={status}>
+            {userId ? (
+              <button
+                onClick={() => {
+                  toggleMenu()
+                  localStorage.removeItem(GC_USER_ID)
+                  localStorage.removeItem(GC_AUTH_TOKEN)
+
+                  history.push('/')
+                }}
+              >
+                logout
+              </button>
+            ) : (
+              <Link onClick={toggleMenu} to='/login'>
+                login
+              </Link>
+            )}
+          </Slider>
+        )}
+      </Transition>
+    </div>
+  )
+}
