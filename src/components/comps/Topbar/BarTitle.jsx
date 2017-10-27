@@ -1,14 +1,39 @@
+import React from 'react'
 import styled from 'styled-components'
+import { TransitionGroup } from 'react-transition-group'
+import { Route, Switch } from 'react-router-dom'
 
-export default styled.h2`
+import { FadeTransition, FadeComp } from '../animations/Fade'
+import RecipeNameData from '../../containers/RecipeNameData'
+
+const Title = styled(FadeComp)`
+  left: calc((100vw - 50vw) - 100px);
   text-align: center;
   font-size: ${props => (props.small ? '16px' : '20px')};
-  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 50px;
+  width: 200px;
 `
+
+export default ({ location }) => (
+  <TransitionGroup>
+    <FadeTransition key={`title-${location.key}`}>
+      {status => (
+        <Switch location={location}>
+          <Route exact path='/' render={() => <Title status={status}>Home</Title>} />
+          <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
+          <Route exact path='/shopping-List' render={() => <Title status={status}>Shopping List</Title>} />
+          <Route
+            exact
+            path='/recipe/:id'
+            render={({ match }) => (
+              <RecipeNameData match={match}>{recipeName => <Title status={status}>{recipeName}</Title>}</RecipeNameData>
+            )}
+          />
+        </Switch>
+      )}
+    </FadeTransition>
+  </TransitionGroup>
+)

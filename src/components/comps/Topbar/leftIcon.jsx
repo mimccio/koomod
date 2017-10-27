@@ -1,38 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
+import { FadeTransition, FadeComp } from '../animations/Fade'
 
-import { GC_USER_ID } from '../../../lib/constants'
-import { Fade } from '../animations'
-import { LeftBarIcon } from './BarIcon'
-
-const Brand = styled.div`
-  width: 70px;
-  text-align: center;
-`
+const Icon = styled(FadeComp)`cursor: pointer;`
 
 export default (menuIsOpen, toggleMenu) => {
-  const userId = localStorage.getItem(GC_USER_ID)
-  if (!userId) {
-    return <Fade key='brand'>{status => <Brand status={status}>Komi</Brand>}</Fade>
-  }
   if (menuIsOpen) {
     return (
-      <Fade key='arrow_back'>
+      <FadeTransition key='arrow_back'>
         {status => (
-          <LeftBarIcon status={status} onClick={toggleMenu}>
+          <Icon status={status} onClick={toggleMenu}>
             <i className='material-icons'>arrow_back</i>
-          </LeftBarIcon>
+          </Icon>
         )}
-      </Fade>
+      </FadeTransition>
     )
   }
   return (
-    <Fade key='menu'>
+    <FadeTransition key='menu'>
       {status => (
-        <LeftBarIcon status={status} onClick={toggleMenu}>
+        <Icon status={status} onClick={toggleMenu}>
           <i className='material-icons'>menu</i>
-        </LeftBarIcon>
+        </Icon>
       )}
-    </Fade>
+    </FadeTransition>
   )
 }
