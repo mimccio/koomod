@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react'
+import { Link } from 'react-router-dom'
+
 import Login from '../containers/Login'
+import { PageLayout } from '../comps/layouts'
 
 type Data = {
   login: boolean,
@@ -9,56 +12,50 @@ type Data = {
   password: string,
   error: string,
   onChange: Function,
-  toggleLogin: Function,
+  signUp: string,
   confirm: Function
 }
 
-export default ({ history }: { history: {} }) => (
-  <div>
-    <Login history={history}>
-      {(data: Data) => {
-        const {
- login, email, name, password, error, onChange, toggleLogin, confirm,
+export default ({ history, signUp }: { history: { push: Function }, signUp: boolean }) => (
+  <Login history={history} signUp={signUp}>
+    {(data: Data) => {
+      const {
+ email, name, password, error, onChange, confirm,
 } = data
 
-        return (
+      return (
+        <PageLayout>
+          {error &&
+            (error === 'GraphQL error: User already exists with that information' ? (
+              <p>User already exist with that email</p>
+            ) : (
+              <p>{error}</p>
+            ))}
+          <div className='flex flex-column'>
+            {signUp && <input name='name' value={name} onChange={onChange} type='text' placeholder='Your name' />}
+            <input name='email' value={email} onChange={onChange} type='text' placeholder='Your email address' />
+            <input
+              name='password'
+              value={password}
+              onChange={onChange}
+              type='password'
+              placeholder='Choose a safe password'
+            />
+          </div>
           <div>
-            <h4>{login ? 'Login' : 'Sign Up'}</h4>
-            {error &&
-              (error === 'GraphQL error: User already exists with that information' ? (
-                <p>User already exist with that email</p>
-              ) : (
-                <p>{error}</p>
-              ))}
-            <div className='flex flex-column'>
-              {!login && <input name='name' value={name} onChange={onChange} type='text' placeholder='Your name' />}
-              <input name='email' value={email} onChange={onChange} type='text' placeholder='Your email address' />
-              <input
-                name='password'
-                value={password}
-                onChange={onChange}
-                type='password'
-                placeholder='Choose a safe password'
-              />
+            <div onClick={confirm} onKeyDown={() => {}} role='switch' aria-checked='false' tabIndex='0'>
+              {!signUp ? 'login' : 'create account'}
             </div>
             <div>
-              <div onClick={confirm} onKeyDown={() => {}} role='switch' aria-checked='false' tabIndex='0'>
-                {login ? 'login' : 'create account'}
-              </div>
-              <div
-                className='pointer button'
-                onClick={toggleLogin}
-                onKeyDown={() => {}}
-                role='switch'
-                aria-checked='false'
-                tabIndex='0'
-              >
-                {login ? 'need to create an account?' : `${error && '⇾'} already have an account?`}
-              </div>
+              {!signUp ? (
+                <Link to='/sign-up'>need to create an account?</Link>
+              ) : (
+                <Link to='/login'>{error && '⇾'} already have an account ?</Link>
+              )}
             </div>
           </div>
-        )
-      }}
-    </Login>
-  </div>
+        </PageLayout>
+      )
+    }}
+  </Login>
 )

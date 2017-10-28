@@ -11,6 +11,7 @@ import globalStyles from '../../style/globalStyle'
 
 import { GC_AUTH_TOKEN } from '../../lib/constants'
 import Routes from '../views'
+import Topbar from '../comps/Topbar'
 
 const networkInterface = createNetworkInterface({
   uri: 'https://api.graph.cool/simple/v1/komi-apollo',
@@ -36,7 +37,10 @@ const client = new ApolloClient({
 export default () => (
   <Router>
     <ApolloProvider client={client}>
-      <Routes />
+      <div>
+        <Topbar />
+        <Routes />
+      </div>
     </ApolloProvider>
   </Router>
 )

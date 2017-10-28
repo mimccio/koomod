@@ -7,16 +7,20 @@ import palette from './palette'
 injectGlobal`
 
   {/* Body */}
+  body{
+    color: ${palette.text};
+  }
+
   div, p, a, li, button, input, textarea, select {
     font-family: "Roboto", "Noto Sans", sans-serif;
     font-size: ${fontSize.body};
-    color: ${palette.text};
+    
   }
 
   {/* Headings */}
   h1, h2, h3, h4, h5, h6 {
     font-family: "Roboto", "Noto Sans", sans-serif;
-    color: ${palette.text};
+    font-weight: normal;
   }
 
   h1 {
@@ -52,6 +56,7 @@ injectGlobal`
 
   i {
     text-decoration: none;
+    color: inherit;
   }
 
 `

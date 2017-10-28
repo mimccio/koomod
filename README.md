@@ -2,11 +2,12 @@
 
 ## Librairies added
 
-- react
 - react-router-dom
 - react-apollo
 - styled-components
 - flow-bin
+- react-transition-group 
+- facepaint
 
 - babel-preset-flow
 - eslint-plugin-prettier

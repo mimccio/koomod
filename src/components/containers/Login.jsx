@@ -6,7 +6,6 @@ import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../graphql/mutati
 
 class Login extends Component {
   state = {
-    login: true, // switch between Login and SignUp
     email: '',
     password: '',
     name: '',
@@ -22,8 +21,7 @@ class Login extends Component {
     evt.persist()
     const { name, email, password } = this.state
     try {
-      console.log('login', this.state.login)
-      if (this.state.login) {
+      if (!this.props.signUp) {
         const result = await this.props.signinUserMutation({
           variables: {
             email,
@@ -35,7 +33,6 @@ class Login extends Component {
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
       } else {
-        console.log('login', this.state.login)
         const result = await this.props.createUserMutation({
           variables: {
             name,
@@ -62,10 +59,6 @@ class Login extends Component {
     localStorage.setItem(GC_USER_ID, id)
     localStorage.setItem(GC_AUTH_TOKEN, token)
     console.log(id)
-  }
-
-  toggleLogin = () => {
-    this.setState({ login: !this.state.login })
   }
 
   render() {
