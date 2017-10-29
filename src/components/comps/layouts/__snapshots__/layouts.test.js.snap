@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
+.c0 {
+  background-color: #f3e5f5;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: top;
+  -webkit-justify-content: top;
+  -ms-flex-pack: top;
+  justify-content: top;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 50px;
+  border: none;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+<div
+  className="c0"
+>
+  <div>
+    <p>
+      hello
+    </p>
+    <p>
+      world
+    </p>
+  </div>
+</div>
+`;

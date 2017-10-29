@@ -7,16 +7,17 @@ import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
 
 const RecipeItem = styled.div`
-  color: ${palette.text};
-  height: 80px;
-  display: flex;
-  padding: 10px;
   border-bottom: 1px solid ${palette.divider};
-  width: 280px;
+  color: ${palette.text};
+  display: flex;
+  height: 80px;
+  padding: 10px;
 `
 
+const sideWidth = '60px'
+
 const Main = styled(Link)`
-  width: calc(100% - 60px);
+  width: calc(100% - ${sideWidth});
   display: flex;
   flex-direction: column;
 `
@@ -25,7 +26,7 @@ const Side = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
+  width: ${sideWidth};
   cursor: pointer;
 
   i {

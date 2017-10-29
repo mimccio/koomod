@@ -9,6 +9,10 @@
 - react-transition-group 
 - facepaint
 
+- enzyme
+- jest-styled-components
+- react-test-renderer
+
 - babel-preset-flow
 - eslint-plugin-prettier
 - raf

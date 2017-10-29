@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
@@ -13,7 +14,7 @@ const Title = styled(FadeComp)`
   align-items: center;
   left: calc((100vw - 50vw) - 100px);
   text-align: center;
-  font-size: ${props => (props.small ? '16px' : '20px')};
+  font-size: ${({ small }: { small: boolean }) => (small ? '16px' : '20px')};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -21,10 +22,10 @@ const Title = styled(FadeComp)`
   width: 200px;
 `
 
-export default ({ location }) => (
+export default ({ location }: { location: { pathname: string, key: string } }) => (
   <TransitionGroup>
     <FadeTransition key={`title-${location.key}`}>
-      {status => (
+      {(status: string) => (
         <Switch location={location}>
           <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />
           <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
@@ -35,7 +36,7 @@ export default ({ location }) => (
             path='/recipe/:id'
             render={({ match }) => (
               <RecipeNameData match={match}>
-                {recipeName => (
+                {(recipeName: string) => (
                   <Title small status={status}>
                     {recipeName}
                   </Title>

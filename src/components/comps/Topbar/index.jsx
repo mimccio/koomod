@@ -1,4 +1,5 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
@@ -30,7 +31,7 @@ const Bar = styled.div`
 
 export default withRouter(({ location, history }) => (
   <MenuToggler>
-    {({ menuIsOpen, toggleMenu }) => (
+    {({ menuIsOpen, toggleMenu }: { menuIsOpen: boolean, toggleMenu: Function }) => (
       <div>
         <Bar>
           <LeftIcon menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} />

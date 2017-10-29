@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
@@ -13,10 +14,10 @@ const Icon = styled(FadeComp)`
   width: 50px;
 `
 
-export default ({ menuIsOpen, toggleMenu }) => (
+export default ({ menuIsOpen, toggleMenu }: { menuIsOpen: boolean, toggleMenu: Function }) => (
   <TransitionGroup>
     <FadeTransition key={menuIsOpen ? 'back' : 'menu'}>
-      {status =>
+      {(status: string) =>
         (menuIsOpen ? (
           <Icon status={status} onClick={toggleMenu}>
             <i className='material-icons'>arrow_back</i>

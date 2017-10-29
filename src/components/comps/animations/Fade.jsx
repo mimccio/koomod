@@ -1,10 +1,19 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 
 const delay = 100
 
-export const FadeTransition = ({ children, enter = delay, ...props }) => (
+export const FadeTransition = ({
+  children,
+  enter = delay,
+  ...props
+}: {
+  children: Function,
+  enter?: number,
+  props?: {}
+}) => (
   <Transition
     exit
     appear
@@ -14,7 +23,7 @@ export const FadeTransition = ({ children, enter = delay, ...props }) => (
       exit: delay,
     }}
   >
-    {status => children(status)}
+    {(status: string): React.Node => children(status)}
   </Transition>
 )
 
@@ -22,33 +31,33 @@ export const FadeComp = styled.div`
   transition: all 100ms ease-in-out;
 
   transform: scale(
-    ${(props) => {
-    if (props.status === 'entering') {
+    ${({ status }: { status: string }) => {
+    if (status === 'entering') {
       return 0.2
     }
-    if (props.status === 'entered') {
+    if (status === 'entered') {
       return 1
     }
-    if (props.status === 'exiting') {
+    if (status === 'exiting') {
       return 0.2
     }
-    if (props.status === 'exited') {
+    if (status === 'exited') {
       return 0.2
     }
     return 1
   }}
   );
-  opacity: ${(props) => {
-    if (props.status === 'entering') {
+  opacity: ${({ status }: { status: string }) => {
+    if (status === 'entering') {
       return 0
     }
-    if (props.status === 'entered') {
+    if (status === 'entered') {
       return 1
     }
-    if (props.status === 'exiting') {
+    if (status === 'exiting') {
       return 0
     }
-    if (props.status === 'exited') {
+    if (status === 'exited') {
       return 0
     }
     return 1

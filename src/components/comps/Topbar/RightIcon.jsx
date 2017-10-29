@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import styled from 'styled-components'
 import { Link, Route, Switch } from 'react-router-dom'
@@ -28,14 +29,14 @@ const RightBarIcon = styled(FadeComp)`
   width: 50px;
 `
 
-export default ({ location }) => {
+export default ({ location }: { location: { pathname: string, key: string } }) => {
   const userId = localStorage.getItem(GC_USER_ID)
   const loginKey =
     location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : `login-${location.key}`
   return (
     <TransitionGroup>
       <FadeTransition key={userId ? location.key : loginKey}>
-        {(status) => {
+        {(status: string) => {
           if (location.pathname === '/login' || location.pathname === '/sign-up') {
             return (
               <Link to='/'>
