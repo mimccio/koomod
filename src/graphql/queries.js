@@ -16,6 +16,11 @@ export const USER_RECIPES_QUERY = gql`
       recipes(first: 100) {
         id
         name
+        description
+        isSelected
+        pers
+        shopFor
+        isOptimistic
       }
     }
   }

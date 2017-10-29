@@ -16,7 +16,7 @@ type Data = {
   confirm: Function
 }
 
-export default ({ history, signUp }: { history: { push: Function }, signUp: boolean }) => (
+export default ({ history, signUp }: { history: {}, signUp: boolean }) => (
   <Login history={history} signUp={signUp}>
     {(data: Data) => {
       const {
