@@ -43,6 +43,8 @@ jobs:
               if [ "${CIRCLE_BRANCH}" == "develop" ]; then
                 ./node_modules/.bin/surge --project ./build --domain https://komi-dev.surge.sh
               else
-                ./node_modules/.bin/surge --project ./build --domain https://komi-feature.surge.sh
+                if [ "${CIRCLE_BRANCH}" == "feature" ]; then
+                  ./node_modules/.bin/surge --project ./build --domain https://komi-feature.surge.sh
+                fi
               fi
             fi
