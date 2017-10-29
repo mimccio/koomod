@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = `
+.c0 {
+  background-color: #fafafa;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-itels: flex-start;
+  -webkit-box-align-itels: flex-start;
+  -ms-flex-align-itels: flex-start;
+  align-itels: flex-start;
+  width: 100vw;
+  max-width: 460px;
+}
+
+<div
+  className="c0"
+>
+  <div>
+    <p>
+      hello
+    </p>
+    <p>
+      world
+    </p>
+  </div>
+</div>
+`;
+
 exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
 .c0 {
   background-color: #f3e5f5;

@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loading test suite "EmptyList" should match snapshot 1`] = `
+.c0 {
+  background-color: #fafafa;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-itels: flex-start;
+  -webkit-box-align-itels: flex-start;
+  -ms-flex-align-itels: flex-start;
+  align-itels: flex-start;
+  width: 100vw;
+  max-width: 460px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 200px;
+  color: rgba(0,0,0,.54);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  border: 2px solid red;
+  text-align: center;
+  padding: 10px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <p
+      className="c2"
+    >
+      loading...
+    </p>
+  </div>
+</div>
+`;
+
+exports[`loading test suite "Spinner" should match snapshot 1`] = `
+.c0 {
+  height: calc(100vh - 156px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  margin: 100px auto;
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.c2 {
+  background-color: #ba68c8;
+  border-radius: 25%;
+  width: 14px;
+  height: 16px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  -webkit-animation: dWlLJE 2.8s infinite ease-in-out;
+  animation: dWlLJE 2.8s infinite ease-in-out;
+}
+
+.c3 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+  width: 16px;
+  height: 14px;
+}
+
+.c4 {
+  -webkit-animation-delay: -1.4s;
+  animation-delay: -1.4s;
+}
+
+.c5 {
+  -webkit-animation-delay: -2.1s;
+  animation-delay: -2.1s;
+  width: 16px;
+  height: 14px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    />
+    <div
+      className="c3 c2"
+    />
+    <div
+      className="c4 c2"
+    />
+    <div
+      className="c5 c2"
+    />
+  </div>
+</div>
+`;
