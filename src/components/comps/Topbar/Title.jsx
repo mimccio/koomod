@@ -7,13 +7,17 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 import RecipeNameData from '../../containers/RecipeNameData'
 
 const Title = styled(FadeComp)`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: calc((100vw - 50vw) - 100px);
   text-align: center;
   font-size: ${props => (props.small ? '16px' : '20px')};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 50px;
+  height: 100%;
   width: 200px;
 `
 

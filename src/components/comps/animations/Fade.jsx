@@ -2,14 +2,16 @@ import React from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 
-export const FadeTransition = ({ children, ...props }) => (
+const delay = 100
+
+export const FadeTransition = ({ children, enter = delay, ...props }) => (
   <Transition
     exit
     appear
     {...props}
     timeout={{
-      enter: 100,
-      exit: 100,
+      enter,
+      exit: delay,
     }}
   >
     {status => children(status)}
@@ -17,13 +19,7 @@ export const FadeTransition = ({ children, ...props }) => (
 )
 
 export const FadeComp = styled.div`
-  position: absolute;
   transition: all 100ms ease-in-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 50px;
 
   transform: scale(
     ${(props) => {
@@ -39,7 +35,7 @@ export const FadeComp = styled.div`
     if (props.status === 'exited') {
       return 0.2
     }
-    return 0.2
+    return 1
   }}
   );
   opacity: ${(props) => {
@@ -55,6 +51,6 @@ export const FadeComp = styled.div`
     if (props.status === 'exited') {
       return 0
     }
-    return 0
+    return 1
   }};
 `

@@ -4,7 +4,7 @@ import React from 'react'
 import UserRecipesData from '../containers/UserRecipesData'
 import { PageLayout } from '../comps/layouts'
 
-import RecipeItem from '../comps/RecipeItem'
+import { RecipeItem } from '../comps/recipe'
 
 type Recipe = {
   id: string,

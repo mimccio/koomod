@@ -9,11 +9,12 @@ injectGlobal`
   {/* Body */}
   body{
     color: ${palette.text};
+    font-size: ${fontSize.body};
   }
 
   div, p, a, li, button, input, textarea, select {
     font-family: "Roboto", "Noto Sans", sans-serif;
-    font-size: ${fontSize.body};
+    font-size: inherit;
     
   }
 

@@ -18,8 +18,14 @@ const Login = styled(FadeComp)`
 `
 
 const RightBarIcon = styled(FadeComp)`
+  position: absolute;
   right: 0;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
 `
 
 export default ({ location }) => {

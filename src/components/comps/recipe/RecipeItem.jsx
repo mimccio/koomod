@@ -3,12 +3,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import palette from '../../../style/palette'
+import { fontSize } from '../../../style/config'
+
 const RecipeItem = styled.div`
-  color: rgba(0, 0, 0, 0.85);
+  color: ${palette.text};
   height: 80px;
   display: flex;
   padding: 10px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid ${palette.divider};
   width: 280px;
 `
 
@@ -29,9 +32,9 @@ const Side = styled.div`
     font-size: 18px;
     color: ${({ isSelected, isOptimistic }: { isSelected: boolean, isOptimistic: boolean }) => {
     if (isSelected) {
-      return isOptimistic ? '#BA68C8' : '#8e24aa'
+      return isOptimistic ? palette.primary.light : palette.primary.main
     }
-    return isOptimistic ? 'rgba(0, 0, 0, 0.35)' : 'rgba(0, 0, 0, 0.64)'
+    return isOptimistic ? palette.disabled : palette.textSecondary
   }};
   }
 `
@@ -42,13 +45,13 @@ const RecipeName = styled.div`
   white-space: nowrap;
   margin-bottom: 6px;
   color: ${({ recipeId }: { recipeId?: number | string }) =>
-    (typeof recipeId === 'number' && recipeId < 0 ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.85)')};
+    (typeof recipeId === 'number' && recipeId < 0 ? palette.textSecondary : palette.text)};
 `
 
 const RecipeInfoWrapper = styled.div`
-  font-size: 12px;
+  font-size: ${fontSize.bodyTiny};
   color: ${({ recipeId }: { recipeId?: number | string }) =>
-    (typeof recipeId === 'number' && recipeId < 0 ? 'rgba(0, 0, 0, 0.35)' : 'rgba(0, 0, 0, 0.64)')};
+    (typeof recipeId === 'number' && recipeId < 0 ? palette.disabled : palette.textSecondary)};
 
   & > p {
     overflow: hidden;
