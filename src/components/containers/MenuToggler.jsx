@@ -14,7 +14,7 @@ export default class ToggleMenu extends React.Component<Props, State> {
     menuIsOpen: false,
   }
 
-  toggleMenu = () => {
+  toggleMenu = (): void => {
     this.setState(({ menuIsOpen }) => ({ menuIsOpen: !menuIsOpen }))
   }
 

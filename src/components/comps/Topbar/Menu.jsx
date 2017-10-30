@@ -11,10 +11,10 @@ const Slider = styled.div`
   // display: flex;
   // align-self: self-start;
   position: fixed;
-  //z-index: 10;
+  z-index: 9;
   //margin-top: 50px;
   height: 100%;
-  width: 260px;
+  width: 240px;
   background-color: ${palette.grey.light};
   padding: 60px 10px 20px 20px;
   transition: all 300ms ease-in-out;

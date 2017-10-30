@@ -8,6 +8,7 @@ import Menu from './Menu'
 import LeftIcon from './LeftIcon'
 import RightIcon from './RightIcon'
 import Title from './Title'
+import Overlay from './Overlay'
 
 import { topbarHeight } from '../../../style/config'
 import palette from '../../../style/palette'
@@ -17,7 +18,7 @@ const Bar = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: top;
@@ -40,6 +41,7 @@ export default withRouter(({ location, history }) => (
         </Bar>
 
         <Menu menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} history={history} location={location} />
+        <Overlay menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} />
       </div>
     )}
   </MenuToggler>

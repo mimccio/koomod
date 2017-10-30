@@ -7,6 +7,7 @@ import { topbarHeight } from '../../../style/config'
 
 const Wrapper = styled.div`
   background-color: ${palette.primary.lighter};
+  background-image: transparent;
   display: flex;
   flex-direction: column;
   justify-content: top;

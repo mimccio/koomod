@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0 10px;
-  background-color: ${palette.grey.light};
+  background-color: ${palette.primary.lighter};
 `
 
 const Icon = styled.i`
