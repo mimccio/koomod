@@ -1,4 +1,5 @@
 // @flow
 import React from 'react'
+import { Spinner, EmptyList } from '../comps/loading'
 
-export default () => <p>Login Page</p>
+export default () => <EmptyList message='loading recipes...' spinner={<Spinner />} />

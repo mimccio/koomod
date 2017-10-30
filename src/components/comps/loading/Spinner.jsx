@@ -39,18 +39,18 @@ const Cube = styled.div`
   bottom: 0;
   top: 0;
 
-  animation: ${cubemove} 2.8s infinite ease-in-out;
+  animation: ${cubemove} 2s infinite ease-in-out;
 `
 
 const Cube1 = styled(Cube)``
 const Cube2 = styled(Cube)`
-  animation-delay: -0.7s;
+  animation-delay: -0.5s;
   width: 16px;
   height: 14px;
 `
-const Cube3 = styled(Cube)`animation-delay: -1.4s;`
+const Cube3 = styled(Cube)`animation-delay: -1s;`
 const Cube4 = styled(Cube)`
-  animation-delay: -2.1s;
+  animation-delay: -1.5s;
   width: 16px;
   height: 14px;
 `

@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   align-itels: flex-start;
   width: 100vw;
   max-width: 460px;
+  min-height: 100%;
 `
 
 export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

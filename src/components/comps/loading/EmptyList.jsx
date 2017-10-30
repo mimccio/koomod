@@ -15,12 +15,13 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  heigth: 100%;
 `
 
 const Message = styled.p`
-  border: 2px solid red;
   text-align: center;
-  padding: 10px;
+
+  padding-top: 100px;
 `
 
 export default ({ spinner, message = 'loading...' }: { spinner?: React.Node, message?: string }) => (
