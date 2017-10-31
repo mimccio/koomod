@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 
-import { USER_RECIPES_QUERY } from '../../graphql/queries'
+import { USER_RECIPES_WITH_INGREDIENTS_QUERY } from '../../graphql/queries'
 import { CREATE_RECIPE_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
 
@@ -48,6 +48,7 @@ export class CreateRecipeHOC extends React.Component {
         description,
         isSelected: false,
         userId,
+        ingredients: [],
       },
       optimisticResponse: {
         createRecipe: {
@@ -59,6 +60,7 @@ export class CreateRecipeHOC extends React.Component {
           isSelected: false,
           isOptimistic: true,
           shopFor: pers,
+          ingredients: [],
           user: {
             __typename: 'User',
             id: userId,
@@ -66,9 +68,9 @@ export class CreateRecipeHOC extends React.Component {
         },
       },
       update: (store, { data: { createRecipe } }) => {
-        const data = store.readQuery({ query: USER_RECIPES_QUERY, variables: { userId } })
+        const data = store.readQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, variables: { userId } })
         data.User.recipes.push(createRecipe)
-        store.writeQuery({ query: USER_RECIPES_QUERY, data })
+        store.writeQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, data })
       },
     })
   }

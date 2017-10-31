@@ -55,6 +55,9 @@ export const CREATE_RECIPE_MUTATION = gql`
       shopFor
       isSelected
       isOptimistic
+      ingredients {
+        id
+      }
     }
   }
 `
