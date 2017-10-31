@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import { USER_SELECTED_RECIPES_QUERY } from '../../graphql/queries'
 import { GC_USER_ID } from '../../lib/constants'
 
-export const SelectedRecipesHOC = ({ selectedRecipesQuery: { loading, error, allRecipes }, children, loadingComp }) => {
+export const SelectedRecipesHOC = ({ selectedRecipesQuery: { loading, error, User }, children, loadingComp }) => {
   if (loading) {
     return loadingComp
   }
@@ -12,7 +12,7 @@ export const SelectedRecipesHOC = ({ selectedRecipesQuery: { loading, error, all
     return <p>{error.message}</p>
   }
 
-  return children(allRecipes)
+  return children(User.recipes)
 }
 
 export const withSelectedRecipesData = graphql(USER_SELECTED_RECIPES_QUERY, {
