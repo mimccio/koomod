@@ -1,4 +1,5 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
@@ -16,4 +17,4 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `
 
-export default ({ children }) => <Wrapper>{children}</Wrapper>
+export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

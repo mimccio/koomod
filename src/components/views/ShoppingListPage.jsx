@@ -1,4 +1,11 @@
 // @flow
 import React from 'react'
 
-export default () => <p>Login Page</p>
+import { PageWrapper } from '../comps/layouts'
+import Loading from '../comps/Loading'
+
+export default () => (
+  <PageWrapper>
+    <Loading />
+  </PageWrapper>
+)

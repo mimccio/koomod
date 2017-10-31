@@ -1,5 +1,7 @@
 import { gql } from 'react-apollo'
 
+// user mutations
+
 export const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($name: String!, $email: String!, $password: String!) {
     createUser(name: $name, authProvider: { email: { email: $email, password: $password } }) {
@@ -21,6 +23,51 @@ export const SIGNIN_USER_MUTATION = gql`
       user {
         id
       }
+    }
+  }
+`
+
+// recipe mutation
+
+export const UPDATE_RECIPE_INFO_MUTATION = gql`
+  mutation UpdateRecipeInfoMutation($name: String!, $description: String!, $pers: Number!, $id: ID!) {
+    updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers) {
+      name
+      description
+      pers
+    }
+  }
+`
+
+export const CREATE_RECIPE_MUTATION = gql`
+  mutation CreateRecipeMutation(
+    $name: String!
+    $description: String!
+    $pers: Int!
+    $isSelected: Boolean!
+    $userId: ID!
+  ) {
+    createRecipe(name: $name, description: $description, pers: $pers, isSelected: $isSelected, userId: $userId) {
+      id
+      name
+      description
+      pers
+      shopFor
+      isSelected
+      isOptimistic
+      ingredients {
+        id
+      }
+    }
+  }
+`
+
+export const UPDATE_RECIPE_SELECT_MUTATION = gql`
+  mutation UpdateRecipeSelectMutation($recipeId: ID!, $isSelected: Boolean!) {
+    updateRecipe(id: $recipeId, isSelected: $isSelected) {
+      id
+      isSelected
+      isOptimistic
     }
   }
 `

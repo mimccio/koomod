@@ -3,17 +3,25 @@ import { injectGlobal } from 'styled-components'
 import { fontSize } from './config'
 import palette from './palette'
 
+// scroll bar changing button position dirty fix
+// html{
+//   overflow-y: scroll;
+// }
 // eslint-disable-next-line
 injectGlobal`
 
   {/* Body */}
   body{
     color: ${palette.text};
+    font-size: ${fontSize.body};
+    overflow-x: hidden;
+    overflow-y: overlay;
   }
+ 
 
   div, p, a, li, button, input, textarea, select {
     font-family: "Roboto", "Noto Sans", sans-serif;
-    font-size: ${fontSize.body};
+    font-size: inherit;
     
   }
 

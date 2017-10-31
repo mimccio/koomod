@@ -1,37 +1,39 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
 import { Link } from 'react-router-dom'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
+import palette from '../../../style/palette'
 
 const Slider = styled.div`
   // display: flex;
   // align-self: self-start;
   position: fixed;
-  //z-index: 10;
+  z-index: 9;
   //margin-top: 50px;
   height: 100%;
-  width: 260px;
-  background-color: #eee;
+  width: 240px;
+  background-color: ${palette.grey.light};
   padding: 60px 10px 20px 20px;
   transition: all 300ms ease-in-out;
-  visibility: ${(props) => {
-    if (props.status === 'entering') {
+  visibility: ${({ status }: { status: string }) => {
+    if (status === 'entering') {
       return 'hidden'
     }
-    if (props.status === 'entered') {
+    if (status === 'entered') {
       return 'visible'
     }
     return 'hidden'
   }};
 
   transform: translate3d(
-    ${(props) => {
-    if (props.status === 'entering') {
+    ${({ status }: { status: string }) => {
+    if (status === 'entering') {
       return '-100%'
     }
-    if (props.status === 'entered') {
+    if (status === 'entered') {
       return 0
     }
     return '-100%'
@@ -42,7 +44,15 @@ const Slider = styled.div`
 `
 
 export default ({
-  menuIsOpen, history, location, toggleMenu,
+  menuIsOpen,
+  history,
+  location,
+  toggleMenu,
+}: {
+  menuIsOpen: boolean,
+  toggleMenu: Function,
+  location: { pathname: string },
+  history: { push: (path: string) => mixed }
 }) => {
   const userId = localStorage.getItem(GC_USER_ID)
   const login =
@@ -58,7 +68,7 @@ export default ({
   return (
     <div onBlur={() => console.log('blur')}>
       <Transition in={menuIsOpen} timeout={0}>
-        {status => (
+        {(status: string) => (
           <Slider status={status}>
             {userId ? (
               <button

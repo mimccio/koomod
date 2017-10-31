@@ -1,11 +1,20 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 
-export default class ToggleMenu extends React.Component {
+type Props = {
+  children: (data: { menuIsOpen: boolean, toggleMenu: Function }) => React.Node
+}
+
+type State = {
+  menuIsOpen: boolean
+}
+
+export default class ToggleMenu extends React.Component<Props, State> {
   state = {
     menuIsOpen: false,
   }
 
-  toggleMenu = () => {
+  toggleMenu = (): void => {
     this.setState(({ menuIsOpen }) => ({ menuIsOpen: !menuIsOpen }))
   }
 
