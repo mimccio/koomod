@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
-import { PageLayout } from '../comps/layouts'
+import { PageWrapper } from '../comps/layouts'
 
 export default () => (
-  <PageLayout>
+  <PageWrapper>
     <p>Home</p>
-  </PageLayout>
+  </PageWrapper>
 )

@@ -1,10 +1,8 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
-import { ListWrapper } from '../layouts'
-import { EmptyList } from '../loading'
+import { EmptyList } from '../layouts'
 
 const IngredientItemWrapper = styled.div`
   display: flex;
@@ -12,6 +10,8 @@ const IngredientItemWrapper = styled.div`
   align-items: center;
   color: rgba(0, 0, 0, 0.85);
   padding: 14px;
+  width: 100%;
+  height: 100%;
 `
 
 const IngredientName = styled.div`
@@ -49,16 +49,10 @@ type PropType = { ingredients: IngredientType[], match: { params: { id: string }
 
 export default ({ ingredients, match }: PropType) => {
   if (ingredients.length < 1) {
-    return (
-      <EmptyList>
-        <Link to={`/recipe/${match.params.id}/ingredients/new`}>
-          <p>add an ingredient</p>
-        </Link>
-      </EmptyList>
-    )
+    return <EmptyList to={`/recipe/${match.params.id}/ingredients/new`} message='add an ingredient' />
   }
   return (
-    <ListWrapper>
+    <div>
       {ingredients.map(ingredient => (
         <IngredientItemWrapper key={ingredient.id}>
           <IngredientName>{ingredient.name}</IngredientName>
@@ -68,6 +62,6 @@ export default ({ ingredients, match }: PropType) => {
           </IngredientInfo>
         </IngredientItemWrapper>
       ))}
-    </ListWrapper>
+    </div>
   )
 }

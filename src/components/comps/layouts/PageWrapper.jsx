@@ -2,15 +2,20 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import palette from '../../../style/palette'
+import { topbarHeight } from '../../../style/config'
+
 const Wrapper = styled.div`
+  background-color: ${palette.primary.lighter};
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: top;
   align-items: center;
+  padding-top: ${topbarHeight};
+  border: none;
   width: 100vw;
-  max-width: 460px;
-  min-height: 100%;
-  padding-bottom: 60px;
+  min-height: 100vh;
+  overflow-x: hidden;
 `
 
 export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

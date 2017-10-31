@@ -3,19 +3,19 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
+
 import { topbarHeight } from '../../../style/config'
 
 const Wrapper = styled.div`
-  background-color: ${palette.primary.lighter};
-  background-image: transparent;
+  background-color: ${palette.grey.lighter};
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: flex-start;
   align-items: center;
-  padding-top: ${topbarHeight};
-  border: none;
   width: 100vw;
-  min-height: 100vh;
+  max-width: 460px;
+  min-height: calc(100vh - ${topbarHeight});
+  padding-bottom: 70px;
 `
 
 export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

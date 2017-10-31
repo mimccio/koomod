@@ -17,7 +17,6 @@ const cubemove = keyframes`
 `
 
 const Wrapper = styled.div`
-  height: calc(100vh - 156px);
   display: flex;
   justify-content: center;
   align-items: center;

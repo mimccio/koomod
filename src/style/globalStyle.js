@@ -11,6 +11,10 @@ injectGlobal`
     color: ${palette.text};
     font-size: ${fontSize.body};
   }
+  div {
+    overflow-x: hidden;
+    width: 100%;
+  }
 
   div, p, a, li, button, input, textarea, select {
     font-family: "Roboto", "Noto Sans", sans-serif;

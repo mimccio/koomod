@@ -10,11 +10,12 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0 10px;
-  background-color: ${palette.primary.lighter};
+  background-color: ${palette.grey.light};
+  width: 100%;
 `
 
 const Icon = styled.i`
-  color: ${palette.textSecondary};
+  color: ${palette.primary.light};
   width: 60px;
   height: 100%;
   display: flex;

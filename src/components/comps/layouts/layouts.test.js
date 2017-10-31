@@ -1,17 +1,17 @@
 import 'jest-styled-components'
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { PageLayout, ListWrapper } from './index'
+import { PageWrapper, ContentWrapper, EmptyList } from './index'
 
 describe('layouts animation test suite', () => {
   test('"PageLayout" should match snapshot', () => {
     const comp = renderer.create(
-      <PageLayout>
+      <PageWrapper>
         <div>
           <p>hello</p>
           <p>world</p>
         </div>
-      </PageLayout>
+      </PageWrapper>
     )
     const tree = comp.toJSON()
     expect(tree).toMatchSnapshot()
@@ -19,12 +19,25 @@ describe('layouts animation test suite', () => {
 
   test('"ListWrapper" should match snapshot', () => {
     const comp = renderer.create(
-      <ListWrapper>
+      <ContentWrapper>
         <div>
           <p>hello</p>
           <p>world</p>
         </div>
-      </ListWrapper>
+      </ContentWrapper>
+    )
+    const tree = comp.toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  test('"EmptyList" should match snapshot', () => {
+    const comp = renderer.create(
+      <EmptyList message='hello world' to='/tests'>
+        <div>
+          <p>hello</p>
+          <p>world</p>
+        </div>
+      </EmptyList>
     )
     const tree = comp.toJSON()
     expect(tree).toMatchSnapshot()

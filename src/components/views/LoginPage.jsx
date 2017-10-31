@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 import Login from '../containers/Login'
-import { PageLayout } from '../comps/layouts'
+import { PageWrapper } from '../comps/layouts'
 
 type Data = {
   login: boolean,
@@ -24,7 +24,7 @@ export default ({ history, signUp }: { history: {}, signUp: boolean }) => (
 } = data
 
       return (
-        <PageLayout>
+        <PageWrapper>
           {error &&
             (error === 'GraphQL error: User already exists with that information' ? (
               <p>User already exist with that email</p>
@@ -54,7 +54,7 @@ export default ({ history, signUp }: { history: {}, signUp: boolean }) => (
               )}
             </div>
           </div>
-        </PageLayout>
+        </PageWrapper>
       )
     }}
   </Login>

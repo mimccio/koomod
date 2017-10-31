@@ -20,6 +20,7 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
   align-itels: flex-start;
   width: 100vw;
   max-width: 460px;
+  min-height: 100%;
 }
 
 <div
@@ -39,6 +40,7 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
 exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
 .c0 {
   background-color: #f3e5f5;
+  background-image: transparent;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -4,9 +4,9 @@ import { graphql } from 'react-apollo'
 import { USER_RECIPES_QUERY } from '../../graphql/queries'
 import { GC_USER_ID } from '../../lib/constants'
 
-export const UserRecipesHOC = ({ userRecipesQuery: { loading, error, User }, children, spinner }) => {
+export const UserRecipesHOC = ({ userRecipesQuery: { loading, error, User }, children, loadingComp }) => {
   if (loading) {
-    return spinner
+    return loadingComp
   }
   if (error) {
     return <p>{error.message}</p>

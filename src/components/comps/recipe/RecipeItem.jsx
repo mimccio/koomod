@@ -12,6 +12,7 @@ const RecipeItem = styled.div`
   display: flex;
   height: 80px;
   padding: 10px;
+  width: 100%;
 `
 
 const sideWidth = '60px'

@@ -24,3 +24,26 @@ export const SIGNIN_USER_MUTATION = gql`
     }
   }
 `
+
+export const UPDATE_RECIPE_INFO_MUTATION = gql`
+  mutation UpdateRecipeInfoMutation($name: String!, $description: String!, $pers: Number!, $id: ID!) {
+    updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers) {
+      name
+      description
+      pers
+    }
+  }
+`
+
+export const CREATE_RECIPE_MUTATION = gql`
+  mutation CreateRecipeMutation($name: String!, $description: String!, $pers: Int!, $isSelected: Boolean!) {
+    createRecipe(name: $name, description: $description, pers: $pers, isSelected: $isSelected) {
+      id
+      name
+      description
+      pers
+      isSelected
+      isOptimistic
+    }
+  }
+`
