@@ -28,9 +28,28 @@ export const USER_RECIPES_QUERY = gql`
   }
 `
 
+export const USER_RECIPES_WITH_INGREDIENTS_QUERY = gql`
+  query UserRecipesWithIngredientsQuery($userId: ID) {
+    User(id: $userId) {
+      id
+      recipes(first: 100) {
+        id
+        isSelected
+        ingredients {
+          id
+          name
+          quantity
+          nature
+        }
+      }
+    }
+  }
+`
+
 export const USER_SELECTED_RECIPES_QUERY = gql`
   query UserSelectedRecipesQuery($userId: ID, $isSelected: Boolean!) {
     User(id: $userId) {
+      id
       recipes(filter: { isSelected: $isSelected }) {
         id
         ingredients {
