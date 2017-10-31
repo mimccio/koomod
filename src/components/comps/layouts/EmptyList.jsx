@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const Message = styled.p`
   text-align: center;
-  padding-top: 60px;
+  padding-top: 80px;
 `
 
 export default ({ message = 'add', children, to }: { message?: string, children?: React.Node, to?: string }) => (
