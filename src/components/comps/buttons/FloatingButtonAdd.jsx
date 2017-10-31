@@ -23,8 +23,8 @@ const Btn = styled(RoundButton)`
   }
 `
 
-export default () => (
-  <Btn>
+export default ({ onClick }: { onClick?: Function }) => (
+  <Btn onClick={onClick}>
     <i className='material-icons'>add</i>
   </Btn>
 )

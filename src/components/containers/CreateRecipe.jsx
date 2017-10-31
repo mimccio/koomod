@@ -1,8 +1,11 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 
-import { RECIPES_LIST_QUERY } from '../../graphql/queries'
+import { USER_RECIPES_QUERY } from '../../graphql/queries'
 import { CREATE_RECIPE_MUTATION } from '../../graphql/mutations'
+import { GC_USER_ID } from '../../lib/constants'
+
+const userId = localStorage.getItem(GC_USER_ID)
 
 export class CreateRecipeHOC extends React.Component {
   state = {
@@ -20,6 +23,7 @@ export class CreateRecipeHOC extends React.Component {
         description: this.state.description,
       }
     )
+
     recipe[evt.target.id] = evt.target.value
     this.setState({
       name: recipe.name,
@@ -43,6 +47,7 @@ export class CreateRecipeHOC extends React.Component {
         pers,
         description,
         isSelected: false,
+        userId,
       },
       optimisticResponse: {
         createRecipe: {
@@ -53,12 +58,17 @@ export class CreateRecipeHOC extends React.Component {
           description,
           isSelected: false,
           isOptimistic: true,
+          shopFor: pers,
+          user: {
+            __typename: 'User',
+            id: userId,
+          },
         },
       },
       update: (store, { data: { createRecipe } }) => {
-        const data = store.readQuery({ query: RECIPES_LIST_QUERY })
-        data.allRecipes.push(createRecipe)
-        store.writeQuery({ query: RECIPES_LIST_QUERY, data })
+        const data = store.readQuery({ query: USER_RECIPES_QUERY, variables: { userId } })
+        data.User.recipes.push(createRecipe)
+        store.writeQuery({ query: USER_RECIPES_QUERY, data })
       },
     })
   }

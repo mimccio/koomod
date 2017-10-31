@@ -40,12 +40,19 @@ export const UPDATE_RECIPE_INFO_MUTATION = gql`
 `
 
 export const CREATE_RECIPE_MUTATION = gql`
-  mutation CreateRecipeMutation($name: String!, $description: String!, $pers: Int!, $isSelected: Boolean!) {
-    createRecipe(name: $name, description: $description, pers: $pers, isSelected: $isSelected) {
+  mutation CreateRecipeMutation(
+    $name: String!
+    $description: String!
+    $pers: Int!
+    $isSelected: Boolean!
+    $userId: ID!
+  ) {
+    createRecipe(name: $name, description: $description, pers: $pers, isSelected: $isSelected, userId: $userId) {
       id
       name
       description
       pers
+      shopFor
       isSelected
       isOptimistic
     }

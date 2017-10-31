@@ -110,7 +110,6 @@ exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
   border: none;
   width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 <div

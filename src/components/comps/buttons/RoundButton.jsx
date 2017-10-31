@@ -5,7 +5,7 @@ const RoundButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  overflow-y: visible;
   margin: 3px;
 
   height: 50px;

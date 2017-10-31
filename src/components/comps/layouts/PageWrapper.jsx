@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   border: none;
   width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden;
 `
 
 export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

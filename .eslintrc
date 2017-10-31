@@ -42,6 +42,16 @@
         "specialLink": ["hrefLeft", "hrefRight", "to"],
         "aspects": ["noHref", "invalidHref", "preferButton"]
       }
+    ],
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": ["Label"],
+        "required": {
+          "every": ["id"]
+        },
+        "allowChildren": false
+      }
     ]
   }
 }

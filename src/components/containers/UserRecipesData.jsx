@@ -27,11 +27,7 @@ export class UserRecipesHOC extends React.Component {
           variables: { isSelected: true, userId },
         })
 
-        const { recipes } = data.User
-
-        console.log('newSelectedRecipe 2', recipes.find(recipe => recipe.id === id))
-
-        const selectedRecipes = recipes.filter(recipe => recipe.isSelected === true)
+        const selectedRecipes = data.User.recipes.filter(recipe => recipe.isSelected === true)
         data.User.recipes = selectedRecipes
 
         store.writeQuery({
@@ -51,6 +47,7 @@ export class UserRecipesHOC extends React.Component {
       },
     })
   }
+
   render() {
     const { userRecipesQuery: { loading, error, User }, children, loadingComp } = this.props
     if (loading) {
@@ -71,7 +68,7 @@ export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
   }),
 })
 
-const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, {
+export const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, {
   name: 'UserRecipesWithIngredientsData',
   options: () => ({
     variables: { userId },
@@ -79,7 +76,7 @@ const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, 
   }),
 })
 
-const withRecipeSelectMutation = graphql(UPDATE_RECIPE_SELECT_MUTATION, {
+export const withRecipeSelectMutation = graphql(UPDATE_RECIPE_SELECT_MUTATION, {
   name: 'mutateRecipeSelect',
 })
 
