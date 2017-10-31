@@ -1,6 +1,7 @@
 import 'jest-styled-components'
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { StaticRouter } from 'react-router-dom'
 import { PageWrapper, ContentWrapper, EmptyList } from './index'
 
 describe('layouts animation test suite', () => {
@@ -32,12 +33,14 @@ describe('layouts animation test suite', () => {
 
   test('"EmptyList" should match snapshot', () => {
     const comp = renderer.create(
-      <EmptyList message='hello world' to='/tests'>
-        <div>
-          <p>hello</p>
-          <p>world</p>
-        </div>
-      </EmptyList>
+      <StaticRouter context={{ router: { isActive: true } }}>
+        <EmptyList message='hello world' to='/tests'>
+          <div>
+            <p>hello</p>
+            <p>world</p>
+          </div>
+        </EmptyList>
+      </StaticRouter>
     )
     const tree = comp.toJSON()
     expect(tree).toMatchSnapshot()

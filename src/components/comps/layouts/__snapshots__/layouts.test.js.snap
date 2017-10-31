@@ -1,5 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`layouts animation test suite "EmptyList" should match snapshot 1`] = `
+.c0 {
+  color: rgba(0,0,0,.54);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.c1 {
+  text-align: center;
+  padding-top: 60px;
+}
+
+<div
+  className="c0"
+>
+  <a
+    href="/tests"
+    onClick={[Function]}
+  >
+    <p
+      className="c1"
+    >
+      hello world
+    </p>
+  </a>
+  <div>
+    <p>
+      hello
+    </p>
+    <p>
+      world
+    </p>
+  </div>
+</div>
+`;
+
 exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = `
 .c0 {
   background-color: #fafafa;
@@ -14,13 +64,14 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-align-itels: flex-start;
-  -webkit-box-align-itels: flex-start;
-  -ms-flex-align-itels: flex-start;
-  align-itels: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100vw;
   max-width: 460px;
-  min-height: 100%;
+  min-height: calc(100vh - 50px);
+  padding-bottom: 70px;
 }
 
 <div
@@ -40,7 +91,6 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
 exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
 .c0 {
   background-color: #f3e5f5;
-  background-image: transparent;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,6 +110,7 @@ exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
   border: none;
   width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 <div
