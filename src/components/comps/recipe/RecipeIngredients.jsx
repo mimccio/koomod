@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { EmptyList } from '../layouts'
+import { ListWrapper, EmptyList } from '../layouts'
 
 const IngredientItemWrapper = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ export default ({ ingredients, match }: PropType) => {
     return <EmptyList to={`/recipe/${match.params.id}/ingredients/new`} message='add an ingredient' />
   }
   return (
-    <div>
+    <ListWrapper>
       {ingredients.map(ingredient => (
         <IngredientItemWrapper key={ingredient.id}>
           <IngredientName>{ingredient.name}</IngredientName>
@@ -62,6 +62,6 @@ export default ({ ingredients, match }: PropType) => {
           </IngredientInfo>
         </IngredientItemWrapper>
       ))}
-    </div>
+    </ListWrapper>
   )
 }

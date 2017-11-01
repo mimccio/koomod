@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   background-color: ${palette.primary.lighter};
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: flex-start;
   //align-items: center;
   padding-top: ${topbarHeight};
   border: none;

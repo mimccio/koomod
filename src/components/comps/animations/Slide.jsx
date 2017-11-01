@@ -3,6 +3,9 @@ import * as React from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 
+import palette from '../../../style/palette'
+import { navHeight, topbarHeight } from '../../../style/config'
+
 const delay = 300
 
 export const SlideTransition = ({ children, ...props }: { children: Function, enter?: number, props?: {} }) => (
@@ -20,18 +23,17 @@ export const SlideTransition = ({ children, ...props }: { children: Function, en
 )
 
 export const SlideComp = styled.div`
+  background-color: ${palette.primary.lighter};
+  color: ${palette.text};
   position: absolute;
-  transition: all 300ms ease-in-out;
-  padding-top: 50px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: calc(100vh - 100px);
-  background-color: #eee;
-  color: rgba(0, 0, 0, 0.8);
+  min-height: calc(100% - ${navHeight} - ${topbarHeight});
+
+  transition: all 300ms ease-in-out;
 
   visibility: ${({ status }: { status: string }) => {
     if (status === 'entering') {

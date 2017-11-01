@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   max-width: 460px;
   padding-bottom: 60px;
   flex: 1;
+  //border: 2px solid blue;
 `
 
 export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>

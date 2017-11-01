@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import { NavLink, withRouter } from 'react-router-dom'
 
 import palette from '../../../style/palette'
+import { navHeight } from '../../../style/config'
 
 const Wrapper = styled.div`
-  height: 60px;
+  height: ${navHeight};
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   background-color: ${palette.grey.light};
+  //border: 2px solid red;
 `
 
 const Content = styled.div`

@@ -1,5 +1,12 @@
 // @flow
-import { fontSizeConfig, baseSpacingConfig, topbarHeightConfig, baseRadiusConfig, diametreConfig } from './sizeConfig'
+import {
+  fontSizeConfig,
+  baseSpacingConfig,
+  topbarHeightConfig,
+  navHeightConfig,
+  baseRadiusConfig,
+  diametreConfig,
+} from './sizeConfig'
 
 // Font Size
 export const fontSizeValue = {
@@ -53,6 +60,7 @@ export const spacing = {
 }
 
 export const topbarHeight = `${topbarHeightConfig}px`
+export const navHeight = `${navHeightConfig}px`
 
 // Radius
 export const baseRadius = `${baseRadiusConfig}px`
