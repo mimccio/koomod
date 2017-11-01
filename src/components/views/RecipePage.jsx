@@ -3,17 +3,17 @@ import { Route, Switch } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 // containers
-// import RecipeIngredientsData from '../containers/RecipeIngredientsData'
+import RecipeIngredientsData from '../containers/RecipeIngredientsData'
 // import RecipeInfoData from '../containers/RecipeInfoData'
 // import RecipeStepsData from '../containers/RecipeStepsData'
 // components
 import { PageWrapper } from '../comps/layouts'
 // import { FloatingButtonAdd } from '../comps/buttons'
-// import Loading from '../comps/Loading'
+import Loading from '../comps/Loading'
 import { RecipeInfo, RecipeSteps, RecipeIngredients, RecipeNav } from '../comps/recipe'
-import { SlideTransition } from '../comps/animations/Slide'
+import { SlideTransition, SlideComp } from '../comps/animations/Slide'
 
-export default ({ location }) => (
+export default ({ location, match }) => (
   <PageWrapper>
     <RecipeNav />
     <TransitionGroup>
@@ -23,7 +23,17 @@ export default ({ location }) => (
             <Route
               exact
               path='/recipe/:id/ingredients'
-              render={({ history }) => <RecipeIngredients status={status} history={history} />}
+              render={({ history }) => (
+                <SlideComp
+                  status={status}
+                  historyPath={history.location.pathname}
+                  from={history.location.state && history.location.state.from}
+                >
+                  <RecipeIngredientsData match={match} loadingComp={<Loading message='loading recipes...' />}>
+                    {ingredients => <RecipeIngredients ingredients={ingredients} match={match} />}
+                  </RecipeIngredientsData>
+                </SlideComp>
+              )}
             />
 
             <Route
