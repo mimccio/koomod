@@ -52,7 +52,6 @@ exports[`layouts animation test suite "EmptyList" should match snapshot 1`] = `
 
 exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = `
 .c0 {
-  background-color: #fafafa;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,18 +59,12 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   width: 100vw;
-  max-width: 460px;
   min-height: calc(100vh - 50px);
-  padding-bottom: 70px;
 }
 
 <div
@@ -102,10 +95,6 @@ exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
   -webkit-justify-content: top;
   -ms-flex-pack: top;
   justify-content: top;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   padding-top: 50px;
   border: none;
   width: 100vw;
