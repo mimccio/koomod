@@ -45,11 +45,11 @@ type IngredientType = {
   quantity?: number
 }
 
-type PropType = { ingredients: IngredientType[], match: { params: { id: string } } }
+type PropType = { ingredients: IngredientType[], recipeId: string }
 
-export default ({ ingredients, match }: PropType) => {
+export default ({ ingredients, recipeId }: PropType) => {
   if (ingredients.length < 1) {
-    return <EmptyList to={`/recipe/${match.params.id}/ingredients/new`} message='add an ingredient' />
+    return <EmptyList to={`/recipe/${recipeId}/ingredients/new`} message='add an ingredient' />
   }
   return (
     <ListWrapper>

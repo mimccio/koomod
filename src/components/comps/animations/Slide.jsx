@@ -69,12 +69,20 @@ export const SlideComp = styled.div`
 
   transform: translate3d(
     ${({
-    status, from, historyPath, right }: { status: string, from: string, historyPath: string, right: boolean
-}) => {
+    status,
+    from,
+    historyPath,
+    reverse,
+  }: {
+      status: string,
+      from: string,
+      historyPath: string,
+      reverse: boolean
+    }) => {
     if (from === historyPath) {
       return 0
     }
-    if (right) {
+    if (reverse) {
       if (status === 'entering') {
         return '100%'
       }
