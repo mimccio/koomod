@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 import palette from '../../../style/palette'
 
@@ -30,25 +30,32 @@ const StyledNavLink = styled(NavLink).attrs({
   font-weight: normal;
   text-align: center;
   padding: 4px;
+  transition: all 300ms ease-in-out;
+
 
   &.${activeClassName} {
     color: ${palette.text};
-    font-weight: bold;
+    //font-weight: bold;
     border-bottom: 1px solid ${palette.textSecondary};
   }
 `
 
-export default ({ match }) => (
-  <Wrapper>
-    <Content>
-      <StyledNavLink to={`/recipe/${match.params.id}/ingredients`}>ingredients</StyledNavLink>
-    </Content>
+const RecipeNav = ({ match, history }) => {
+  const recipeId = match.params.id
+  const from = history.location.pathname
+  return (
+    <Wrapper>
+      <Content>
+        <StyledNavLink to={{ pathname: `/recipe/${recipeId}/ingredients`, state: { from } }}>ingredients</StyledNavLink>
+      </Content>
+      <Content>
+        <StyledNavLink to={{ pathname: `/recipe/${recipeId}/info`, state: { from } }}>info</StyledNavLink>
+      </Content>
+      <Content>
+        <StyledNavLink to={{ pathname: `/recipe/${recipeId}/preparation`, state: { from } }}>preparation</StyledNavLink>
+      </Content>
+    </Wrapper>
+  )
+}
 
-    <Content>
-      <StyledNavLink to={`/recipe/${match.params.id}/info`}>info</StyledNavLink>
-    </Content>
-    <Content>
-      <StyledNavLink to={`/recipe/${match.params.id}/preparation`}>preparation</StyledNavLink>
-    </Content>
-  </Wrapper>
-)
+export default withRouter(RecipeNav)

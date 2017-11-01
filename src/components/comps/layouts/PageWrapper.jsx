@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: top;
-  align-items: center;
+  //align-items: center;
   padding-top: ${topbarHeight};
   border: none;
   width: 100vw;

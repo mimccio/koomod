@@ -23,7 +23,7 @@ exports[`layouts animation test suite "EmptyList" should match snapshot 1`] = `
 
 .c1 {
   text-align: center;
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 <div

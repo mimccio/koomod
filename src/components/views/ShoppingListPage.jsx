@@ -2,7 +2,7 @@ import React from 'react'
 // containers
 import UserSelectedRecipesData from '../containers/UserSelectedRecipesData'
 // components
-import { PageWrapper, ContentWrapper, EmptyList } from '../comps/layouts'
+import { PageWrapper, ContentWrapper, EmptyList, ListWrapper } from '../comps/layouts'
 import Loading from '../comps/Loading'
 import { ShoppingItem } from '../comps/shoppingList'
 // helpers
@@ -22,7 +22,9 @@ export default () => (
         }
         return (
           <ContentWrapper>
-            {shoppingList.map(ingredient => <ShoppingItem key={ingredient.id} ingredient={ingredient} />)}
+            <ListWrapper>
+              {shoppingList.map(ingredient => <ShoppingItem key={ingredient.id} ingredient={ingredient} />)}
+            </ListWrapper>
           </ContentWrapper>
         )
       }}

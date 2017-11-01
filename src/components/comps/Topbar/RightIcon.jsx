@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link, Route, Switch, matchPath } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 import { GC_USER_ID } from '../../../lib/constants'
@@ -33,9 +33,25 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
   const userId = localStorage.getItem(GC_USER_ID)
   const loginKey =
     location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : `login-${location.key}`
+
+  const match = matchPath(location.pathname, {
+    path: '/recipe/:id',
+    exact: false,
+    strict: false,
+  })
+
+  const keyFunc = () => {
+    if (!userId) return loginKey
+    if (match) {
+      return 'recipeLocationKey'
+    }
+    return location.key
+  }
+
+  const key = keyFunc()
   return (
     <TransitionGroup>
-      <FadeTransition key={userId ? location.key : loginKey}>
+      <FadeTransition key={key}>
         {(status: string) => {
           if (location.pathname === '/login' || location.pathname === '/sign-up') {
             return (

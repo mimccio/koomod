@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import UserRecipesData from '../containers/UserRecipesData'
 import Loading from '../comps/Loading'
 
-import { PageWrapper, ContentWrapper, EmptyList } from '../comps/layouts'
+import { PageWrapper, ContentWrapper, EmptyList, ListWrapper } from '../comps/layouts'
 import { RecipeItem } from '../comps/recipe'
 import { GlobalSelection, FloatingButtonAdd } from '../comps/buttons'
 
@@ -33,8 +33,10 @@ export default () => (
 
         return (
           <ContentWrapper>
-            <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
-            {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
+            <ListWrapper>
+              <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
+              {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
+            </ListWrapper>
           </ContentWrapper>
         )
       }}
