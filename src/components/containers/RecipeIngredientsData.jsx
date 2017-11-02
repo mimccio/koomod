@@ -15,7 +15,7 @@ export const RecipeIngredientsHOC = ({ recipeIngredientsQuery: { loading, error,
 
 export const withRecipeName = graphql(RECIPE_INGREDIENTS_QUERY, {
   name: 'recipeIngredientsQuery',
-  options: ({ match }) => ({ variables: { recipeId: match.params.id } }),
+  options: ({ recipeId }) => ({ variables: { recipeId } }),
 })
 
 export default withRecipeName(RecipeIngredientsHOC)

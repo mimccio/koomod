@@ -2,16 +2,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { EmptyList } from '../layouts'
+import { ListWrapper, EmptyList } from '../layouts'
+import { topbarHeight, navHeight } from '../../../style/config'
+
+const Wrapper = styled.div`
+  height: calc(100vh - ${topbarHeight} - ${navHeight});
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+`
 
 const IngredientItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(0, 0, 0, 0.85);
   padding: 14px;
   width: 100%;
-  height: 100%;
+  height: 50px;
 `
 
 const IngredientName = styled.div`
@@ -45,23 +54,25 @@ type IngredientType = {
   quantity?: number
 }
 
-type PropType = { ingredients: IngredientType[], match: { params: { id: string } } }
+type PropType = { ingredients: IngredientType[], recipeId: string }
 
-export default ({ ingredients, match }: PropType) => {
+export default ({ ingredients, recipeId }: PropType) => {
   if (ingredients.length < 1) {
-    return <EmptyList to={`/recipe/${match.params.id}/ingredients/new`} message='add an ingredient' />
+    return <EmptyList to={`/recipe/${recipeId}/ingredients/new`} message='add an ingredient' />
   }
   return (
-    <div>
-      {ingredients.map(ingredient => (
-        <IngredientItemWrapper key={ingredient.id}>
-          <IngredientName>{ingredient.name}</IngredientName>
-          <IngredientInfo>
-            <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
-            <IngredientNature>{ingredient.nature}</IngredientNature>
-          </IngredientInfo>
-        </IngredientItemWrapper>
-      ))}
-    </div>
+    <Wrapper>
+      <ListWrapper>
+        {ingredients.map(ingredient => (
+          <IngredientItemWrapper key={ingredient.id}>
+            <IngredientName>{ingredient.name}</IngredientName>
+            <IngredientInfo>
+              <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
+              <IngredientNature>{ingredient.nature}</IngredientNature>
+            </IngredientInfo>
+          </IngredientItemWrapper>
+        ))}
+      </ListWrapper>
+    </Wrapper>
   )
 }

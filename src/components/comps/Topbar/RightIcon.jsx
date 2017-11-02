@@ -1,11 +1,13 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link, Route, Switch, matchPath } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 import { GC_USER_ID } from '../../../lib/constants'
 import { FadeTransition, FadeComp } from '../animations/Fade'
+
+const iconWith = '50px'
 
 const Login = styled(FadeComp)`
   width: 70px;
@@ -20,22 +22,31 @@ const Login = styled(FadeComp)`
 
 const RightBarIcon = styled(FadeComp)`
   position: absolute;
-  right: 0;
+  left: calc(100vw - ${iconWith});
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
+  height: 100%;
+  width: ${iconWith};
 `
 
 export default ({ location }: { location: { pathname: string, key: string } }) => {
   const userId = localStorage.getItem(GC_USER_ID)
   const loginKey =
     location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : `login-${location.key}`
+
+  const matchRecipePath = matchPath(location.pathname, {
+    path: '/recipe/:id',
+    exact: false,
+    strict: false,
+  })
+
+  const recipePageKeykey = matchRecipePath ? 'icon-recipe-key' : `icon-${location.key}`
+  const key = userId ? recipePageKeykey : loginKey
   return (
     <TransitionGroup>
-      <FadeTransition key={userId ? location.key : loginKey}>
+      <FadeTransition key={key}>
         {(status: string) => {
           if (location.pathname === '/login' || location.pathname === '/sign-up') {
             return (

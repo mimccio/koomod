@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   background-color: ${palette.primary.lighter};
   display: flex;
   flex-direction: column;
-  justify-content: top;
-  align-items: center;
+  justify-content: flex-start;
+  //align-items: center;
   padding-top: ${topbarHeight};
   border: none;
   width: 100vw;

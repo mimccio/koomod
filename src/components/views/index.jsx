@@ -16,7 +16,10 @@ const Routes = () => (
     <Route exact path='/sign-up' render={({ history }) => <LoginPage signUp history={history} />} />
     <Route exact path='/recipes' component={UserRecipesPage} />
     <Route exact path='/shopping-list' component={ShoppingListPage} />
-    <Route path='/recipe/:id' component={RecipePage} />
+    <Route
+      path='/recipe/:id'
+      render={({ location, match, history }) => <RecipePage location={location} match={match} history={history} />}
+    />
     <Route path='/new-recipe' component={NewRecipePage} />
   </Switch>
 )

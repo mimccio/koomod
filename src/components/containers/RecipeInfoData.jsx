@@ -16,12 +16,13 @@ export const RecipeInfoHOC = ({
   if (error) {
     return <p>{error.message}</p>
   }
+
   return children(Recipe, UpdateRecipeMutation)
 }
 
 export const withRecipeInfoData = graphql(RECIPE_INFO_QUERY, {
   name: 'recipeInfoQuery',
-  options: ({ match }) => ({ variables: { recipeId: match.params.id } }),
+  options: ({ recipeId }) => ({ variables: { recipeId } }),
 })
 
 export const withRecipeInfoMutation = graphql(UPDATE_RECIPE_INFO_MUTATION, {

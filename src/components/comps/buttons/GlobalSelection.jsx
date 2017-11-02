@@ -3,9 +3,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
+import { navHeight } from '../../../style/config'
 
 const Wrapper = styled.div`
-  height: 60px;
+  height: ${navHeight};
   display: flex;
   justify-content: flex-end;
   align-items: center;
