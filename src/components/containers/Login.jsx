@@ -28,7 +28,6 @@ class Login extends Component {
             password,
           },
         })
-        console.log('result', result)
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
@@ -40,18 +39,16 @@ class Login extends Component {
             password,
           },
         })
-        console.log('result', result)
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
-        console.log('id', id)
         this.saveUserData(id, token)
       }
+      this.props.history.push('/recipes')
     } catch (error) {
       console.log('error', error)
       this.setState({ error: error.message })
       evt.target.blur()
     }
-    this.props.history.push('/recipes')
   }
 
   saveUserData = (id, token) => {

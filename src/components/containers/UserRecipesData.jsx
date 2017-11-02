@@ -10,8 +10,6 @@ import { UPDATE_RECIPE_SELECT_MUTATION } from '../../graphql/mutations'
 import { withSelectedRecipesData } from './UserSelectedRecipesData'
 import { GC_USER_ID } from '../../lib/constants'
 
-const userId = localStorage.getItem(GC_USER_ID)
-
 export class UserRecipesHOC extends React.Component {
   updateRecipeSelect = async (id, isSelected) => {
     const toggledSelect = !isSelected
@@ -24,7 +22,7 @@ export class UserRecipesHOC extends React.Component {
       update: (store) => {
         const data = store.readQuery({
           query: USER_RECIPES_WITH_INGREDIENTS_QUERY,
-          variables: { isSelected: true, userId },
+          variables: { isSelected: true, userId: localStorage.getItem(GC_USER_ID) },
         })
 
         const selectedRecipes = data.User.recipes.filter(recipe => recipe.isSelected === true)
@@ -32,7 +30,7 @@ export class UserRecipesHOC extends React.Component {
 
         store.writeQuery({
           query: USER_SELECTED_RECIPES_QUERY,
-          variables: { isSelected: true, userId },
+          variables: { isSelected: true, userId: localStorage.getItem(GC_USER_ID) },
           data,
         })
       },
@@ -63,7 +61,7 @@ export class UserRecipesHOC extends React.Component {
 export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
   name: 'userRecipesQuery',
   options: () => ({
-    variables: { userId },
+    variables: { userId: localStorage.getItem(GC_USER_ID) },
     pollInterval: 5000,
   }),
 })
@@ -71,7 +69,7 @@ export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
 export const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, {
   name: 'UserRecipesWithIngredientsData',
   options: () => ({
-    variables: { userId },
+    variables: { userId: localStorage.getItem(GC_USER_ID) },
     fetchPolicy: 'cache-first',
   }),
 })
