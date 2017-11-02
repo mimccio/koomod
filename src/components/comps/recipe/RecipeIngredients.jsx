@@ -3,15 +3,24 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { ListWrapper, EmptyList } from '../layouts'
+import { topbarHeight, navHeight } from '../../../style/config'
+
+const Wrapper = styled.div`
+  height: calc(100vh - ${topbarHeight} - ${navHeight});
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+`
 
 const IngredientItemWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(0, 0, 0, 0.85);
   padding: 14px;
   width: 100%;
-  height: 100%;
+  height: 50px;
 `
 
 const IngredientName = styled.div`
@@ -52,16 +61,18 @@ export default ({ ingredients, recipeId }: PropType) => {
     return <EmptyList to={`/recipe/${recipeId}/ingredients/new`} message='add an ingredient' />
   }
   return (
-    <ListWrapper>
-      {ingredients.map(ingredient => (
-        <IngredientItemWrapper key={ingredient.id}>
-          <IngredientName>{ingredient.name}</IngredientName>
-          <IngredientInfo>
-            <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
-            <IngredientNature>{ingredient.nature}</IngredientNature>
-          </IngredientInfo>
-        </IngredientItemWrapper>
-      ))}
-    </ListWrapper>
+    <Wrapper>
+      <ListWrapper>
+        {ingredients.map(ingredient => (
+          <IngredientItemWrapper key={ingredient.id}>
+            <IngredientName>{ingredient.name}</IngredientName>
+            <IngredientInfo>
+              <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
+              <IngredientNature>{ingredient.nature}</IngredientNature>
+            </IngredientInfo>
+          </IngredientItemWrapper>
+        ))}
+      </ListWrapper>
+    </Wrapper>
   )
 }
