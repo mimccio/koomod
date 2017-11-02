@@ -1,5 +1,7 @@
 // @flow
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
@@ -23,8 +25,19 @@ const Btn = styled(RoundButton)`
   }
 `
 
-export default ({ onClick }: { onClick?: Function }) => (
-  <Btn onClick={onClick}>
-    <i className='material-icons'>add</i>
-  </Btn>
-)
+export default ({ onClick, to }: { onClick?: Function, to?: string }) => {
+  if (to) {
+    return (
+      <Link to={to}>
+        <Btn>
+          <i className='material-icons'>add</i>
+        </Btn>
+      </Link>
+    )
+  }
+  return (
+    <Btn onClick={onClick}>
+      <i className='material-icons'>add</i>
+    </Btn>
+  )
+}

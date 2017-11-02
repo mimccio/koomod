@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import UserRecipesData from '../containers/UserRecipesData'
 import Loading from '../comps/Loading'
@@ -37,12 +36,10 @@ export default () => (
               <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
               {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
             </ListWrapper>
+            <FloatingButtonAdd to='/new-recipe' />
           </ContentWrapper>
         )
       }}
     </UserRecipesData>
-    <Link to='/new-recipe'>
-      <FloatingButtonAdd />
-    </Link>
   </PageWrapper>
 )
