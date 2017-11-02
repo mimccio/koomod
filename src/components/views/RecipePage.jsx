@@ -32,7 +32,10 @@ export default ({ location, match }) => {
                     historyPath={history.location.pathname}
                     from={history.location.state && history.location.state.from}
                   >
-                    <RecipeIngredientsData recipeId={recipeId} loadingComp={<Loading message='loading recipes...' />}>
+                    <RecipeIngredientsData
+                      recipeId={recipeId}
+                      loadingComp={<Loading message='loading ingredients...' />}
+                    >
                       {ingredients => <RecipeIngredients ingredients={ingredients} recipeId={recipeId} />}
                     </RecipeIngredientsData>
                   </SlideComp>
