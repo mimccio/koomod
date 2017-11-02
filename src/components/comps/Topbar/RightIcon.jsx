@@ -34,21 +34,14 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
   const loginKey =
     location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : `login-${location.key}`
 
-  const match = matchPath(location.pathname, {
+  const matchRecipePath = matchPath(location.pathname, {
     path: '/recipe/:id',
     exact: false,
     strict: false,
   })
 
-  const keyFunc = () => {
-    if (!userId) return loginKey
-    if (match) {
-      return 'recipeLocationKey'
-    }
-    return location.key
-  }
-
-  const key = keyFunc()
+  const recipePageKeykey = matchRecipePath ? 'icon-recipe-key' : `icon-${location.key}`
+  const key = userId ? recipePageKeykey : loginKey
   return (
     <TransitionGroup>
       <FadeTransition key={key}>

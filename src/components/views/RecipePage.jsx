@@ -1,10 +1,10 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, matchPath } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 // containers
 import RecipeIngredientsData from '../containers/RecipeIngredientsData'
-// import RecipeInfoData from '../containers/RecipeInfoData'
+import RecipeInfoData from '../containers/RecipeInfoData'
 import RecipeStepsData from '../containers/RecipeStepsData'
 // components
 import { PageWrapper } from '../comps/layouts'
@@ -15,11 +15,12 @@ import { SlideTransition, SlideComp } from '../comps/animations/Slide'
 
 export default ({ location, match }) => {
   const recipeId = match.params.id
+
   return (
     <PageWrapper>
       <RecipeNav />
       <TransitionGroup>
-        <SlideTransition key={location.key}>
+        <SlideTransition key={`recipePage-${location.key}`}>
           {status => (
             <Switch location={location}>
               <Route
@@ -41,7 +42,33 @@ export default ({ location, match }) => {
               <Route
                 exact
                 path='/recipe/:id/info'
-                render={({ history }) => <RecipeInfo status={status} history={history} />}
+                render={({ history }) => {
+                  const matchRecipeIngredientsLocationPath = matchPath(history.location.pathname, {
+                    path: '/recipe/:id/ingredients',
+                    exact: true,
+                    strict: false,
+                  })
+
+                  const matchRecipeIngredientsFromPath = matchPath(history.location.state.from, {
+                    path: '/recipe/:id/ingredients',
+                    exact: true,
+                    strict: false,
+                  })
+                  return (
+                    <SlideComp
+                      status={status}
+                      historyPath={history.location.pathname}
+                      from={history.location.state && history.location.state.from}
+                      reverse={matchRecipeIngredientsLocationPath || matchRecipeIngredientsFromPath}
+                    >
+                      <RecipeInfoData recipeId={recipeId} loadingComp={<Loading message='loading info...' />}>
+                        {(Recipe, UpdateRecipeMutation) => (
+                          <RecipeInfo recipe={Recipe} UpdateRecipeMutation={UpdateRecipeMutation} />
+                        )}
+                      </RecipeInfoData>
+                    </SlideComp>
+                  )
+                }}
               />
 
               <Route
