@@ -46,13 +46,12 @@ class Login extends Component {
         console.log('id', id)
         this.saveUserData(id, token)
       }
-
-      this.props.history.push('/recipes')
     } catch (error) {
       console.log('error', error)
       this.setState({ error: error.message })
       evt.target.blur()
     }
+    this.props.history.push('/recipes')
   }
 
   saveUserData = (id, token) => {
