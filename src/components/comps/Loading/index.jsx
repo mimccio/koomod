@@ -2,7 +2,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
-// import { ContentWrapper } from '../layouts'
 import Spinner from './Spinner'
 
 import palette from '../../../style/palette'
@@ -13,7 +12,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //max-height: 100%;
   width: 100%;
 `
 

@@ -7,6 +7,8 @@ import { TransitionGroup } from 'react-transition-group'
 import { GC_USER_ID } from '../../../lib/constants'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
+const iconWith = '50px'
+
 const Login = styled(FadeComp)`
   width: 70px;
   right: 0;
@@ -20,13 +22,13 @@ const Login = styled(FadeComp)`
 
 const RightBarIcon = styled(FadeComp)`
   position: absolute;
-  right: 0;
+  left: calc(100vw - ${iconWith});
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
+  height: 100%;
+  width: ${iconWith};
 `
 
 export default ({ location }: { location: { pathname: string, key: string } }) => {
