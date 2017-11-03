@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   display: block;
 `
 
-export default ({ history }) => (
+export default ({ history, status }) => (
   <PageWrapper>
     <CreateRecipe history={history}>
       {({ recipeState, handleKeyDown, handleChangeRecipe, createRecipe }) => (
@@ -39,7 +39,7 @@ export default ({ history }) => (
             value={recipeState.description}
             onChange={evt => handleChangeRecipe(evt)}
           />
-          <FloatingButtonSave onClick={createRecipe} />
+          <FloatingButtonSave onClick={createRecipe} status={status} />
         </Wrapper>
       )}
     </CreateRecipe>

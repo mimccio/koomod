@@ -5,16 +5,30 @@ import styled from 'styled-components'
 import palette from '../../../style/palette'
 import { topbarHeight } from '../../../style/config'
 
-const Wrapper = styled.div`
+const FixedWrapper = styled.div`
   background-color: ${palette.primary.lighter};
+
+  //z-index: 5;
+
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   //align-items: center;
   padding-top: ${topbarHeight};
   border: none;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
 `
 
-export default ({ children }: { children: React.Node }) => <Wrapper>{children}</Wrapper>
+const ContentWrapper = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+`
+
+export default ({ children }: { children: React.Node }) => (
+  <FixedWrapper>
+    <ContentWrapper>{children}</ContentWrapper>
+  </FixedWrapper>
+)

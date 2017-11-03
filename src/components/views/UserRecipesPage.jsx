@@ -18,7 +18,7 @@ type Recipe = {
   isOptimistic: boolean
 }
 
-export default () => (
+export default ({ status }: { status: string }) => (
   <PageWrapper>
     <UserRecipesData loadingComp={<Loading message='loading recipes...' />}>
       {(recipes: Recipe[], updateRecipeSelect: Function) => {
@@ -36,7 +36,7 @@ export default () => (
               <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
               {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
             </ListWrapper>
-            <FloatingButtonAdd to='/new-recipe' />
+            <FloatingButtonAdd to='/new-recipe' status={status} />
           </ContentWrapper>
         )
       }}

@@ -2,7 +2,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
+import facepaint from 'facepaint'
 import { FadeTransition, FadeComp } from '../animations/Fade'
+
+const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
 
 const Icon = styled(FadeComp)`
   position: absolute;
@@ -11,7 +14,9 @@ const Icon = styled(FadeComp)`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 50px;
+  ${mq({
+    width: ['50px;', '60px', '70px'],
+  })};
 `
 
 export default ({ menuIsOpen, toggleMenu }: { menuIsOpen: boolean, toggleMenu: Function }) => (

@@ -15,7 +15,7 @@ injectGlobal`
     color: ${palette.text};
     font-size: ${fontSize.body};
     overflow-x: hidden;
-    overflow-y: overlay;
+    //overflow-y: overlay;
   }
  
 

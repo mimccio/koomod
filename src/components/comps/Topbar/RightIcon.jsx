@@ -3,14 +3,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, Route, Switch, matchPath } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
+import facepaint from 'facepaint'
 
 import { GC_USER_ID } from '../../../lib/constants'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
-const iconWith = '50px'
+const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
 
 const Login = styled(FadeComp)`
-  width: 70px;
   right: 0;
   cursor: pointer;
   display: flex;
@@ -18,17 +18,22 @@ const Login = styled(FadeComp)`
   align-items: center;
   text-align: center;
   height: 100%;
+  ${mq({
+    width: ['70px;', '85px', '100px'],
+  })};
 `
 
 const RightBarIcon = styled(FadeComp)`
   position: absolute;
-  left: calc(100vw - ${iconWith});
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: ${iconWith};
+  ${mq({
+    width: ['50px', '60px', '70px'],
+    left: ['calc(100vw - 50px)', 'calc(100vw - 65px)', 'calc(100vw - 80px)'],
+  })};
 `
 
 export default ({ location }: { location: { pathname: string, key: string } }) => {

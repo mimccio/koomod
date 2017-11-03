@@ -1,20 +1,30 @@
 // @flow
 import React from 'react'
 import { Link } from 'react-router-dom'
+import facepaint from 'facepaint'
 
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
 import RoundButton from './RoundButton'
+import { FadeComp } from '../animations/Fade'
 
 const color = palette.info.accent.main
+
+const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
+
+const TransitionComp = styled(FadeComp)`
+  position: fixed;
+  bottom: 15px;
+  left: calc(100vw - 70px);
+  ${mq({
+    left: ['calc(100vw - 70px)', 'calc(100vw - 85px)', 'calc(100vw - 110px)'],
+  })};
+`
 
 const Btn = styled(RoundButton)`
   background-color: ${color};
   color: white;
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
 
   &:hover {
     color: ${color};
@@ -25,19 +35,21 @@ const Btn = styled(RoundButton)`
   }
 `
 
-export default ({ onClick, to }: { onClick?: Function, to?: string }) => {
-  if (to) {
+const icon = <i className='material-icons'>add</i>
+
+export default ({ onClick, to, status }: { onClick?: Function, to?: string, status: string }) => {
+  if (typeof to === 'string') {
     return (
-      <Link to={to}>
-        <Btn>
-          <i className='material-icons'>add</i>
-        </Btn>
-      </Link>
+      <TransitionComp enter={0} status={status}>
+        <Link to={to}>
+          <Btn>{icon}</Btn>
+        </Link>
+      </TransitionComp>
     )
   }
   return (
-    <Btn onClick={onClick}>
-      <i className='material-icons'>add</i>
-    </Btn>
+    <TransitionComp status={status}>
+      <Btn onClick={onClick}>{icon}</Btn>
+    </TransitionComp>
   )
 }
