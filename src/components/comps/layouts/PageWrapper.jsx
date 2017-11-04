@@ -7,14 +7,10 @@ import { topbarHeight } from '../../../style/config'
 
 const FixedWrapper = styled.div`
   background-color: ${palette.primary.lighter};
-
-  //z-index: 5;
-
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  //align-items: center;
   padding-top: ${topbarHeight};
   border: none;
   width: 100%;
