@@ -34,31 +34,41 @@ const Btn = styled(RoundButton)`
   }
 `
 
-const icon = <i className='material-icons'>check</i>
-
 export default ({
   onClick,
   to,
   status,
-  color = palette.primary.main,
+  name = 'add',
+  color,
 }: {
   onClick?: Function,
   to?: string,
   status: string,
+  name?: string,
   color?: string
 }) => {
+  const icon = <i className='material-icons'>{name}</i>
+  const setColor = () => {
+    if (color) return color
+    if (name === 'add') return palette.info.accent.main
+    if (name === 'check') return palette.success.accent.main
+    return palette.primary.main
+  }
+  const btnColor = setColor()
   if (typeof to === 'string') {
     return (
       <TransitionComp enter={0} status={status}>
         <Link to={to}>
-          <Btn color={color}>{icon}</Btn>
+          <Btn color={btnColor}>{icon}</Btn>
         </Link>
       </TransitionComp>
     )
   }
   return (
     <TransitionComp status={status}>
-      <Btn onClick={onClick}>{icon}</Btn>
+      <Btn color={btnColor} onClick={onClick}>
+        {icon}
+      </Btn>
     </TransitionComp>
   )
 }

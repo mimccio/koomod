@@ -6,7 +6,7 @@ import Loading from '../comps/Loading'
 
 import { PageWrapper, ContentWrapper, EmptyList, ListWrapper } from '../comps/layouts'
 import { RecipeItem } from '../comps/recipe'
-import { GlobalSelection, FloatingButtonAdd } from '../comps/buttons'
+import { GlobalSelection, FloatingButton } from '../comps/buttons'
 
 type Recipe = {
   id: string,
@@ -36,7 +36,7 @@ export default ({ status }: { status: string }) => (
               <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
               {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
             </ListWrapper>
-            <FloatingButtonAdd to='/new-recipe' status={status} />
+            <FloatingButton name='add' to='/new-recipe' status={status} />
           </ContentWrapper>
         )
       }}
