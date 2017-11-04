@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import CreateRecipe from '../containers/CreateRecipe'
 
 import { PageWrapper } from '../comps/layouts'
-import { FloatingButtonSave } from '../comps/buttons'
+import { FloatingButton } from '../comps/buttons'
 
 const Wrapper = styled.div`
   // display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   display: block;
 `
 
-export default ({ history }) => (
+export default ({ history, status }) => (
   <PageWrapper>
     <CreateRecipe history={history}>
       {({ recipeState, handleKeyDown, handleChangeRecipe, createRecipe }) => (
@@ -39,7 +39,7 @@ export default ({ history }) => (
             value={recipeState.description}
             onChange={evt => handleChangeRecipe(evt)}
           />
-          <FloatingButtonSave onClick={createRecipe} />
+          <FloatingButton name="check" onClick={createRecipe} status={status} />
         </Wrapper>
       )}
     </CreateRecipe>

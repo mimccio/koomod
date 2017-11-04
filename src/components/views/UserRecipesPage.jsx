@@ -1,13 +1,12 @@
 // @flow
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import UserRecipesData from '../containers/UserRecipesData'
 import Loading from '../comps/Loading'
 
 import { PageWrapper, ContentWrapper, EmptyList, ListWrapper } from '../comps/layouts'
 import { RecipeItem } from '../comps/recipe'
-import { GlobalSelection, FloatingButtonAdd } from '../comps/buttons'
+import { GlobalSelection, FloatingButton } from '../comps/buttons'
 
 type Recipe = {
   id: string,
@@ -19,7 +18,7 @@ type Recipe = {
   isOptimistic: boolean
 }
 
-export default () => (
+export default ({ status }: { status: string }) => (
   <PageWrapper>
     <UserRecipesData loadingComp={<Loading message='loading recipes...' />}>
       {(recipes: Recipe[], updateRecipeSelect: Function) => {
@@ -37,12 +36,10 @@ export default () => (
               <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
               {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
             </ListWrapper>
+            <FloatingButton name='add' to='/new-recipe' status={status} />
           </ContentWrapper>
         )
       }}
     </UserRecipesData>
-    <Link to='/new-recipe'>
-      <FloatingButtonAdd />
-    </Link>
   </PageWrapper>
 )
