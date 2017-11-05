@@ -7,7 +7,7 @@ const RoundButton = styled.div`
   align-items: center;
   overflow-y: visible;
   margin: 3px;
-
+  text-rendering: optimizeLegibility;
   height: 50px;
   width: 50px;
   border: none;
@@ -15,26 +15,28 @@ const RoundButton = styled.div`
   padding: 0;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s ease;
+  transform: scale(1);
 
   i {
     font-size: 22px;
   }
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     cursor: pointer;
     box-shadow: none;
     transform: scale(1.1);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  &:after {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
     box-sizing: border-content;
     content: '';
     width: 100%;
     height: 100%;
-    position: absolute;
-
     border: solid 2px;
     border-color: transparent;
     transform: scale(0.7);
@@ -42,9 +44,8 @@ const RoundButton = styled.div`
     border-radius: 50%;
   }
 
-  &:hover:after {
+  &:hover::after {
     transform: scale(1);
-    border-radius: 50%;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
