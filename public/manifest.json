@@ -16,6 +16,6 @@
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",
   "theme_color": "#673ab7",
-  "background_color": "#b39ddb",
+  "background_color": "#f3e5f5",
   "description": "Make your shopping list by selecting your recipes"
 }
