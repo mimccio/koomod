@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { ListWrapper, EmptyList } from '../layouts'
 import { topbarHeight, navHeight } from '../../../style/config'
+import { NewIngredient } from '../ingredient'
 
 const Wrapper = styled.div`
   height: calc(100vh - ${topbarHeight} - ${navHeight});
@@ -63,6 +64,7 @@ export default ({ ingredients, recipeId }: PropType) => {
   return (
     <Wrapper>
       <ListWrapper>
+        <NewIngredient recipeId={recipeId} />
         {ingredients.map(ingredient => (
           <IngredientItemWrapper key={ingredient.id}>
             <IngredientName>{ingredient.name}</IngredientName>

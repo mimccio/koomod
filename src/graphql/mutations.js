@@ -71,3 +71,17 @@ export const UPDATE_RECIPE_SELECT_MUTATION = gql`
     }
   }
 `
+
+// ingredient mutation
+
+export const CREATE_INGREDIENT_MUTATION = gql`
+  mutation CreateIngredientMutation($recipeId: ID!, $name: String!, $quantity: Float!, $nature: String!) {
+    createIngredient(recipeId: $recipeId, name: $name, quantity: $quantity, nature: $nature) {
+      id
+      name
+      quantity
+      nature
+      isOptimistic
+    }
+  }
+`

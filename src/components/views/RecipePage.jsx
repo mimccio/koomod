@@ -52,11 +52,14 @@ export default ({ location, match }) => {
                     strict: false,
                   })
 
-                  const matchRecipeIngredientsFromPath = matchPath(history.location.state.from, {
-                    path: '/recipe/:id/ingredients',
-                    exact: true,
-                    strict: false,
-                  })
+                  const matchRecipeIngredientsFromPath = matchPath(
+                    history.location.state && history.location.state.from,
+                    {
+                      path: '/recipe/:id/ingredients',
+                      exact: true,
+                      strict: false,
+                    }
+                  )
                   return (
                     <SlideComp
                       status={status}
