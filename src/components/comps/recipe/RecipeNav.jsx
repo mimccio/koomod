@@ -33,12 +33,13 @@ const StyledNavLink = styled(NavLink).attrs({
   text-align: center;
   padding: 4px;
   transition: all 300ms ease-in-out;
+  border-bottom: 1px solid transparent;
 
 
   &.${activeClassName} {
     color: ${palette.text};
     //font-weight: bold;
-    border-bottom: 1px solid ${palette.textSecondary};
+    border-bottom-color: ${palette.textSecondary};
   }
 `
 
