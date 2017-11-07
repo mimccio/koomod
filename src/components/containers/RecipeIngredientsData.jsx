@@ -8,6 +8,7 @@ export const RecipeIngredientsHOC = ({ recipeIngredientsQuery: { loading, error,
     return loadingComp
   }
   if (error) {
+    console.log(error)
     return <p>{error.message}</p>
   }
   return children(Recipe.ingredients)

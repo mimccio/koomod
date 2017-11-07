@@ -25,6 +25,7 @@ export class CreateIngredientHOC extends React.Component {
 
   handleKeyDown = (keydownEvt) => {
     if (keydownEvt.keyCode === 27) {
+      console.log('escape')
       this.setState({
         name: '',
         quantity: '',
@@ -35,6 +36,11 @@ export class CreateIngredientHOC extends React.Component {
 
   createIngredient = async () => {
     const { name, quantity, nature } = this.state
+    this.setState({
+      name: '',
+      quantity: '',
+      nature: 'g',
+    })
     console.log('name', name)
     this.props.createIngredientMutation({
       variables: {

@@ -30,7 +30,7 @@ export const SIGNIN_USER_MUTATION = gql`
 // recipe mutation
 
 export const UPDATE_RECIPE_INFO_MUTATION = gql`
-  mutation UpdateRecipeInfoMutation($name: String!, $description: String!, $pers: Number!, $id: ID!) {
+  mutation UpdateRecipeInfoMutation($name: String!, $description: String!, $pers: Int!, $id: ID!) {
     updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers) {
       name
       description
