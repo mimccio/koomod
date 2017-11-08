@@ -2,7 +2,7 @@ const toShoppingList = (recipes) => {
   let arr = []
   recipes.map(recipe => recipe.ingredients.map(ingredient => arr.push(ingredient)))
 
-  console.log('arr', arr)
+  // console.log('arr', arr)
 
   const list = []
 
@@ -23,19 +23,20 @@ const toShoppingList = (recipes) => {
         }
         return ing
       })
-      const shoppingItem = newArrWithSameNature.reduce((prev, item) => {
-        console.log('prev', prev, 'item', item)
-        return {
+      const shoppingItem = newArrWithSameNature.reduce((prev, item) =>
+        // console.log('prev', prev, 'item', item)
+        ({
           name: prev.name,
           quantity: prev.quantity + item.quantity,
           nature: prev.nature,
-        }
-      })
+          id: prev.id,
+        })
+      )
       list.push(shoppingItem)
     }
   })
 
-  console.log('list', list)
+  // console.log('list', list)
 
   const shoppingList = list.map((ingredient) => {
     if (ingredient.nature === 'g' && ingredient.quantity >= 1000) {
@@ -55,7 +56,7 @@ const toShoppingList = (recipes) => {
     return ingredient
   })
 
-  console.log('shoppingList', shoppingList)
+  // console.log('shoppingList', shoppingList)
   return shoppingList
 }
 

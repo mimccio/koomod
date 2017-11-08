@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 
 import palette from '../../../style/palette'
-import { navHeight, topbarHeight } from '../../../style/config'
+// import { navHeight, topbarHeight } from '../../../style/config'
 
 const delay = 300
 
@@ -25,13 +25,13 @@ export const SlideTransition = ({ children, ...props }: { children: Function, en
 export const SlideComp = styled.div`
   background-color: ${palette.primary.lighter};
   color: ${palette.text};
-  position: absolute;
+  //position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: calc(100% - ${navHeight} - ${topbarHeight});
+  min-height: 100%;
 
   transition: all 300ms ease-in-out;
 

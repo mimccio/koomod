@@ -99,6 +99,8 @@ export const RECIPE_INGREDIENTS_QUERY = gql`
         name
         quantity
         nature
+        isOptimistic
+        key
       }
     }
   }
