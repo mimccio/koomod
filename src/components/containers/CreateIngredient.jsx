@@ -20,12 +20,10 @@ export class CreateIngredientHOC extends React.Component {
       quantity: ingredient.quantity,
       nature: ingredient.nature,
     })
-    console.log(changeEvt.target.value)
   }
 
   handleKeyDown = (keydownEvt) => {
     if (keydownEvt.keyCode === 27) {
-      console.log('escape')
       this.setState({
         name: '',
         quantity: '',
