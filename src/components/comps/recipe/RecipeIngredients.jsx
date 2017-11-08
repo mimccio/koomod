@@ -3,11 +3,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { ListWrapper, EmptyList } from '../layouts'
-import { topbarHeight, navHeight } from '../../../style/config'
+// import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
 
 const Wrapper = styled.div`
-  height: calc(100vh - ${topbarHeight} - ${navHeight});
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

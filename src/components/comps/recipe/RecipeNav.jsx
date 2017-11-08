@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: ${palette.grey.light};
   //border: 2px solid red;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
 `
 
 const Content = styled.div`
