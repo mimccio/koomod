@@ -1,10 +1,12 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
+import { TransitionGroup } from 'react-transition-group'
 
 import { ListWrapper, EmptyList } from '../layouts'
 // import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
+import { FadeTransition, FadeComp } from '../animations/Fade'
 
 const Wrapper = styled.div`
   height: 100%;
@@ -15,13 +17,15 @@ const Wrapper = styled.div`
   width: 100vw;
 `
 
-const IngredientItemWrapper = styled.div`
+const IngredientItemWrapper = styled(FadeComp)`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 14px;
   width: 100%;
   height: 50px;
+  width: 100vw;
+  max-width: 460px;
 `
 
 const IngredientName = styled.div`
@@ -65,15 +69,21 @@ export default ({ ingredients, recipeId }: PropType) => {
     <Wrapper>
       <ListWrapper>
         <NewIngredient recipeId={recipeId} />
-        {ingredients.map(ingredient => (
-          <IngredientItemWrapper key={ingredient.id}>
-            <IngredientName>{ingredient.name}</IngredientName>
-            <IngredientInfo>
-              <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
-              <IngredientNature>{ingredient.nature}</IngredientNature>
-            </IngredientInfo>
-          </IngredientItemWrapper>
-        ))}
+        <TransitionGroup>
+          {ingredients.map(ingredient => (
+            <FadeTransition key={`ingredient-list-${ingredient.id}`}>
+              {status => (
+                <IngredientItemWrapper key={ingredient.id} status={status}>
+                  <IngredientName>{ingredient.name}</IngredientName>
+                  <IngredientInfo>
+                    <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
+                    <IngredientNature>{ingredient.nature}</IngredientNature>
+                  </IngredientInfo>
+                </IngredientItemWrapper>
+              )}
+            </FadeTransition>
+          ))}
+        </TransitionGroup>
       </ListWrapper>
     </Wrapper>
   )
