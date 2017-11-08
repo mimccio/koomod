@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 
+import palette from '../../../style/palette'
 import { ListWrapper, EmptyList } from '../layouts'
 // import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
@@ -19,37 +20,57 @@ const Wrapper = styled.div`
 
 const IngredientItemWrapper = styled(FadeComp)`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 14px;
   width: 100%;
   height: 50px;
   width: 100vw;
   max-width: 460px;
+  border-bottom: 1px solid ${palette.divider};
 `
 
 const IngredientName = styled.div`
-  width: 64%;
+  width: 50%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding-left: 12px;
 `
 
 const IngredientInfo = styled.div`
-  width: 36%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 `
 
 const IngredientQuantity = styled.div`
-  width: 38%;
+  width: 42%;
   text-align: end;
 `
 
 const IngredientNature = styled.div`
-  width: 56%;
+  width: 46%;
   text-align: end;
+`
+
+const CancelButton = styled.div`
+  width: 50px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${palette.danger.light};
+  cursor: pointer;
+  transition: all 200ms ease;
+
+  i {
+    font-size: 16px;
+  }
+
+  &:hover {
+    color: ${palette.danger.main};
+  }
 `
 
 type IngredientType = {
@@ -79,6 +100,9 @@ export default ({ ingredients, recipeId }: PropType) => {
                     <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
                     <IngredientNature>{ingredient.nature}</IngredientNature>
                   </IngredientInfo>
+                  <CancelButton>
+                    <i className='material-icons'>cancel</i>
+                  </CancelButton>
                 </IngredientItemWrapper>
               )}
             </FadeTransition>
