@@ -110,7 +110,14 @@ DataType) => {
                   onChange={evt => handleChange(evt)}
                   onKeyDown={evt => handleKeyDown(evt)}
                 />
-                <SaveButton onClick={createIngredient}>
+                <SaveButton
+                  onClick={createIngredient}
+                  tabIndex={0}
+                  onKeyDown={(evt) => {
+                    if (evt.keyCode === 13) return createIngredient()
+                    return null
+                  }}
+                >
                   <i className='material-icons'>check</i>
                 </SaveButton>
               </InfoWrapper>
