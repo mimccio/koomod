@@ -1,10 +1,12 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
+// import { Transition } from 'react-transition-group'
 
 import palette from '../../../style/palette'
 import CreateIngredient from '../../containers/CreateIngredient'
 import SelectNature from './SelectNature'
+import { FadeTransition, FadeComp } from '../animations/Fade'
 
 import Input from '../inputs/Input'
 
@@ -13,13 +15,15 @@ const Form = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 50px;
-  padding: 26px 10px;
+  padding: 24px 10px 28px;
   width: 100%;
 `
 
 const NameInput = styled(Input)`width: 42%;`
 
-const InfoWrapper = styled.div`
+const InfoWrapper = styled(FadeComp)`
+  transition: all 300ms ease-in-out;
+  transform-origin: right;
   width: 54%;
   display: flex;
   justify-content: space-between;
@@ -88,28 +92,30 @@ DataType) => {
             onKeyDown={evt => handleNameKeyDown(evt)}
             tabIndex='0'
           />
-          {name && (
-            <InfoWrapper>
-              <QuantityInput
-                type='number'
-                id='quantity'
-                value={quantity}
-                placeholder={0}
-                onChange={evt => handleChange(evt)}
-                onKeyDown={evt => handleQuantityKeyDown(evt)}
-              />
-              <SelectNature
-                type='text'
-                id='nature'
-                value={nature}
-                onChange={evt => handleChange(evt)}
-                onKeyDown={evt => handleKeyDown(evt)}
-              />
-              <SaveButton onClick={createIngredient}>
-                <i className='material-icons'>check</i>
-              </SaveButton>
-            </InfoWrapper>
-          )}
+          <FadeTransition in={!!name} enter={0}>
+            {status => (
+              <InfoWrapper status={status}>
+                <QuantityInput
+                  type='number'
+                  id='quantity'
+                  value={quantity}
+                  placeholder={0}
+                  onChange={evt => handleChange(evt)}
+                  onKeyDown={evt => handleQuantityKeyDown(evt)}
+                />
+                <SelectNature
+                  type='text'
+                  id='nature'
+                  value={nature}
+                  onChange={evt => handleChange(evt)}
+                  onKeyDown={evt => handleKeyDown(evt)}
+                />
+                <SaveButton onClick={createIngredient}>
+                  <i className='material-icons'>check</i>
+                </SaveButton>
+              </InfoWrapper>
+            )}
+          </FadeTransition>
         </Form>
       )
     }}
