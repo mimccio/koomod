@@ -62,7 +62,6 @@ export const USER_SELECTED_RECIPES_QUERY = gql`
           name
           quantity
           nature
-          key
         }
       }
     }

@@ -1,8 +1,9 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 
-import { RECIPE_INGREDIENTS_QUERY } from '../../graphql/queries'
+import { RECIPE_INGREDIENTS_QUERY, USER_RECIPES_WITH_INGREDIENTS_QUERY } from '../../graphql/queries'
 import { DELETE_INGREDIENT_MUTATION } from '../../graphql/mutations'
+import { GC_USER_ID } from '../../lib/constants'
 
 export const RecipeIngredientsHOC = ({
   recipeIngredientsQuery: { loading, error, Recipe },
@@ -24,17 +25,22 @@ export const RecipeIngredientsHOC = ({
         variables: {
           id: ingredientId,
         },
-        update: (store, { data: { deleteIngredient } }) => {
+        update: (store) => {
           const data = store.readQuery({
             query: RECIPE_INGREDIENTS_QUERY,
             variables: { recipeId: Recipe.id },
           })
-          console.log('"deleteIngredient" :', deleteIngredient)
-          console.log('"index" :', Recipe.ingredients.findIndex(ingredient => ingredient.id === ingredientId))
+
           const index = Recipe.ingredients.findIndex(ingredient => ingredient.id === ingredientId)
           data.Recipe.ingredients.splice(index, 1)
           store.writeQuery({ query: RECIPE_INGREDIENTS_QUERY, data })
         },
+        refetchQueries: [
+          {
+            query: USER_RECIPES_WITH_INGREDIENTS_QUERY,
+            variables: { userId: localStorage.getItem(GC_USER_ID) },
+          },
+        ],
       })
     },
   }
