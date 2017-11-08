@@ -4,18 +4,32 @@ import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 
 import palette from '../../../style/palette'
-import { ListWrapper, EmptyList } from '../layouts'
+import { EmptyList } from '../layouts'
 // import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
 const Wrapper = styled.div`
-  height: 100%;
+  min-height: calc(100vh - 104px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
+  border: none;
+`
+
+const ContentWrapper = styled.div`
+  background-color: ${palette.grey.lighter};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  max-width: 460px;
+  padding-bottom: 20px;
+  flex: 1;
+  border: none;
 `
 
 const IngredientItemWrapper = styled(FadeComp)`
@@ -27,6 +41,8 @@ const IngredientItemWrapper = styled(FadeComp)`
   width: 100vw;
   max-width: 460px;
   border-bottom: 1px solid ${palette.divider};
+  color: ${({ ingredientId }: { ingredientId?: number | string }) =>
+    (typeof ingredientId === 'number' && ingredientId < 0 ? palette.textSecondary : palette.text)};
 `
 
 const IngredientName = styled.div`
@@ -90,13 +106,13 @@ export default ({ ingredients, recipeId, deleteIngredient }: PropType) => {
   }
   return (
     <Wrapper>
-      <ListWrapper>
+      <ContentWrapper>
         <NewIngredient recipeId={recipeId} />
         <TransitionGroup>
           {ingredients.map(ingredient => (
-            <FadeTransition key={`ingredient-list-${ingredient.id}`}>
+            <FadeTransition key={`ingredient-list-${ingredient.name + ingredients.indexOf(ingredient)}`}>
               {status => (
-                <IngredientItemWrapper key={ingredient.id} status={status}>
+                <IngredientItemWrapper key={ingredient.id} status={status} ingredientId={ingredient.id}>
                   <IngredientName>{ingredient.name}</IngredientName>
                   <IngredientInfo>
                     <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
@@ -110,7 +126,7 @@ export default ({ ingredients, recipeId, deleteIngredient }: PropType) => {
             </FadeTransition>
           ))}
         </TransitionGroup>
-      </ListWrapper>
+      </ContentWrapper>
     </Wrapper>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 
-// import { RECIPE_INGREDIENTS_QUERY } from '../../graphql/queries'
+import { RECIPE_INGREDIENTS_QUERY } from '../../graphql/queries'
 import { CREATE_INGREDIENT_MUTATION } from '../../graphql/mutations'
 
 export class CreateIngredientHOC extends React.Component {
@@ -49,14 +49,29 @@ export class CreateIngredientHOC extends React.Component {
         quantity: Number(Number(quantity).toFixed(2)),
         nature,
       },
-      // update: (store, { data: { createIngredient } }) => {
-      //   const recipe = store.readQuery({
-      //     query: RECIPE_INGREDIENTS_QUERY,
-      //     variables: { recipeId: this.props.recipeId },
-      //   })
-      //   recipe.ingredients.push(createIngredient)
-      //   store.writeQuery({ query: RECIPE_INGREDIENTS_QUERY, recipe })
-      // },
+      optimisticResponse: {
+        createIngredient: {
+          __typename: 'Ingredient',
+          id: Math.round(Math.random() * -100000),
+          name,
+          quantity: Number(Number(quantity).toFixed(2)),
+          nature,
+          isOptimistic: true,
+          recipe: {
+            __typename: 'Recipe',
+            id: this.props.recipeId,
+          },
+        },
+      },
+      update: (store, { data: { createIngredient } }) => {
+        const data = store.readQuery({
+          query: RECIPE_INGREDIENTS_QUERY,
+          variables: { recipeId: this.props.recipeId },
+        })
+        console.log('recipe', data.Recipe.ingredients)
+        data.Recipe.ingredients.push(createIngredient)
+        store.writeQuery({ query: RECIPE_INGREDIENTS_QUERY, data })
+      },
     })
   }
 
