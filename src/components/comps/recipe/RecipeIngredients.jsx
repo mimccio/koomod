@@ -55,21 +55,23 @@ const IngredientNature = styled.div`
 `
 
 const CancelButton = styled.div`
-  width: 50px;
+  margin-left: 10px;
+  width: 60px;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${palette.danger.light};
+  color: ${palette.grey.light};
+  color: rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: all 200ms ease;
 
   i {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   &:hover {
-    color: ${palette.danger.main};
+    color: ${palette.danger.light};
   }
 `
 

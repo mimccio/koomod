@@ -46,7 +46,7 @@ export class CreateIngredientHOC extends React.Component {
       variables: {
         recipeId: this.props.recipeId,
         name,
-        quantity: Number(quantity),
+        quantity: Number(Number(quantity).toFixed(2)),
         nature,
       },
       // update: (store, { data: { createIngredient } }) => {

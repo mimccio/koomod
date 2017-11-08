@@ -28,7 +28,7 @@ export const FadeTransition = ({
 )
 
 export const FadeComp = styled.div`
-  transition: all 1000ms ease-in-out;
+  transition: all 100ms ease-in-out;
 
   transform: scale(
     ${({ status }: { status: string }) => {
