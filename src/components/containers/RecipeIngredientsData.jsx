@@ -17,17 +17,28 @@ export const RecipeIngredientsHOC = ({
     console.log(error)
     return <p>{error.message}</p>
   }
-  const data = {
+  const props = {
     ingredients: Recipe.ingredients,
     deleteIngredient: async (ingredientId) => {
       await deleteIngredientMutation({
         variables: {
           id: ingredientId,
         },
+        update: (store, { data: { deleteIngredient } }) => {
+          const data = store.readQuery({
+            query: RECIPE_INGREDIENTS_QUERY,
+            variables: { recipeId: Recipe.id },
+          })
+          console.log('"deleteIngredient" :', deleteIngredient)
+          console.log('"index" :', Recipe.ingredients.findIndex(ingredient => ingredient.id === ingredientId))
+          const index = Recipe.ingredients.findIndex(ingredient => ingredient.id === ingredientId)
+          data.Recipe.ingredients.splice(index, 1)
+          store.writeQuery({ query: RECIPE_INGREDIENTS_QUERY, data })
+        },
       })
     },
   }
-  return children(data)
+  return children(props)
 }
 
 export const withRecipeIngredients = graphql(RECIPE_INGREDIENTS_QUERY, {

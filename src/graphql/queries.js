@@ -62,6 +62,7 @@ export const USER_SELECTED_RECIPES_QUERY = gql`
           name
           quantity
           nature
+          key
         }
       }
     }
@@ -100,6 +101,7 @@ export const RECIPE_INGREDIENTS_QUERY = gql`
         quantity
         nature
         isOptimistic
+        key
       }
     }
   }

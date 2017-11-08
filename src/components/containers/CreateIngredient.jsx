@@ -36,6 +36,7 @@ export class CreateIngredientHOC extends React.Component {
 
   createIngredient = async () => {
     const { name, quantity, nature } = this.state
+    const key = Math.round(Math.random() * 100000)
     this.setState({
       name: '',
       quantity: '',
@@ -45,6 +46,7 @@ export class CreateIngredientHOC extends React.Component {
     this.props.createIngredientMutation({
       variables: {
         recipeId: this.props.recipeId,
+        key,
         name,
         quantity: Number(Number(quantity).toFixed(2)),
         nature,
@@ -53,6 +55,7 @@ export class CreateIngredientHOC extends React.Component {
         createIngredient: {
           __typename: 'Ingredient',
           id: Math.round(Math.random() * -100000),
+          key,
           name,
           quantity: Number(Number(quantity).toFixed(2)),
           nature,

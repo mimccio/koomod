@@ -29,6 +29,7 @@ const toShoppingList = (recipes) => {
           name: prev.name,
           quantity: prev.quantity + item.quantity,
           nature: prev.nature,
+          id: prev.id,
         }
       })
       list.push(shoppingItem)

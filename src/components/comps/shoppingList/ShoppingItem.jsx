@@ -10,6 +10,7 @@ const ItemWrapper = styled.div`
 export default ({ ingredient }) => (
   <ItemWrapper>
     <p>{ingredient.name}</p>
+
     <p>
       {ingredient.quantity} {ingredient.nature}
     </p>

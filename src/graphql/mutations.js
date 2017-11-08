@@ -75,13 +75,14 @@ export const UPDATE_RECIPE_SELECT_MUTATION = gql`
 // ingredient mutation
 
 export const CREATE_INGREDIENT_MUTATION = gql`
-  mutation CreateIngredientMutation($recipeId: ID!, $name: String!, $quantity: Float!, $nature: String!) {
-    createIngredient(recipeId: $recipeId, name: $name, quantity: $quantity, nature: $nature) {
+  mutation CreateIngredientMutation($recipeId: ID!, $name: String!, $quantity: Float!, $nature: String!, $key: Int!) {
+    createIngredient(recipeId: $recipeId, name: $name, quantity: $quantity, nature: $nature, key: $key) {
       id
       name
       quantity
       nature
       isOptimistic
+      key
     }
   }
 `
@@ -90,6 +91,7 @@ export const DELETE_INGREDIENT_MUTATION = gql`
   mutation DeleteIngredientMutation($id: ID!) {
     deleteIngredient(id: $id) {
       id
+      key
     }
   }
 `

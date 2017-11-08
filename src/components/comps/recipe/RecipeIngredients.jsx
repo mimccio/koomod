@@ -4,10 +4,12 @@ import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 
 import palette from '../../../style/palette'
-import { EmptyList } from '../layouts'
+// import { EmptyList } from '../layouts'
 // import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
 import { FadeTransition, FadeComp } from '../animations/Fade'
+
+const transitionDelay = 220
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 104px);
@@ -33,6 +35,8 @@ const ContentWrapper = styled.div`
 `
 
 const IngredientItemWrapper = styled(FadeComp)`
+  transition: all ${transitionDelay}ms ease-in-out;
+  transform-origin: right;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,38 +99,34 @@ type IngredientType = {
   id: string,
   name: string,
   nature?: 'g' | 'kg' | 'ml' | 'l' | 'item',
-  quantity?: number
+  quantity?: number,
+  key: number
 }
 
 type PropType = { ingredients: IngredientType[], recipeId: string, deleteIngredient: Function }
 
-export default ({ ingredients, recipeId, deleteIngredient }: PropType) => {
-  if (ingredients.length < 1) {
-    return <EmptyList to={`/recipe/${recipeId}/ingredients/new`} message='add an ingredient' />
-  }
-  return (
-    <Wrapper>
-      <ContentWrapper>
-        <NewIngredient recipeId={recipeId} />
-        <TransitionGroup>
-          {ingredients.map(ingredient => (
-            <FadeTransition key={`ingredient-list-${ingredient.name + ingredients.indexOf(ingredient)}`}>
-              {status => (
-                <IngredientItemWrapper key={ingredient.id} status={status} ingredientId={ingredient.id}>
-                  <IngredientName>{ingredient.name}</IngredientName>
-                  <IngredientInfo>
-                    <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
-                    <IngredientNature>{ingredient.nature}</IngredientNature>
-                  </IngredientInfo>
-                  <CancelButton onClick={() => deleteIngredient(ingredient.id)}>
-                    <i className='material-icons'>cancel</i>
-                  </CancelButton>
-                </IngredientItemWrapper>
-              )}
-            </FadeTransition>
-          ))}
-        </TransitionGroup>
-      </ContentWrapper>
-    </Wrapper>
-  )
-}
+export default ({ ingredients, recipeId, deleteIngredient }: PropType) => (
+  <Wrapper>
+    <ContentWrapper>
+      <NewIngredient recipeId={recipeId} />
+      <TransitionGroup>
+        {ingredients.map(ingredient => (
+          <FadeTransition key={`ingredient-list-${ingredient.key}`} enter={transitionDelay} exit={transitionDelay}>
+            {status => (
+              <IngredientItemWrapper key={ingredient.id} status={status} ingredientId={ingredient.id}>
+                <IngredientName>{ingredient.name}</IngredientName>
+                <IngredientInfo>
+                  <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
+                  <IngredientNature>{ingredient.nature}</IngredientNature>
+                </IngredientInfo>
+                <CancelButton onClick={() => deleteIngredient(ingredient.id)}>
+                  <i className='material-icons'>cancel</i>
+                </CancelButton>
+              </IngredientItemWrapper>
+            )}
+          </FadeTransition>
+        ))}
+      </TransitionGroup>
+    </ContentWrapper>
+  </Wrapper>
+)

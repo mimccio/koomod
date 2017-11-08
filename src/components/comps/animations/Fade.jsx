@@ -8,10 +8,12 @@ const delay = 100
 export const FadeTransition = ({
   children,
   enter = delay,
+  exit = delay,
   ...props
 }: {
   children: Function,
   enter?: number,
+  exit?: number,
   props?: {}
 }) => (
   <Transition
@@ -20,7 +22,7 @@ export const FadeTransition = ({
     {...props}
     timeout={{
       enter,
-      exit: delay,
+      exit,
     }}
   >
     {(status: string): React.Node => children(status)}
