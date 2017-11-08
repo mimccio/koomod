@@ -7,8 +7,8 @@ import palette from '../../../style/palette'
 import CreateIngredient from '../../containers/CreateIngredient'
 import SelectNature from './SelectNature'
 import { FadeTransition, FadeComp } from '../animations/Fade'
-
 import Input from '../inputs/Input'
+import { handlePlural } from '../../../lib/helpers'
 
 const Form = styled.div`
   display: flex;
@@ -42,9 +42,14 @@ const SaveButton = styled.div`
   color: ${palette.success.main};
   cursor: pointer;
   transition: all 200ms ease;
+  border-bottom: 1px solid transparent;
 
   &:hover {
     color: ${palette.success.light};
+  }
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid ${palette.primary.light};
   }
 `
 
@@ -109,6 +114,7 @@ DataType) => {
                   value={nature}
                   onChange={evt => handleChange(evt)}
                   onKeyDown={evt => handleKeyDown(evt)}
+                  isPlural={handlePlural(quantity)}
                 />
                 <SaveButton
                   onClick={createIngredient}

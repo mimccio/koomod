@@ -30,13 +30,23 @@ const Select = styled.select`
   }
 `
 
-export default ({ value, onChange }: { value: 'g' | 'kg' | 'ml' | 'l' | 'item', onChange: Function }) => (
+export default ({
+  value,
+  onChange,
+  isPlural,
+}: {
+  value: 'g' | 'kg' | 'ml' | 'l' | 'item',
+  onChange: Function,
+  isPlural: boolean
+}) => (
   <div>
     <Select name='nature' value={value} onChange={onChange} id='nature'>
       <option value='g'>g</option>
       <option value='kg'>kg</option>
       <option value='ml'>ml</option>
       <option value='l'>l</option>
+      <option value='item'>{isPlural ? 'items' : 'item'}</option>
+      <option value='box'>{isPlural ? 'boxes' : 'box'}</option>
     </Select>
   </div>
 )

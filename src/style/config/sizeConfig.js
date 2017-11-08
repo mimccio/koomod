@@ -2,16 +2,16 @@
 
 // Fonts Sizes
 export const fontSizeConfig = {
-  heading1: 36,
-  heading2: 28,
-  heading3: 22,
-  heading4: 18,
+  heading1: 30,
+  heading2: 24,
+  heading3: 20,
+  heading4: 16,
 
-  bodyHuge: 22,
-  bodyBig: 18,
-  body: 16,
-  bodySmall: 14,
-  bodyTiny: 12,
+  bodyHuge: 20,
+  bodyBig: 16,
+  body: 14,
+  bodySmall: 12,
+  bodyTiny: 10,
 
   rem: {
     huge: 2.8,

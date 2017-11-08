@@ -8,6 +8,7 @@ import palette from '../../../style/palette'
 // import { topbarHeight, navHeight } from '../../../style/config'
 import { NewIngredient } from '../ingredient'
 import { FadeTransition, FadeComp } from '../animations/Fade'
+import { handleIngredientNaturePlural } from '../../../lib/helpers'
 
 const transitionDelay = 220
 
@@ -98,7 +99,7 @@ const CancelButton = styled.div`
 type IngredientType = {
   id: string,
   name: string,
-  nature?: 'g' | 'kg' | 'ml' | 'l' | 'item',
+  nature?: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
   quantity?: number,
   key: number
 }
@@ -117,7 +118,9 @@ export default ({ ingredients, recipeId, deleteIngredient }: PropType) => (
                 <IngredientName>{ingredient.name}</IngredientName>
                 <IngredientInfo>
                   <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
-                  <IngredientNature>{ingredient.nature}</IngredientNature>
+                  <IngredientNature>
+                    {handleIngredientNaturePlural(ingredient.nature, ingredient.quantity)}
+                  </IngredientNature>
                 </IngredientInfo>
                 <CancelButton onClick={() => deleteIngredient(ingredient.id)}>
                   <i className='material-icons'>cancel</i>
