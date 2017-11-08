@@ -82,9 +82,9 @@ type IngredientType = {
   quantity?: number
 }
 
-type PropType = { ingredients: IngredientType[], recipeId: string }
+type PropType = { ingredients: IngredientType[], recipeId: string, deleteIngredient: Function }
 
-export default ({ ingredients, recipeId }: PropType) => {
+export default ({ ingredients, recipeId, deleteIngredient }: PropType) => {
   if (ingredients.length < 1) {
     return <EmptyList to={`/recipe/${recipeId}/ingredients/new`} message='add an ingredient' />
   }
@@ -102,7 +102,7 @@ export default ({ ingredients, recipeId }: PropType) => {
                     <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
                     <IngredientNature>{ingredient.nature}</IngredientNature>
                   </IngredientInfo>
-                  <CancelButton>
+                  <CancelButton onClick={() => deleteIngredient(ingredient.id)}>
                     <i className='material-icons'>cancel</i>
                   </CancelButton>
                 </IngredientItemWrapper>

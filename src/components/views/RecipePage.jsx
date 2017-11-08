@@ -57,7 +57,13 @@ export default ({ location, match }) => {
                           recipeId={recipeId}
                           loadingComp={<Loading message='loading ingredients...' />}
                         >
-                          {ingredients => <RecipeIngredients ingredients={ingredients} recipeId={recipeId} />}
+                          {({ ingredients, deleteIngredient }) => (
+                            <RecipeIngredients
+                              ingredients={ingredients}
+                              deleteIngredient={deleteIngredient}
+                              recipeId={recipeId}
+                            />
+                          )}
                         </RecipeIngredientsData>
                       </SlideComp>
                     </ContentWrapper>

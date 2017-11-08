@@ -85,3 +85,11 @@ export const CREATE_INGREDIENT_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_INGREDIENT_MUTATION = gql`
+  mutation DeleteIngredientMutation($id: ID!) {
+    deleteIngredient(id: $id) {
+      id
+    }
+  }
+`
