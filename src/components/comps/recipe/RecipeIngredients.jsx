@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
   border: none;
+  background-color: ${palette.grey.lighter};
 `
 
 const ContentWrapper = styled.div`

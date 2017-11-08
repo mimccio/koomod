@@ -14,6 +14,9 @@ import { PageWrapper } from '../comps/layouts'
 import Loading from '../comps/Loading'
 import { RecipeInfo, RecipeSteps, RecipeIngredients, RecipeNav } from '../comps/recipe'
 import { SlideTransition, SlideComp } from '../comps/animations/Slide'
+import palette from '../../style/palette'
+
+const Wrapper = styled(PageWrapper)`background-color: ${palette.grey.dark};`
 
 const FixedWrapper = styled.div`
   position: fixed;
@@ -32,11 +35,17 @@ const ContentWrapper = styled.div`
   overflow-x: hidden;
 `
 
+const LoadingWrapper = styled.div`
+  height: calc(100vh - 104px);
+  width: 100%;
+  background-color: ${palette.grey.lighter};
+`
+
 export default ({ location, match }) => {
   const recipeId = match.params.id
 
   return (
-    <PageWrapper>
+    <Wrapper>
       <RecipeNav />
       <TransitionGroup>
         <SlideTransition key={`recipePage-${location.key}`}>
@@ -55,7 +64,11 @@ export default ({ location, match }) => {
                       >
                         <RecipeIngredientsData
                           recipeId={recipeId}
-                          loadingComp={<Loading message='loading ingredients...' />}
+                          loadingComp={
+                            <LoadingWrapper>
+                              <Loading message='loading ingredients...' />
+                            </LoadingWrapper>
+                          }
                         >
                           {({ ingredients, deleteIngredient }) => (
                             <RecipeIngredients
@@ -98,7 +111,14 @@ export default ({ location, match }) => {
                           from={history.location.state && history.location.state.from}
                           reverse={matchRecipeIngredientsLocationPath || matchRecipeIngredientsFromPath}
                         >
-                          <RecipeInfoData recipeId={recipeId} loadingComp={<Loading message='loading info...' />}>
+                          <RecipeInfoData
+                            recipeId={recipeId}
+                            loadingComp={
+                              <LoadingWrapper>
+                                <Loading message='loading info...' />
+                              </LoadingWrapper>
+                            }
+                          >
                             {(Recipe, UpdateRecipeMutation) => (
                               <RecipeInfo recipe={Recipe} UpdateRecipeMutation={UpdateRecipeMutation} />
                             )}
@@ -122,7 +142,14 @@ export default ({ location, match }) => {
                         from={history.location.state && history.location.state.from}
                         reverse
                       >
-                        <RecipeStepsData recipeId={recipeId} loadingComp={<Loading message='loading steps...' />}>
+                        <RecipeStepsData
+                          recipeId={recipeId}
+                          loadingComp={
+                            <LoadingWrapper>
+                              <Loading message='loading steps...' />
+                            </LoadingWrapper>
+                          }
+                        >
                           {steps => <RecipeSteps steps={steps} recipeId={recipeId} />}
                         </RecipeStepsData>
                       </SlideComp>
@@ -134,6 +161,6 @@ export default ({ location, match }) => {
           )}
         </SlideTransition>
       </TransitionGroup>
-    </PageWrapper>
+    </Wrapper>
   )
 }
