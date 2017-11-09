@@ -38,6 +38,7 @@ export const UPDATE_RECIPE_INFO_MUTATION = gql`
     $recipeId: ID!
   ) {
     updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers, shopFor: $shopFor) {
+      id
       name
       description
       pers

@@ -3,7 +3,7 @@ import { graphql, compose } from 'react-apollo'
 
 import { RECIPE_INFO_QUERY } from '../../graphql/queries'
 import { UPDATE_RECIPE_INFO_MUTATION } from '../../graphql/mutations'
-// import { GC_USER_ID } from '../../lib/constants'
+import { GC_USER_ID } from '../../lib/constants'
 
 export class RecipeInfoHOC extends React.Component {
   updateRecipeInfo = async ({ value, select }) => {
@@ -23,28 +23,27 @@ export class RecipeInfoHOC extends React.Component {
         shopFor: Number(updatedRecipe.shopFor),
       },
 
-      // optimisticResponse: {
-      //   updateRecipe: {
-      //     __typename: 'Recipe',
-      //     id: this.props.recipeId,
-      //     name: updatedRecipe.name,
-      //     description: updatedRecipe.description,
-      //     pers: Number(updatedRecipe.pers),
-      //     shopFor: Number(updatedRecipe.shopFor),
-      //     recipe: {
-      //       __typename: 'User',
-      //       userId: localStorage.getItem(GC_USER_ID),
-      //     },
-      //   },
-      // },
-      // update: (store, { data: { updateRecipe } }) => {
-      //   const data = store.readQuery({ query: RECIPE_INFO_QUERY, variables: { recipeId: this.props.recipeId } })
-      //   data.Recipe = updateRecipe
-      //   console.log('data', data)
-      //   console.log('updateRecipe', updateRecipe)
-      //   // data.User.recipes.push(updateRecipe)
-      //   // store.writeQuery({ query: RECIPE_INFO_QUERY, data })
-      // },
+      optimisticResponse: {
+        updateRecipe: {
+          __typename: 'Recipe',
+          id: this.props.recipeId,
+          name: updatedRecipe.name,
+          description: updatedRecipe.description,
+          pers: Number(updatedRecipe.pers),
+          shopFor: Number(updatedRecipe.shopFor),
+          user: {
+            __typename: 'User',
+            userId: localStorage.getItem(GC_USER_ID),
+          },
+        },
+      },
+      update: (store, { data: { updateRecipe } }) => {
+        const data = store.readQuery({ query: RECIPE_INFO_QUERY, variables: { recipeId: this.props.recipeId } })
+        data.Recipe = updateRecipe
+        console.log('data', data)
+        console.log('updateRecipe', updateRecipe)
+        store.writeQuery({ query: RECIPE_INFO_QUERY, data })
+      },
     })
   }
 
