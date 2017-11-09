@@ -6,32 +6,34 @@ import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
-export const InputStyle = styled.input`
-  background-color: ${palette.primary.lighter};
-  width: 120px;
+export const TextareaStyle = styled.textarea`
+  width: 80%;
   border: none;
-  height: 36px;
+  height: 180px;
   display: flex;
   justify-content: flex-start;
-  padding: 6px;
+  padding: 6px 10px;
   align-items: center;
+  border-left: 1px solid ${palette.primary.lighter};
   border-bottom: 1px solid ${palette.primary.lighter};
   background-color: transparent;
   transition: all 200ms ease;
   color: ${({ isOptimistic }) => (isOptimistic ? palette.textSecondary : palette.text)};
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
+  resize: none;
 
   &::placeholder {
     color: ${palette.textSecondary};
     font-style: italic;
     font-size: ${fontSize.bodySmall};
-    padding-left: 6px;
+    padding-left: 10px;
   }
 
   &:focus {
     outline: none;
+    border-left: 1px solid ${palette.primary.light};
     border-bottom: 1px solid ${palette.primary.light};
   }
 `
@@ -39,14 +41,12 @@ export const InputStyle = styled.input`
 const Label = styled.div`
   color: ${palette.primary.light};
   font-style: italic;
-  padding-bottom: 8px;
-  font-size: ${fontSize.bodySmall};
+  padding-bottom: 14px;
 `
 
 const Form = styled.form`
   padding-bottom: 20px;
   width: 100%;
-  max-width: 240px;
 `
 
 const SaveButton = styled(FadeComp)`
@@ -67,7 +67,7 @@ const SaveButton = styled(FadeComp)`
 `
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,8 +80,7 @@ type PropsType = {
   placeholder?: string,
   update: Function,
   label?: string,
-  isOptimistic?: boolean,
-  maxNumber: number
+  isOptimistic?: boolean
 }
 
 type StateType = {
@@ -90,10 +89,6 @@ type StateType = {
 }
 
 export default class Input extends React.Component<PropsType, StateType> {
-  static defaultProps = {
-    maxNumber: 99999,
-  }
-
   state = {
     value: this.props.val,
     edit: false,
@@ -110,13 +105,6 @@ export default class Input extends React.Component<PropsType, StateType> {
       evt.target.blur()
       this.setState({ value: this.props.val })
     }
-    if (evt.keyCode === 13) {
-      // evt.preventDefault()
-      evt.persist()
-      this.saveChange()
-      this.setState({ edit: false }, () => evt.target.blur())
-      // evt.target.blur()
-    }
   }
 
   handleSave = () => {
@@ -125,48 +113,23 @@ export default class Input extends React.Component<PropsType, StateType> {
   }
 
   handleChange = (evt: SyntheticInputEvent<HTMLInputElement>) => {
-    if (typeof Number(evt.target.value) === 'number') {
-      const num = Number(evt.target.value)
-      const maxedValue = num >= this.props.maxNumber ? this.props.maxNumber : evt.target.value
-      this.setState({ value: maxedValue, edit: true })
-    }
-
     this.setState({ value: evt.target.value, edit: true })
   }
 
-  handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
+  handleBlur = (evt: SyntheticFocusEvent<HTMLDivElement>) => {
     evt.stopPropagation()
-    if (evt.relatedTarget && evt.relatedTarget.id === 'save') {
-      console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
-    } else {
+    if (!evt.relatedTarget || evt.relatedTarget.id !== 'save') {
       this.setState({ value: this.props.val, edit: false })
     }
-  }
-
-  defineStep = () => {
-    let step = 1
-    if (typeof Number(this.state.value) === 'number') {
-      const num = Number(this.state.value)
-      if (num > 100) {
-        step = 10
-      }
-      if (num > 1000) {
-        step = 100
-      }
-      if (num > 10000) {
-        step = 1000
-      }
-    }
-    return step
+    console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
   }
 
   render() {
-    const step = this.defineStep()
     return (
       <Form onBlur={evt => this.handleBlur(evt)}>
         {this.props.label && <Label htmlFor={this.props.id}>{this.props.label}</Label>}
         <Wrapper>
-          <InputStyle
+          <TextareaStyle
             isOptimistic={this.props.isOptimistic}
             id={this.props.id}
             value={this.state.value}
@@ -175,12 +138,9 @@ export default class Input extends React.Component<PropsType, StateType> {
             onChange={evt => this.handleChange(evt)}
             onKeyDown={evt => this.handleKeyDown(evt)}
             tabIndex='0'
-            maxlength={140}
-            step={step}
-            min='0'
-            max={this.props.maxNumber}
+            maxlength={1000}
           />
-          <FadeTransition in={this.state.edit && !!this.state.value} enter={0}>
+          <FadeTransition in={this.state.edit} enter={0}>
             {status => (
               <SaveButton
                 id='save'

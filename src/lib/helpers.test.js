@@ -1,4 +1,4 @@
-import { findById, handlePlural, handleIngredientNaturePlural } from './helpers'
+import { findById, handlePlural, handleIngredientNaturePlural, maxCheck } from './helpers'
 
 describe('findById', () => {
   it('hould return the expected item from an array', () => {
@@ -84,6 +84,22 @@ describe('handleIngredientNaturePlural', () => {
     const quantity = 2
     const expected = 'items'
     const result = handleIngredientNaturePlural(nature, quantity)
+    expect(result).toEqual(expected)
+  })
+})
+
+describe('maxCheck', () => {
+  const max = 999
+  it('should return num when num < max', () => {
+    const num = 25
+    const expected = num
+    const result = maxCheck(num, max)
+    expect(result).toEqual(expected)
+  })
+  it('should return 99999 when num >= 99999', () => {
+    const num = 12500
+    const expected = max
+    const result = maxCheck(num, max)
     expect(result).toEqual(expected)
   })
 })

@@ -87,6 +87,7 @@ export const RECIPE_INFO_QUERY = gql`
       description
       pers
       shopFor
+      isOptimistic
     }
   }
 `

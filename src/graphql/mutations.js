@@ -43,6 +43,7 @@ export const UPDATE_RECIPE_INFO_MUTATION = gql`
       description
       pers
       shopFor
+      isOptimistic
     }
   }
 `

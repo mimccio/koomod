@@ -89,6 +89,7 @@ DataType) => {
       return (
         <Form>
           <NameInput
+            maxlength={140}
             type='text'
             id='name'
             value={name}

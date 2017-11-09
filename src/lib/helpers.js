@@ -10,3 +10,8 @@ export const handleIngredientNaturePlural = (nature?: 'g' | 'kg' | 'ml' | 'l' | 
   }
   return nature
 }
+
+export const maxCheck = (num: number, max: number) => {
+  if (num >= max) return max
+  return num
+}
