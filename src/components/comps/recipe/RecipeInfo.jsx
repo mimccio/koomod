@@ -5,6 +5,7 @@ import facepaint from 'facepaint'
 import palette from '../../../style/palette'
 import Input from '../inputs/Input'
 import Textarea from '../inputs/Textarea'
+import DeleteRecipe from './DeleteRecipe'
 
 const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
 
@@ -82,6 +83,7 @@ export default ({ recipe, updateRecipe }) => (
         isOptimistic={recipe.isOptimistic}
         placeholder='add recipe description...'
       />
+      <DeleteRecipe />
     </ContentWrapper>
   </Wrapper>
 )
