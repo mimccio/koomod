@@ -28,7 +28,7 @@ const ContentWrapper = styled.div`
   ${mq({
     width: ['100vw', 'calc(100vw - 10%)', '800px'],
   })};
-  padding: 20px;
+  padding: 10px 20px 4px;
   flex: 1;
   border: none;
   height: 100%;

@@ -9,16 +9,18 @@ export const FadeTransition = ({
   children,
   enter = delay,
   exit = delay,
+  appear,
   ...props
 }: {
   children: Function,
   enter?: number,
   exit?: number,
+  appear?: boolean,
   props?: {}
 }) => (
   <Transition
     exit
-    appear
+    appear={appear}
     {...props}
     timeout={{
       enter,
