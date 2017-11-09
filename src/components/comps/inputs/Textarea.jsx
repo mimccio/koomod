@@ -9,7 +9,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 export const TextareaStyle = styled.textarea`
   width: 80%;
   border: none;
-  height: 180px;
+  height: 140px;
   display: flex;
   justify-content: flex-start;
   padding: 6px 10px;

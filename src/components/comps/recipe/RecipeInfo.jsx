@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import facepaint from 'facepaint'
+
 import palette from '../../../style/palette'
 import Input from '../inputs/Input'
 import Textarea from '../inputs/Textarea'
-// import { ContentWrapper } from '../layouts'
+
+const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 104px);
@@ -12,7 +15,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //padding: 14px;
   width: 100%;
   height: 100%;
 `
@@ -22,12 +24,14 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  width: 100vw;
-  max-width: 800px;
-  padding: 40px 20px 20px;
+  ${mq({
+    width: ['100vw', 'calc(100vw - 10%)', '800px'],
+  })};
+  padding: 20px;
   flex: 1;
   border: none;
   height: 100%;
+  //border: 2px solid red;
 `
 
 const PersWrapper = styled.div`
