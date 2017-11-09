@@ -81,6 +81,14 @@ export const UPDATE_RECIPE_SELECT_MUTATION = gql`
   }
 `
 
+export const DELETE_RECIPE_MUTATION = gql`
+  mutation DeleteRecipeMutation($recipeId: ID!) {
+    deleteRecipe(id: $recipeId) {
+      id
+    }
+  }
+`
+
 // ingredient mutation
 
 export const CREATE_INGREDIENT_MUTATION = gql`

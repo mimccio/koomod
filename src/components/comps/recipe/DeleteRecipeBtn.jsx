@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
+import DeleteRecipe from '../../containers/DeleteRecipe'
 
 const Wrapper = styled.div`
   display: flex;
@@ -86,7 +87,7 @@ const Title = styled.div`
   padding-bottom: 14px;
 `
 
-export default class DeleteRecipe extends React.Component {
+export default class DeleteRecipeBtn extends React.Component {
   state = {
     isOpen: false,
   }
@@ -145,13 +146,17 @@ export default class DeleteRecipe extends React.Component {
             <i className='material-icons'>delete_forever</i>
           )} */}
         </QuestionWtapper>
-        <FadeTransition in={this.state.isOpen} enter={0}>
-          {status => (
-            <ConfirmWrapper tabIndex='0' id='confirm-delete-recipe' status={status}>
-              confirm
-            </ConfirmWrapper>
+        <DeleteRecipe recipeId={this.props.recipeId}>
+          {deleteRecipe => (
+            <FadeTransition in={this.state.isOpen} enter={0}>
+              {status => (
+                <ConfirmWrapper onClick={deleteRecipe} tabIndex='0' id='confirm-delete-recipe' status={status}>
+                  confirm
+                </ConfirmWrapper>
+              )}
+            </FadeTransition>
           )}
-        </FadeTransition>
+        </DeleteRecipe>
       </Wrapper>
     )
   }
