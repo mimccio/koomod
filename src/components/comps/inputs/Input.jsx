@@ -8,7 +8,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 
 export const InputStyle = styled.input`
   background-color: ${palette.primary.lighter};
-  width: 120px;
+  width: ${({ type }: { type: string }) => (type === 'number' ? '100px' : '150px')};
   border: none;
   height: 36px;
   display: flex;
@@ -22,6 +22,10 @@ export const InputStyle = styled.input`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (min-width: 420px) {
+    width: ${({ type }: { type: string }) => (type === 'number' ? '120px' : '220px')};
+  }
 
   &::placeholder {
     color: ${palette.textSecondary};
@@ -46,10 +50,21 @@ const Label = styled.div`
 const Form = styled.form`
   padding-bottom: 20px;
   width: 100%;
-  max-width: 240px;
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `
 
 const SaveButton = styled(FadeComp)`
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 18px;
   transition: all 300ms ease-in-out;
   transform-origin: right;
   color: ${palette.success.main};
@@ -64,13 +79,6 @@ const SaveButton = styled(FadeComp)`
     outline: none;
     border-bottom: 1px solid ${palette.primary.light};
   }
-`
-
-const Wrapper = styled.div`
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `
 
 type PropsType = {
@@ -114,7 +122,10 @@ export default class Input extends React.Component<PropsType, StateType> {
     }
     if (evt.keyCode === 13) {
       evt.persist()
-      this.saveChange()
+      if (this.isDifferent()) {
+        this.saveChange()
+      }
+
       this.setState({ edit: false }, () => evt.target.blur())
     }
   }
@@ -160,8 +171,16 @@ export default class Input extends React.Component<PropsType, StateType> {
     return step
   }
 
+  isDifferent = () => {
+    if (this.props.type === 'number') {
+      return Number(this.state.value) !== Number(this.props.val)
+    }
+    return this.state.edit && this.state.value !== this.props.val
+  }
+
   render() {
     const step = this.defineStep()
+    const isIn = this.isDifferent()
     return (
       <Form onBlur={evt => this.handleBlur(evt)}>
         {this.props.label && <Label htmlFor={this.props.id}>{this.props.label}</Label>}
@@ -180,7 +199,7 @@ export default class Input extends React.Component<PropsType, StateType> {
             min='0'
             max={this.props.maxNumber}
           />
-          <FadeTransition in={this.state.edit && !!this.state.value} enter={0}>
+          <FadeTransition in={isIn} enter={0}>
             {status => (
               <SaveButton
                 id='save'
