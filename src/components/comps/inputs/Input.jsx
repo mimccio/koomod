@@ -101,8 +101,10 @@ export default class Input extends React.Component<PropsType, StateType> {
 
   saveChange = () => {
     const newValue = this.state.value
-    const data = { value: newValue, select: this.props.id }
-    this.props.update(data)
+    if (newValue !== this.props.val) {
+      const data = { value: newValue, select: this.props.id }
+      this.props.update(data)
+    }
   }
 
   handleKeyDown = (evt: SyntheticInputEvent<HTMLInputElement>) => {
@@ -111,11 +113,9 @@ export default class Input extends React.Component<PropsType, StateType> {
       this.setState({ value: this.props.val })
     }
     if (evt.keyCode === 13) {
-      // evt.preventDefault()
       evt.persist()
       this.saveChange()
       this.setState({ edit: false }, () => evt.target.blur())
-      // evt.target.blur()
     }
   }
 
