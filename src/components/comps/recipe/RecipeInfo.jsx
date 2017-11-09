@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import palette from '../../../style/palette'
+import Input from '../inputs/Input'
 // import { ContentWrapper } from '../layouts'
 
 const Wrapper = styled.div`
@@ -20,19 +21,20 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100vw;
   max-width: 460px;
-  padding-bottom: 20px;
+  padding: 20px;
   flex: 1;
   border: none;
   height: 100%;
 `
 
-export default ({ recipe }) => (
+export default ({ recipe, updateRecipe }) => (
   <Wrapper>
     <ContentWrapper>
-      <p>{recipe.name}</p>
+      <Input id='name' val={recipe.name} label='recipe name' update={updateRecipe} />
+
       <p>{recipe.description}</p>
       <p>{recipe.pers}</p>
       <p>{recipe.shopFor}</p>

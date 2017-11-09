@@ -119,9 +119,7 @@ export default ({ location, match }) => {
                               </LoadingWrapper>
                             }
                           >
-                            {(Recipe, UpdateRecipeMutation) => (
-                              <RecipeInfo recipe={Recipe} UpdateRecipeMutation={UpdateRecipeMutation} />
-                            )}
+                            {({ recipe, updateRecipe }) => <RecipeInfo recipe={recipe} updateRecipe={updateRecipe} />}
                           </RecipeInfoData>
                         </SlideComp>
                       </ContentWrapper>
