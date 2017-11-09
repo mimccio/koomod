@@ -63,10 +63,11 @@ export default ({ recipe, updateRecipe }) => (
           maxNumber={999}
         />
         <Input
+          disabled
           type='number'
           id='shopFor'
           val={recipe.shopFor}
-          label='shop for'
+          label='shop for (coming soon)'
           update={updateRecipe}
           isOptimistic={recipe.isOptimistic}
           maxNumber={999}

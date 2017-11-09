@@ -18,10 +18,7 @@ export const TextareaStyle = styled.textarea`
   border-bottom: 1px solid ${palette.primary.lighter};
   background-color: transparent;
   transition: all 200ms ease;
-  color: ${({ isOptimistic }) => (isOptimistic ? palette.textSecondary : palette.text)};
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
+  color: ${({ isOptimistic }) => (isOptimistic ? 'rgba(0, 0, 0, 0.77)' : palette.text)};
   resize: none;
 
   &::placeholder {

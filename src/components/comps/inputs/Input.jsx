@@ -18,7 +18,7 @@ export const InputStyle = styled.input`
   border-bottom: 1px solid ${palette.primary.lighter};
   background-color: transparent;
   transition: all 200ms ease;
-  color: ${({ isOptimistic }) => (isOptimistic ? palette.textSecondary : palette.text)};
+  color: ${({ isOptimistic }) => (isOptimistic ? 'rgba(0,0,0,.77)' : palette.text)};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -93,7 +93,8 @@ type PropsType = {
   update: Function,
   label?: string,
   isOptimistic?: boolean,
-  maxNumber: number
+  maxNumber: number,
+  disabled?: boolean
 }
 
 type StateType = {
@@ -202,6 +203,7 @@ export default class Input extends React.Component<PropsType, StateType> {
             step={step}
             min='0'
             max={this.props.maxNumber}
+            disabled={this.props.disabled}
           />
           <FadeTransition in={isIn} enter={0}>
             {status => (
