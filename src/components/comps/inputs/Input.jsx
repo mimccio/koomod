@@ -8,7 +8,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 
 export const InputStyle = styled.input`
   background-color: ${palette.primary.lighter};
-  width: ${({ type }: { type: string }) => (type === 'number' ? '100px' : '150px')};
+  width: ${({ type }: { type: string }) => (type === 'number' ? '60px' : '120px')};
   border: none;
   height: 36px;
   display: flex;
@@ -24,7 +24,7 @@ export const InputStyle = styled.input`
   white-space: nowrap;
 
   @media (min-width: 420px) {
-    width: ${({ type }: { type: string }) => (type === 'number' ? '120px' : '220px')};
+    width: ${({ type }: { type: string }) => (type === 'number' ? '80px' : '160px')};
   }
 
   &::placeholder {
@@ -64,13 +64,17 @@ const SaveButton = styled(FadeComp)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 18px;
+  margin-left: ${({ type }: { type: string }) => (type === 'number' ? '4px' : '16px')};
   transition: all 300ms ease-in-out;
   transform-origin: right;
   color: ${palette.success.main};
   cursor: pointer;
   transition: all 200ms ease;
   border-bottom: 1px solid transparent;
+
+  @media (min-width: 420px) {
+    margin-left: ${({ type }: { type: string }) => (type === 'number' ? '18px' : '26px')};
+  }
 
   &:hover {
     color: ${palette.success.light};
@@ -207,6 +211,7 @@ export default class Input extends React.Component<PropsType, StateType> {
                 onClick={() => this.handleSave()}
                 tabIndex={0}
                 onKeyDown={evt => this.handleKeyDown(evt)}
+                type={this.props.type}
               >
                 <i className='material-icons'>check</i>
               </SaveButton>

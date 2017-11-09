@@ -31,7 +31,6 @@ const ContentWrapper = styled.div`
   flex: 1;
   border: none;
   height: 100%;
-  //border: 2px solid red;
 `
 
 const PersWrapper = styled.div`
@@ -39,7 +38,6 @@ const PersWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 40px 0;
 `
 
 export default ({ recipe, updateRecipe }) => (

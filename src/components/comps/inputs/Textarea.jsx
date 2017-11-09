@@ -42,6 +42,7 @@ const Label = styled.div`
   color: ${palette.primary.light};
   font-style: italic;
   padding-bottom: 14px;
+  font-size: ${fontSize.bodySmall};
 `
 
 const Form = styled.form`
