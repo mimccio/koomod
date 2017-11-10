@@ -7,7 +7,11 @@ import { Route, Switch, matchPath } from 'react-router-dom'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 import RecipeNameData from '../../containers/RecipeNameData'
 
+const transitionDelay = 220
+
 const Title = styled(FadeComp)`
+  transform-origin: left;
+  transition: all ${transitionDelay}ms ease-in-out;
   color: white;
   position: absolute;
   display: flex;
@@ -33,7 +37,7 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
   const key = matchRecipePath ? 'title-recipe-key' : `title-${location.key}`
   return (
     <TransitionGroup>
-      <FadeTransition key={key}>
+      <FadeTransition key={key} enter={transitionDelay} exit={transitionDelay}>
         {(status: string) => (
           <Switch location={location}>
             <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />

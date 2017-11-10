@@ -30,11 +30,20 @@ export const SIGNIN_USER_MUTATION = gql`
 // recipe mutation
 
 export const UPDATE_RECIPE_INFO_MUTATION = gql`
-  mutation UpdateRecipeInfoMutation($name: String!, $description: String!, $pers: Int!, $id: ID!) {
-    updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers) {
+  mutation UpdateRecipeInfoMutation(
+    $name: String!
+    $description: String!
+    $pers: Int!
+    $shopFor: Int!
+    $recipeId: ID!
+  ) {
+    updateRecipe(name: $name, description: $description, id: $recipeId, pers: $pers, shopFor: $shopFor) {
+      id
       name
       description
       pers
+      shopFor
+      isOptimistic
     }
   }
 `
@@ -68,6 +77,14 @@ export const UPDATE_RECIPE_SELECT_MUTATION = gql`
       id
       isSelected
       isOptimistic
+    }
+  }
+`
+
+export const DELETE_RECIPE_MUTATION = gql`
+  mutation DeleteRecipeMutation($recipeId: ID!) {
+    deleteRecipe(id: $recipeId) {
+      id
     }
   }
 `

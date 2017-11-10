@@ -6,7 +6,7 @@ import palette from '../../../style/palette'
 import { topbarHeight } from '../../../style/config'
 
 const FixedWrapper = styled.div`
-  background-color: ${palette.primary.lighter};
+  background-color: ${({ primary }) => (primary ? palette.primary.lighter : palette.grey.lighter)};
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -23,8 +23,8 @@ const ContentWrapper = styled.div`
   overflow-x: hidden;
 `
 
-export default ({ children }: { children: React.Node }) => (
-  <FixedWrapper>
+export default ({ children, primary }: { children: React.Node, primary?: boolean }) => (
+  <FixedWrapper primary={primary}>
     <ContentWrapper>{children}</ContentWrapper>
   </FixedWrapper>
 )

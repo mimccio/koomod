@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import palette from '../../../style/palette'
 
 const cubemove = keyframes`
 25% { 
@@ -30,7 +31,7 @@ const Spinner = styled.div`
 `
 
 const Cube = styled.div`
-  background-color: #ba68c8;
+  background-color: ${palette.primary.light};
   border-radius: 25%;
   width: 14px;
   height: 16px;

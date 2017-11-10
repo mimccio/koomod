@@ -62,7 +62,7 @@ export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
   name: 'userRecipesQuery',
   options: () => ({
     variables: { userId: localStorage.getItem(GC_USER_ID) },
-    pollInterval: 5000,
+    fetchPolicy: 'cache-first',
   }),
 })
 

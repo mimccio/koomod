@@ -7,7 +7,7 @@ import palette from '../../../style/palette'
 
 const Wrapper = styled.div`
   color: ${palette.textSecondary};
-  // background-color: ${palette.grey.lighter};
+  background-color: ${palette.grey.lighter};
   display: flex;
   flex-direction: column;
   justify-content: center;

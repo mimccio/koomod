@@ -24,7 +24,7 @@ exports[`loading test suite "Spinner" should match snapshot 1`] = `
 }
 
 .c2 {
-  background-color: #ba68c8;
+  background-color: #7E57C2;
   border-radius: 25%;
   width: 14px;
   height: 16px;

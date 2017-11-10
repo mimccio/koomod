@@ -7,7 +7,7 @@ import palette from '../../../style/palette'
 import CreateIngredient from '../../containers/CreateIngredient'
 import SelectNature from './SelectNature'
 import { FadeTransition, FadeComp } from '../animations/Fade'
-import Input from '../inputs/Input'
+import { InputStyle } from '../inputs/Input'
 import { handlePlural } from '../../../lib/helpers'
 
 const Form = styled.div`
@@ -19,7 +19,7 @@ const Form = styled.div`
   width: 100%;
 `
 
-const NameInput = styled(Input)`width: 42%;`
+const NameInput = styled(InputStyle)`width: 42%;`
 
 const InfoWrapper = styled(FadeComp)`
   transition: all 300ms ease-in-out;
@@ -30,7 +30,7 @@ const InfoWrapper = styled(FadeComp)`
   align-items: center;
 `
 
-const QuantityInput = styled(Input)`
+const QuantityInput = styled(InputStyle)`
   width: 70px;
   padding: 3px;
   &::placeholder {
@@ -89,6 +89,7 @@ DataType) => {
       return (
         <Form>
           <NameInput
+            maxlength={140}
             type='text'
             id='name'
             value={name}

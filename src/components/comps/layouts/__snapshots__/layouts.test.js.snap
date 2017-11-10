@@ -3,6 +3,7 @@
 exports[`layouts animation test suite "EmptyList" should match snapshot 1`] = `
 .c0 {
   color: rgba(0,0,0,.54);
+  background-color: #fafafa;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -83,7 +84,7 @@ exports[`layouts animation test suite "ListWrapper" should match snapshot 1`] = 
 
 exports[`layouts animation test suite "PageLayout" should match snapshot 1`] = `
 .c0 {
-  background-color: #f3e5f5;
+  background-color: #fafafa;
   position: fixed;
   display: -webkit-box;
   display: -webkit-flex;

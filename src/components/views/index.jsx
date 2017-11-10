@@ -20,7 +20,7 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
   const key = matchRecipePath ? 'views-recipe-key' : `views-${location.key}`
   return (
     <TransitionGroup>
-      <FadeTransition key={key}>
+      <FadeTransition appear key={key}>
         {(status: string) => (
           <Switch location={location}>
             <Route exact path='/' component={HomePage} />

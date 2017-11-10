@@ -19,7 +19,7 @@ type Recipe = {
 }
 
 export default ({ status }: { status: string }) => (
-  <PageWrapper>
+  <PageWrapper primary>
     <UserRecipesData loadingComp={<Loading message='loading recipes...' />}>
       {(recipes: Recipe[], updateRecipeSelect: Function) => {
         if (recipes.length < 1) {
