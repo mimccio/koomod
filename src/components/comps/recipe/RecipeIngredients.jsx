@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   border: none;
   background-color: ${palette.grey.lighter};
 `
-
 const ContentWrapper = styled.div`
   background-color: ${palette.grey.lighter};
   display: flex;
@@ -35,7 +34,6 @@ const ContentWrapper = styled.div`
   flex: 1;
   border: none;
 `
-
 const IngredientItemWrapper = styled(FadeComp)`
   transition: all ${transitionDelay}ms ease-in-out;
   transform-origin: right;
@@ -50,7 +48,6 @@ const IngredientItemWrapper = styled(FadeComp)`
   color: ${({ ingredientId }: { ingredientId?: number | string }) =>
     (typeof ingredientId === 'number' && ingredientId < 0 ? palette.textSecondary : palette.text)};
 `
-
 const IngredientName = styled.div`
   width: 50%;
   overflow: hidden;
@@ -58,24 +55,20 @@ const IngredientName = styled.div`
   white-space: nowrap;
   padding-left: 12px;
 `
-
 const IngredientInfo = styled.div`
   width: 50%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 `
-
 const IngredientQuantity = styled.div`
   width: 42%;
   text-align: end;
 `
-
 const IngredientNature = styled.div`
   width: 46%;
   text-align: end;
 `
-
 const CancelButton = styled.div`
   margin-left: 10px;
   width: 60px;
@@ -100,7 +93,7 @@ const CancelButton = styled.div`
 type IngredientType = {
   id: string,
   name: string,
-  nature?: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
+  nature: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
   quantity?: number,
   key: number
 }
@@ -110,7 +103,7 @@ type PropType = { ingredients: IngredientType[], recipeId: string, deleteIngredi
 export default ({ ingredients, recipeId, deleteIngredient }: PropType) => (
   <Wrapper>
     <ContentWrapper>
-      <NewIngredient recipeId={recipeId} />
+      <NewIngredient recipeId={recipeId} ingredients={ingredients} />
       <TransitionGroup>
         {ingredients.map(ingredient => (
           <FadeTransition key={`ingredient-list-${ingredient.key}`} enter={transitionDelay} exit={transitionDelay}>

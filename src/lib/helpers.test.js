@@ -112,7 +112,7 @@ describe('maxCheck', () => {
   })
 })
 
-describe('inList test suite', () => {
+describe('is in list test suite', () => {
   const nameInList = 'sucre'
   const nameNotInList = 'notInListName'
   const listString = ['tomato', nameInList, 'milk']
