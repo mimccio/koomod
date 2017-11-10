@@ -15,7 +15,7 @@ const Form = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 70px;
+  height: 50px;
   width: 100%;
   margin-bottom: 10px;
 `
@@ -74,7 +74,6 @@ const Error = styled(FadeComp)`
   transform-origin: left;
   color: ${palette.danger.light};
   padding: 10px 0 0 10px;
-  width
 `
 
 type IngredientType = {
@@ -117,7 +116,7 @@ DataType) => {
       return (
         <Form>
           <FadeTransition in={isInList(name, ingredients, 'name')} enter={0}>
-            {(status: string) => <Error status={status}>ingredient is already in recipe</Error>}
+            {(status: string) => <Error status={status}>this ingredient is already in the list !</Error>}
           </FadeTransition>
           <ContentWrapper>
             <NameInput
