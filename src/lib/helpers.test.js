@@ -1,4 +1,12 @@
-import { findById, handlePlural, handleIngredientNaturePlural, maxCheck } from './helpers'
+import {
+  findById,
+  handlePlural,
+  handleIngredientNaturePlural,
+  maxCheck,
+  isInListString,
+  isInListObj,
+  isInList,
+} from './helpers'
 
 describe('findById', () => {
   it('hould return the expected item from an array', () => {
@@ -101,5 +109,82 @@ describe('maxCheck', () => {
     const expected = max
     const result = maxCheck(num, max)
     expect(result).toEqual(expected)
+  })
+})
+
+describe('is in list test suite', () => {
+  const nameInList = 'sucre'
+  const nameNotInList = 'notInListName'
+  const listString = ['tomato', nameInList, 'milk']
+  const key = 'name'
+  const listObj = [
+    {
+      name: nameInList,
+      quantity: 20,
+      nature: 'g',
+    },
+    {
+      name: 'tomato',
+      quantity: 4,
+      nature: 'item',
+    },
+    {
+      name: 'milk',
+      quantity: 1.5,
+      nature: 'l',
+    },
+  ]
+
+  describe('isInlistString', () => {
+    it('should return FALSE when list IS empty', () => {
+      const result = isInListString(nameNotInList, [])
+      expect(result).toEqual(false)
+    })
+    it('should return FALSE when "value" is NOT in list of srings', () => {
+      const result = isInListString(nameNotInList, listString)
+      expect(result).toEqual(false)
+    })
+    it('should return TRUE when "value" IS in list of srings', () => {
+      const result = isInListString(nameInList, listString)
+      expect(result).toEqual(true)
+    })
+  })
+
+  describe('isInlistObj', () => {
+    it('should return FALSE when list IS empty', () => {
+      const result = isInListString(nameNotInList, [])
+      expect(result).toEqual(false)
+    })
+    it('should return FALSE when "value" is NOT in list of objects', () => {
+      const result = isInListObj(nameNotInList, listObj, key)
+      expect(result).toEqual(false)
+    })
+    it('should return TRUE when "value" IS in list of objects', () => {
+      const result = isInListObj(nameInList, listObj, key)
+      expect(result).toEqual(true)
+    })
+  })
+
+  describe('isInList', () => {
+    it('should return FALSE when list is empty', () => {
+      const result = isInList(nameNotInList, [])
+      expect(result).toEqual(false)
+    })
+    it('should return FALSE when "value" is NOT in list of srings', () => {
+      const result = isInList(nameNotInList, listString)
+      expect(result).toEqual(false)
+    })
+    it('should return FALSE when "value" is NOT in list of objects', () => {
+      const result = isInList(nameNotInList, listObj, key)
+      expect(result).toEqual(false)
+    })
+    it('should return TRUE when "value" is in list of srings', () => {
+      const result = isInList(nameInList, listString)
+      expect(result).toEqual(true)
+    })
+    it('should return TRUE when "value" is in list of objects', () => {
+      const result = isInList(nameInList, listObj, key)
+      expect(result).toEqual(true)
+    })
   })
 })

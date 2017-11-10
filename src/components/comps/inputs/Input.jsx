@@ -8,7 +8,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 
 export const InputStyle = styled.input`
   background-color: ${palette.primary.lighter};
-  width: ${({ type }: { type: string }) => (type === 'number' ? '60px' : '120px')};
+  width: ${({ type }: { type: string }) => (type === 'number' ? '50px' : '120px')};
   border: none;
   height: 36px;
   display: flex;
@@ -23,8 +23,16 @@ export const InputStyle = styled.input`
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  @media (min-width: 360px) {
+    width: ${({ type }: { type: string }) => (type === 'number' ? '60px' : '140px')};
+  }
+
   @media (min-width: 420px) {
     width: ${({ type }: { type: string }) => (type === 'number' ? '80px' : '160px')};
+  }
+
+  @media (min-width: 820px) {
+    width: ${({ type }: { type: string }) => (type === 'number' ? '100px' : '180px')};
   }
 
   &::placeholder {
