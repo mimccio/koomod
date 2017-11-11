@@ -15,11 +15,16 @@ type Recipe = {
   ingredients: IngredientType[]
 }
 
-export const extractIngredients = (recipes: Object[]): Object[] => {
+export const extractIngredients = (recipes: Recipe[]): IngredientType[] => {
   const allIngredients = []
   recipes.forEach((recipe: Recipe) => recipe.ingredients.forEach(ingredient => allIngredients.push(ingredient)))
   return allIngredients
 }
+
+export const removeItem = (list: IngredientType[], item: IngredientType) => [
+  ...list.slice(0, list.indexOf(item)),
+  ...list.slice(list.indexOf(item) + 1),
+]
 
 export const convertDownNature = (ingredient: IngredientType) => {
   const { nature, quantity } = ingredient

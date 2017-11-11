@@ -1,5 +1,6 @@
 import {
   extractIngredients,
+  removeItem,
   convertDownNature,
   convertBackNature,
   flattenAddQuantity,
@@ -374,5 +375,60 @@ describe('toShoppingList test suite', () => {
     ]
     const result = sortByName(list)
     expect(result).toEqual(expected)
+  })
+
+  describe('removeItem', () => {
+    const itemToRemove = {
+      id: 'id-07',
+      name: 'recipe2-ing3',
+      quantity: 200,
+      nature: 'ml',
+    }
+    const list = [
+      {
+        id: 'id-01',
+        name: 'ing1',
+        quantity: 700,
+        nature: 'g',
+      },
+      {
+        id: 'id-02',
+        name: 'recipe2-ing2',
+        quantity: 600,
+        nature: 'g',
+      },
+      itemToRemove,
+      {
+        id: 'id-08',
+        name: 'ing4',
+        quantity: 1,
+        nature: 'kg',
+      },
+    ]
+
+    it('should return same list without element to remove', () => {
+      const expected = [
+        {
+          id: 'id-01',
+          name: 'ing1',
+          quantity: 700,
+          nature: 'g',
+        },
+        {
+          id: 'id-02',
+          name: 'recipe2-ing2',
+          quantity: 600,
+          nature: 'g',
+        },
+        {
+          id: 'id-08',
+          name: 'ing4',
+          quantity: 1,
+          nature: 'kg',
+        },
+      ]
+      const result = removeItem(list, itemToRemove)
+      expect(result).toEqual(expected)
+    })
   })
 })

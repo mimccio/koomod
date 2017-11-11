@@ -1,13 +1,30 @@
-import { removeItem } from './helpers'
+// @flow
+
 import {
   extractIngredients,
+  removeItem,
   convertDownNature,
   convertBackNature,
   flattenAddQuantity,
   sortByName,
 } from './shoppingListHelpers'
 
-export default (recipes) => {
+type IngredientType = {
+  id: string,
+  name: string,
+  nature: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
+  quantity: number,
+  key: number
+}
+
+type Recipe = {
+  id: string,
+  name: string,
+  pers: number,
+  ingredients: IngredientType[]
+}
+
+export default (recipes: Recipe[]) => {
   const rawIngredientList = extractIngredients(recipes)
   let ingredients = rawIngredientList.map(ingredient => convertDownNature(ingredient))
   const list = []
