@@ -16,7 +16,10 @@ export const isInList = (value: string, list: Array<any>, key?: string) => {
 // String manipulation helpers
 export const handlePlural = (quantity?: number = 0) => quantity >= 2
 
-export const handleIngredientNaturePlural = (nature?: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box', quantity?: number) => {
+type NatureType = 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box'
+type NatureTypeWithPlural = NatureType | 'boxes' | 'items'
+
+export const handleIngredientNaturePlural = (nature: NatureType, quantity?: number): NatureTypeWithPlural => {
   if (typeof quantity === 'number') {
     if (quantity >= 2 && nature === 'box') return 'boxes'
     if (quantity >= 2 && nature === 'item') return 'items'

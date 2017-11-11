@@ -92,6 +92,12 @@ describe('toShoppingList', () => {
           quantity: 3,
           nature: 'l',
         },
+        {
+          id: 'id-04-03',
+          name: 'ingredient-8',
+          quantity: 1,
+          nature: 'item',
+        },
       ],
     },
   ]
@@ -138,19 +144,25 @@ describe('toShoppingList', () => {
         id: 'id-02-01',
         name: 'ingredient-5',
         quantity: 3,
-        nature: 'item',
+        nature: 'items',
       },
       {
         id: 'id-02-04',
         name: 'ingredient-7',
         quantity: 4,
-        nature: 'box',
+        nature: 'boxes',
       },
       {
         id: 'id-03-01',
         name: 'ingredient-7',
         quantity: 30,
         nature: 'g',
+      },
+      {
+        id: 'id-04-03',
+        name: 'ingredient-8',
+        quantity: 1,
+        nature: 'item',
       },
     ]
 

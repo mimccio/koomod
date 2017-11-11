@@ -1,5 +1,5 @@
 // @flow
-
+import { handleIngredientNaturePlural } from './helpers'
 import {
   extractIngredients,
   removeItem,
@@ -9,10 +9,12 @@ import {
   sortByName,
 } from './shoppingListHelpers'
 
+type NatureType = 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box'
+
 type IngredientType = {
   id: string,
   name: string,
-  nature: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
+  nature: NatureType,
   quantity: number,
   key: number
 }
@@ -38,7 +40,11 @@ export default (recipes: Recipe[]) => {
     })
     if (newArr.length > 0) {
       const shoppingItem = flattenAddQuantity(newArr)
-      list.push(shoppingItem)
+      const shoppingItemWithPlural = {
+        ...shoppingItem,
+        nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
+      }
+      list.push(shoppingItemWithPlural)
     }
   })
 
