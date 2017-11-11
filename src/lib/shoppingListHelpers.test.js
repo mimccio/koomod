@@ -1,4 +1,11 @@
-import { extractIngredients, ingredientHasSameNameAndSameNature, convertNatureDown } from './shoppingListHelpers'
+import {
+  extractIngredients,
+  ingredientHasSameNameAndSameNature,
+  convertDownNature,
+  convertBackNature,
+  flattenAddQuantity,
+  sortByName,
+} from './shoppingListHelpers'
 
 describe('toShoppingList test suite', () => {
   const ing1 = {
@@ -174,6 +181,33 @@ describe('toShoppingList test suite', () => {
     },
   ]
 
+  const ingredientsWithSameNameAndNature = [
+    {
+      id: 'id-30',
+      name: 'same-name',
+      quantity: 200,
+      nature: 'g',
+    },
+    {
+      id: 'id-31',
+      name: 'same-name',
+      quantity: 2500,
+      nature: 'g',
+    },
+    {
+      id: 'id-32',
+      name: 'same-name',
+      quantity: 350,
+      nature: 'g',
+    },
+    {
+      id: 'id-33',
+      name: 'same-name',
+      quantity: 500,
+      nature: 'g',
+    },
+  ]
+
   test('extractIngredients should return all the ingredients from the list', () => {
     const result = extractIngredients(recipes)
     expect(result).toEqual(allIngredients)
@@ -203,7 +237,7 @@ describe('toShoppingList test suite', () => {
     }
   )
 
-  describe('convertNatureDown', () => {
+  describe('convertDownNature', () => {
     it('should return nature "g" and quantity * 1000 when nature is "kg"', () => {
       const ing2Expected = {
         id: 'id-02',
@@ -211,7 +245,7 @@ describe('toShoppingList test suite', () => {
         quantity: 3000,
         nature: 'g',
       }
-      const ing2Result = convertNatureDown(ing2)
+      const ing2Result = convertDownNature(ing2)
       expect(ing2Result).toEqual(ing2Expected)
     })
 
@@ -222,14 +256,119 @@ describe('toShoppingList test suite', () => {
         quantity: 2000,
         nature: 'ml',
       }
-      const ing3Result = convertNatureDown(ing3)
+      const ing3Result = convertDownNature(ing3)
       expect(ing3Result).toEqual(ing3Expected)
     })
     it('should return same ingredient when nature is not "kg" nor "l"', () => {
-      const ing1Result = convertNatureDown(ing1)
+      const ing1Result = convertDownNature(ing1)
       expect(ing1Result).toEqual(ing1)
-      const ing4Result = convertNatureDown(ing4)
+      const ing4Result = convertDownNature(ing4)
       expect(ing4Result).toEqual(ing4)
     })
+  })
+
+  describe('convertBackNature', () => {
+    it('should return same when nature is not: "g", "kg", "l", "ml"', () => {
+      const result = convertBackNature(ing1)
+      expect(result).toEqual(ing1)
+    })
+    it('should return same when nature is "g" and quantity < 1000', () => {
+      const result = convertBackNature(ing4)
+      expect(result).toEqual(ing4)
+    })
+    it('should return same when nature is "l" and quantity < 1000', () => {
+      const result = convertBackNature(ing4)
+      expect(result).toEqual(ing4)
+    })
+    it('should return "kg" when nature is "g" and quantity >= 1000', () => {
+      const ingredient = {
+        id: 'id-20',
+        name: 'ing-20',
+        quantity: 3250,
+        nature: 'g',
+      }
+      const expected = {
+        id: 'id-20',
+        name: 'ing-20',
+        quantity: 3.25,
+        nature: 'kg',
+      }
+      const result = convertBackNature(ingredient)
+      expect(result).toEqual(expected)
+    })
+
+    it('should return "l" when nature is "ml" and quantity >= 1000', () => {
+      const ingredient = {
+        id: 'id-21',
+        name: 'ing-21',
+        quantity: 3250,
+        nature: 'ml',
+      }
+      const expected = {
+        id: 'id-21',
+        name: 'ing-21',
+        quantity: 3.25,
+        nature: 'l',
+      }
+      const result = convertBackNature(ingredient)
+      expect(result).toEqual(expected)
+    })
+  })
+
+  test('flattenAddQuantity should return an item with the quantity added', () => {
+    const expected = {
+      id: 'id-30',
+      name: 'same-name',
+      quantity: 3550,
+      nature: 'g',
+    }
+    const result = flattenAddQuantity(ingredientsWithSameNameAndNature)
+    expect(result).toEqual(expected)
+  })
+
+  test('sortByName should sort the list by name', () => {
+    const list = [
+      {
+        name: 'zombi',
+        quantity: 1000,
+        nature: 'item',
+      },
+      {
+        name: 'Bonjour',
+        quantity: 200,
+        nature: 'ml',
+      },
+      {
+        name: 'hello',
+      },
+
+      {
+        name: 'banana',
+        quantity: 4,
+        nature: 'item',
+      },
+    ]
+    const expected = [
+      {
+        name: 'banana',
+        quantity: 4,
+        nature: 'item',
+      },
+      {
+        name: 'Bonjour',
+        quantity: 200,
+        nature: 'ml',
+      },
+      {
+        name: 'hello',
+      },
+      {
+        name: 'zombi',
+        quantity: 1000,
+        nature: 'item',
+      },
+    ]
+    const result = sortByName(list)
+    expect(result).toEqual(expected)
   })
 })

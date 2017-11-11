@@ -21,16 +21,31 @@ export const extractIngredients = (recipes: Object[]): Object[] => {
   return allIngredients
 }
 
-export const convertNatureDown = (ingredient: IngredientType) => {
+export const convertDownNature = (ingredient: IngredientType) => {
   const { nature, quantity } = ingredient
   if (nature === 'kg') return { ...ingredient, nature: 'g', quantity: quantity * 1000 }
   if (nature === 'l') return { ...ingredient, nature: 'ml', quantity: quantity * 1000 }
   return ingredient
 }
 
-// --
-
-// --
+export const convertBackNature = (ingredient: IngredientType) => {
+  const { nature, quantity } = ingredient
+  if (nature === 'g' && quantity >= 1000) return { ...ingredient, nature: 'kg', quantity: quantity / 1000 }
+  if (nature === 'ml' && quantity >= 1000) return { ...ingredient, nature: 'l', quantity: quantity / 1000 }
+  return ingredient
+}
 
 export const ingredientHasSameNameAndSameNature = (ingredientTest: IngredientType, ingredientList: IngredientType[]) =>
   ingredientList.filter(ing => ingredientTest.name === ing.name && ingredientTest.nature === ing.nature)
+
+export const flattenAddQuantity = (list: IngredientType[]) =>
+  list.reduce((prev: IngredientType, item: IngredientType) => ({ ...prev, quantity: prev.quantity + item.quantity }))
+
+export const sortByName = (list: IngredientType[]) =>
+  list.sort((a, b) => {
+    const nameA = a.name.toUpperCase() // ignore upper and lowercase
+    const nameB = b.name.toUpperCase()
+    if (nameA < nameB) return -1
+    if (nameA > nameB) return 1
+    return 0
+  })

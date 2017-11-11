@@ -1,10 +1,10 @@
-import { convertNatureDown } from './shoppingListHelpers'
+import { convertDownNature, convertBackNature, flattenAddQuantity, sortByName } from './shoppingListHelpers'
 
 const toShoppingList = (recipes) => {
   const arrNotConverted = []
   recipes.map(recipe => recipe.ingredients.map(ingredient => arrNotConverted.push(ingredient)))
 
-  let arr = arrNotConverted.map(ing => convertNatureDown(ing))
+  let arr = arrNotConverted.map(ing => convertDownNature(ing))
   console.log('convertedDownIngredients', arr)
 
   const list = []
@@ -18,49 +18,14 @@ const toShoppingList = (recipes) => {
       return item.name === element.name && item.nature === element.nature
     })
     if (newArr.length > 0) {
-      const newArrWithSameNature = newArr.map((ing) => {
-        if (ing.nature === 'kg') {
-          return { ...ing, nature: 'g', quantity: ing.quantity * 1000 }
-        } else if (ing.nature === 'l') {
-          return { ...ing, nature: 'ml', quantity: ing.quantity * 1000 }
-        }
-        return ing
-      })
-      const shoppingItem = newArrWithSameNature.reduce((prev, item) =>
-        // console.log('prev', prev, 'item', item)
-        ({
-          name: prev.name,
-          quantity: prev.quantity + item.quantity,
-          nature: prev.nature,
-          id: prev.id,
-        })
-      )
+      const shoppingItem = flattenAddQuantity(newArr)
       list.push(shoppingItem)
     }
   })
 
-  // console.log('list', list)
-
-  const shoppingList = list.map((ingredient) => {
-    if (ingredient.nature === 'g' && ingredient.quantity >= 1000) {
-      return {
-        ...ingredient,
-        quantity: ingredient.quantity / 1000,
-        nature: 'kg',
-      }
-    }
-    if (ingredient.nature === 'ml' && ingredient.quantity >= 1000) {
-      return {
-        ...ingredient,
-        quantity: ingredient.quantity / 1000,
-        nature: 'l',
-      }
-    }
-    return ingredient
-  })
-
-  // console.log('shoppingList', shoppingList)
-  return shoppingList
+  const shoppingList = list.map(ingredient => convertBackNature(ingredient))
+  const sorted = sortByName(shoppingList)
+  return sorted
 }
 
 export default toShoppingList
