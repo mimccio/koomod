@@ -1,18 +1,21 @@
-const toShoppingList = (recipes) => {
-  let arr = []
-  recipes.map(recipe => recipe.ingredients.map(ingredient => arr.push(ingredient)))
+import { convertNatureDown } from './shoppingListHelpers'
 
-  // console.log('arr', arr)
+const toShoppingList = (recipes) => {
+  const arrNotConverted = []
+  recipes.map(recipe => recipe.ingredients.map(ingredient => arrNotConverted.push(ingredient)))
+
+  let arr = arrNotConverted.map(ing => convertNatureDown(ing))
+  console.log('convertedDownIngredients', arr)
 
   const list = []
 
   arr.forEach((element) => {
     const newArr = arr.filter((item) => {
-      if (item.name === element.name) {
+      if (item.name === element.name && item.nature === element.nature) {
         arr = [...arr.slice(0, arr.indexOf(item)), ...arr.slice(arr.indexOf(item) + 1)]
       }
 
-      return item.name === element.name
+      return item.name === element.name && item.nature === element.nature
     })
     if (newArr.length > 0) {
       const newArrWithSameNature = newArr.map((ing) => {
