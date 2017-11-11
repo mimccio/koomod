@@ -1,63 +1,37 @@
-const toShoppingList = (recipes) => {
-  let arr = []
-  recipes.map(recipe => recipe.ingredients.map(ingredient => arr.push(ingredient)))
+// @flow
+import { handleIngredientNaturePlural } from './helpers'
+import {
+  extractIngredients,
+  removeItem,
+  convertDownNature,
+  convertBackNature,
+  flattenAddQuantity,
+  sortByName,
+} from './shoppingListHelpers'
+import type { Recipe } from './types'
 
-  // console.log('arr', arr)
-
+export default (recipes: Recipe[]) => {
+  const rawIngredientList = extractIngredients(recipes)
+  let ingredients = rawIngredientList.map(ingredient => convertDownNature(ingredient))
   const list = []
 
-  arr.forEach((element) => {
-    const newArr = arr.filter((item) => {
-      if (item.name === element.name) {
-        arr = [...arr.slice(0, arr.indexOf(item)), ...arr.slice(arr.indexOf(item) + 1)]
+  ingredients.forEach((element) => {
+    const sameIngredientList = ingredients.filter((item) => {
+      if (item.name === element.name && item.nature === element.nature) {
+        ingredients = removeItem(ingredients, item)
       }
-
-      return item.name === element.name
+      return item.name === element.name && item.nature === element.nature
     })
-    if (newArr.length > 0) {
-      const newArrWithSameNature = newArr.map((ing) => {
-        if (ing.nature === 'kg') {
-          return { ...ing, nature: 'g', quantity: ing.quantity * 1000 }
-        } else if (ing.nature === 'l') {
-          return { ...ing, nature: 'ml', quantity: ing.quantity * 1000 }
-        }
-        return ing
-      })
-      const shoppingItem = newArrWithSameNature.reduce((prev, item) =>
-        // console.log('prev', prev, 'item', item)
-        ({
-          name: prev.name,
-          quantity: prev.quantity + item.quantity,
-          nature: prev.nature,
-          id: prev.id,
-        })
-      )
-      list.push(shoppingItem)
+    if (sameIngredientList.length > 0) {
+      const shoppingItem = flattenAddQuantity(sameIngredientList)
+      const shoppingItemWithPlural = {
+        ...shoppingItem,
+        nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
+      }
+      list.push(shoppingItemWithPlural)
     }
   })
 
-  // console.log('list', list)
-
-  const shoppingList = list.map((ingredient) => {
-    if (ingredient.nature === 'g' && ingredient.quantity >= 1000) {
-      return {
-        ...ingredient,
-        quantity: ingredient.quantity / 1000,
-        nature: 'kg',
-      }
-    }
-    if (ingredient.nature === 'ml' && ingredient.quantity >= 1000) {
-      return {
-        ...ingredient,
-        quantity: ingredient.quantity / 1000,
-        nature: 'l',
-      }
-    }
-    return ingredient
-  })
-
-  // console.log('shoppingList', shoppingList)
-  return shoppingList
+  const shoppingList = list.map(ingredient => convertBackNature(ingredient))
+  return sortByName(shoppingList)
 }
-
-export default toShoppingList
