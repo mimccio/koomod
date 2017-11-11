@@ -17,7 +17,7 @@ type Recipe = {
 
 export const extractIngredients = (recipes: Object[]): Object[] => {
   const allIngredients = []
-  recipes.map((recipe: Recipe) => recipe.ingredients.map(ingredient => allIngredients.push(ingredient)))
+  recipes.forEach((recipe: Recipe) => recipe.ingredients.forEach(ingredient => allIngredients.push(ingredient)))
   return allIngredients
 }
 
@@ -34,9 +34,6 @@ export const convertBackNature = (ingredient: IngredientType) => {
   if (nature === 'ml' && quantity >= 1000) return { ...ingredient, nature: 'l', quantity: quantity / 1000 }
   return ingredient
 }
-
-export const ingredientHasSameNameAndSameNature = (ingredientTest: IngredientType, ingredientList: IngredientType[]) =>
-  ingredientList.filter(ing => ingredientTest.name === ing.name && ingredientTest.nature === ing.nature)
 
 export const flattenAddQuantity = (list: IngredientType[]) =>
   list.reduce((prev: IngredientType, item: IngredientType) => ({ ...prev, quantity: prev.quantity + item.quantity }))

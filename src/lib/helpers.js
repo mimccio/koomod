@@ -13,6 +13,11 @@ export const isInList = (value: string, list: Array<any>, key?: string) => {
   return isInListString(value, list)
 }
 
+export const removeItem = (list: [], item: {}) => [
+  ...list.slice(0, list.indexOf(item)),
+  ...list.slice(list.indexOf(item) + 1),
+]
+
 // String manipulation helpers
 export const handlePlural = (quantity?: number = 0) => quantity >= 2
 

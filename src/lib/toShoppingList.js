@@ -1,20 +1,22 @@
-import { convertDownNature, convertBackNature, flattenAddQuantity, sortByName } from './shoppingListHelpers'
+import { removeItem } from './helpers'
+import {
+  extractIngredients,
+  convertDownNature,
+  convertBackNature,
+  flattenAddQuantity,
+  sortByName,
+} from './shoppingListHelpers'
 
-const toShoppingList = (recipes) => {
-  const arrNotConverted = []
-  recipes.map(recipe => recipe.ingredients.map(ingredient => arrNotConverted.push(ingredient)))
-
-  let arr = arrNotConverted.map(ing => convertDownNature(ing))
-  console.log('convertedDownIngredients', arr)
-
+export default (recipes) => {
+  const rawIngredientList = extractIngredients(recipes)
+  let ingredients = rawIngredientList.map(ingredient => convertDownNature(ingredient))
   const list = []
 
-  arr.forEach((element) => {
-    const newArr = arr.filter((item) => {
+  ingredients.forEach((element) => {
+    const newArr = ingredients.filter((item) => {
       if (item.name === element.name && item.nature === element.nature) {
-        arr = [...arr.slice(0, arr.indexOf(item)), ...arr.slice(arr.indexOf(item) + 1)]
+        ingredients = removeItem(ingredients, item)
       }
-
       return item.name === element.name && item.nature === element.nature
     })
     if (newArr.length > 0) {
@@ -24,8 +26,6 @@ const toShoppingList = (recipes) => {
   })
 
   const shoppingList = list.map(ingredient => convertBackNature(ingredient))
-  const sorted = sortByName(shoppingList)
-  return sorted
-}
 
-export default toShoppingList
+  return sortByName(shoppingList)
+}

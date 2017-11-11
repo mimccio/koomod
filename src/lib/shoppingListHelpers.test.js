@@ -1,6 +1,5 @@
 import {
   extractIngredients,
-  ingredientHasSameNameAndSameNature,
   convertDownNature,
   convertBackNature,
   flattenAddQuantity,
@@ -112,6 +111,23 @@ describe('toShoppingList test suite', () => {
         },
       ],
     },
+    {
+      name: 'recipe5',
+      ingredients: [
+        {
+          id: 'id-15',
+          name: 'ing1',
+          quantity: 300,
+          nature: 'ml',
+        },
+        {
+          id: 'id-16',
+          name: 'ing2',
+          quantity: 3,
+          nature: 'kg',
+        },
+      ],
+    },
   ]
 
   const allIngredients = [
@@ -179,6 +195,18 @@ describe('toShoppingList test suite', () => {
       quantity: 200,
       nature: 'g',
     },
+    {
+      id: 'id-15',
+      name: 'ing1',
+      quantity: 300,
+      nature: 'ml',
+    },
+    {
+      id: 'id-16',
+      name: 'ing2',
+      quantity: 3,
+      nature: 'kg',
+    },
   ]
 
   const ingredientsWithSameNameAndNature = [
@@ -212,30 +240,6 @@ describe('toShoppingList test suite', () => {
     const result = extractIngredients(recipes)
     expect(result).toEqual(allIngredients)
   })
-
-  test(
-    'ingredientHasSameNameAndSameNature should return an array of the ingredients ' +
-      'that has the same name and same nature as the ingredient argument',
-    () => {
-      const expected = [
-        ing1,
-        {
-          id: 'id-05',
-          name: 'ing1',
-          quantity: 700,
-          nature: 'g',
-        },
-        {
-          id: 'id-13',
-          name: 'ing1',
-          quantity: 30,
-          nature: 'g',
-        },
-      ]
-      const result = ingredientHasSameNameAndSameNature(ing1, allIngredients)
-      expect(result).toEqual(expected)
-    }
-  )
 
   describe('convertDownNature', () => {
     it('should return nature "g" and quantity * 1000 when nature is "kg"', () => {
