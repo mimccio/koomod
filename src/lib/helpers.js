@@ -14,7 +14,13 @@ export const isInList = (value: string, list: Array<any>, key?: string) => {
   return isInListString(value, list)
 }
 
-// String manipulation helpers
+// String helpers
+
+export const hasSameName = (test: { name: string }, tested: { name: string }) => {
+  if (test.name.toUpperCase() === tested.name.toUpperCase()) return true
+  return false
+}
+
 export const handlePlural = (quantity?: number = 0) => quantity >= 2
 
 export const handleIngredientNaturePlural = (nature: NatureType, quantity?: number): NatureTypeWithPlural => {

@@ -6,6 +6,7 @@ import {
   isInListString,
   isInListObj,
   isInList,
+  hasSameName,
 } from './helpers'
 
 describe('findById', () => {
@@ -186,5 +187,42 @@ describe('is in list test suite', () => {
       const result = isInList(nameInList, listObj, key)
       expect(result).toEqual(true)
     })
+  })
+})
+
+describe('hasSameName', () => {
+  const test = {
+    id: 'recipe-id-01',
+    name: 'sucre',
+    quantity: 500,
+    nature: 'ml',
+  }
+  const testUpper = {
+    id: 'recipe-id-01',
+    name: 'Sucre',
+    quantity: 2,
+    nature: 'kg',
+  }
+  const testedSame = {
+    id: 'recipe-id-02',
+    name: 'sucre',
+    quantity: 80,
+    nature: 'g',
+  }
+  const testedSameUpper = {
+    id: 'recipe-id-03',
+    name: 'Sucre',
+    quantity: 1,
+    nature: 'kg',
+  }
+  it('should return true when test.name === tested.name', () => {
+    const result = hasSameName(test, testedSame)
+    expect(result).toEqual(true)
+  })
+  it('should return true when test.name === tested.name but with upper', () => {
+    const result = hasSameName(test, testedSameUpper)
+    expect(result).toEqual(true)
+    const resultUpper = hasSameName(testUpper, testedSame)
+    expect(resultUpper).toEqual(true)
   })
 })
