@@ -1,31 +1,5 @@
 // @flow
-
-type NatureType = 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box'
-
-type IngredientType = {
-  id: string,
-  name: string,
-  nature: NatureType,
-  quantity: number,
-  key: number
-}
-
-type NatureTypeWithPlural = NatureType | 'boxes' | 'items'
-
-type IngredientTypeWithNaturePlural = {
-  id: string,
-  name: string,
-  nature: NatureTypeWithPlural,
-  quantity: number,
-  key: number
-}
-
-type Recipe = {
-  id: string,
-  name: string,
-  pers: number,
-  ingredients: IngredientType[]
-}
+import type { IngredientType, IngredientTypeWithNaturePlural, Recipe } from './types'
 
 export const extractIngredients = (recipes: Recipe[]): IngredientType[] => {
   const allIngredients = []
@@ -57,7 +31,7 @@ export const flattenAddQuantity = (list: IngredientType[]) =>
 
 export const sortByName = (list: IngredientTypeWithNaturePlural[]) =>
   list.sort((a, b) => {
-    const nameA = a.name.toUpperCase() // ignore upper and lowercase
+    const nameA = a.name.toUpperCase()
     const nameB = b.name.toUpperCase()
     if (nameA < nameB) return -1
     if (nameA > nameB) return 1

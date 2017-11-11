@@ -1,4 +1,5 @@
 // @flow
+import type { NatureType, NatureTypeWithPlural } from './types'
 
 // Array helpers
 export const findById = (id: ?string, list: Object[]) => list.find((item: { id: string }) => item.id === id)
@@ -6,7 +7,7 @@ export const findById = (id: ?string, list: Object[]) => list.find((item: { id: 
 export const isInListString = (value: string, list: string[]) => Boolean(list.find(val => val === value))
 
 export const isInListObj = (value: string, list: Object[], key: string) =>
-  Boolean(list.find(item => item[key] === value))
+  Boolean(list.find((item: { [string]: string }) => item[key] === value))
 
 export const isInList = (value: string, list: Array<any>, key?: string) => {
   if (key) return isInListObj(value, list, key)
@@ -15,9 +16,6 @@ export const isInList = (value: string, list: Array<any>, key?: string) => {
 
 // String manipulation helpers
 export const handlePlural = (quantity?: number = 0) => quantity >= 2
-
-type NatureType = 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box'
-type NatureTypeWithPlural = NatureType | 'boxes' | 'items'
 
 export const handleIngredientNaturePlural = (nature: NatureType, quantity?: number): NatureTypeWithPlural => {
   if (typeof quantity === 'number') {

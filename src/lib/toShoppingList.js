@@ -8,23 +8,7 @@ import {
   flattenAddQuantity,
   sortByName,
 } from './shoppingListHelpers'
-
-type NatureType = 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box'
-
-type IngredientType = {
-  id: string,
-  name: string,
-  nature: NatureType,
-  quantity: number,
-  key: number
-}
-
-type Recipe = {
-  id: string,
-  name: string,
-  pers: number,
-  ingredients: IngredientType[]
-}
+import type { Recipe } from './types'
 
 export default (recipes: Recipe[]) => {
   const rawIngredientList = extractIngredients(recipes)
@@ -32,14 +16,14 @@ export default (recipes: Recipe[]) => {
   const list = []
 
   ingredients.forEach((element) => {
-    const newArr = ingredients.filter((item) => {
+    const sameIngredientList = ingredients.filter((item) => {
       if (item.name === element.name && item.nature === element.nature) {
         ingredients = removeItem(ingredients, item)
       }
       return item.name === element.name && item.nature === element.nature
     })
-    if (newArr.length > 0) {
-      const shoppingItem = flattenAddQuantity(newArr)
+    if (sameIngredientList.length > 0) {
+      const shoppingItem = flattenAddQuantity(sameIngredientList)
       const shoppingItemWithPlural = {
         ...shoppingItem,
         nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
@@ -49,6 +33,5 @@ export default (recipes: Recipe[]) => {
   })
 
   const shoppingList = list.map(ingredient => convertBackNature(ingredient))
-
   return sortByName(shoppingList)
 }

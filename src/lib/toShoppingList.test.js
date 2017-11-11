@@ -165,7 +165,6 @@ describe('toShoppingList', () => {
         nature: 'item',
       },
     ]
-
     const result = toShoppingList(recipes)
     expect(result).toEqual(expected)
   })
