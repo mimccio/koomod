@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
+import { upperFirstChar } from '../../../lib/helpers'
 
 const RecipeItem = styled.div`
   border-bottom: 1px solid ${palette.divider};
@@ -78,7 +79,7 @@ export default ({ recipe, handleToggle }: { recipe: Recipe, handleToggle: Functi
   return (
     <RecipeItem>
       <Main to={`recipe/${recipe.id}/ingredients`}>
-        <RecipeName recipeId={recipe.id}>{recipe.name}</RecipeName>
+        <RecipeName recipeId={recipe.id}>{upperFirstChar(recipe.name)}</RecipeName>
         <RecipeInfoWrapper recipeId={recipe.id}>
           <p>{recipe.pers || 4} pers</p>
           <p>{recipe.description}</p>

@@ -2,5 +2,5 @@
 
 export { isSameName, handlePlural, upperFirstChar } from './stringHelpers'
 export { maxCheck } from './numberHelpers'
-export { sameNameIsInList } from './arrayHelpers'
+export { sameNameIsInList, byNameAlphabetical } from './arrayHelpers'
 export { handleIngredientNaturePlural } from './ingredientHelpers'

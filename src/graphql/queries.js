@@ -4,7 +4,7 @@ import { gql } from 'react-apollo'
 
 export const ALL_RECIPES_QUERY = gql`
   query AllRecipesQuery {
-    allRecipes {
+    allRecipes(orderBy: name_ASC) {
       id
       name
     }
@@ -15,7 +15,7 @@ export const USER_RECIPES_QUERY = gql`
   query UserRecipesQuery($userId: ID) {
     User(id: $userId) {
       id
-      recipes(first: 100) {
+      recipes(first: 500, orderBy: name_ASC) {
         id
         name
         description
@@ -32,7 +32,7 @@ export const USER_RECIPES_WITH_INGREDIENTS_QUERY = gql`
   query UserRecipesWithIngredientsQuery($userId: ID) {
     User(id: $userId) {
       id
-      recipes(first: 100) {
+      recipes(first: 500, orderBy: name_ASC) {
         id
         name
         description
@@ -55,7 +55,7 @@ export const USER_SELECTED_RECIPES_QUERY = gql`
   query UserSelectedRecipesQuery($userId: ID, $isSelected: Boolean!) {
     User(id: $userId) {
       id
-      recipes(filter: { isSelected: $isSelected }) {
+      recipes(filter: { isSelected: $isSelected }, orderBy: name_ASC) {
         id
         ingredients {
           id
@@ -96,7 +96,7 @@ export const RECIPE_INGREDIENTS_QUERY = gql`
   query RecipeIngredientsQuery($recipeId: ID) {
     Recipe(id: $recipeId) {
       id
-      ingredients(first: 100) {
+      ingredients(first: 500, orderBy: name_ASC) {
         id
         name
         quantity
@@ -112,7 +112,7 @@ export const RECIPE_STEPS_QUERY = gql`
   query RecipeStepsQuery($recipeId: ID) {
     Recipe(id: $recipeId) {
       id
-      steps(first: 100) {
+      steps(first: 100, orderBy: name_ASC) {
         id
         text
       }
