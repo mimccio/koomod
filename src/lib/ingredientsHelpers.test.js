@@ -5,9 +5,9 @@ import {
   convertBackNature,
   flattenAddQuantity,
   sortByName,
-} from './shoppingListHelpers'
+} from './ingredientsHelpers'
 
-describe('toShoppingList test suite', () => {
+describe('ingredientsHelpers test suite', () => {
   const ing1 = {
     id: 'id-01',
     name: 'ing1',

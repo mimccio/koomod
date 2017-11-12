@@ -7,6 +7,7 @@ import {
   isInListObj,
   isInList,
   hasSameName,
+  sameNameIsInList,
 } from './helpers'
 
 describe('findById', () => {
@@ -203,6 +204,18 @@ describe('hasSameName', () => {
     quantity: 2,
     nature: 'kg',
   }
+  const testAccent = {
+    id: 'recipe-id-01',
+    name: 'sùcre',
+    quantity: 500,
+    nature: 'ml',
+  }
+  const testedDifferent = {
+    id: 'recipe-id-02',
+    name: 'autre',
+    quantity: 180,
+    nature: 'g',
+  }
   const testedSame = {
     id: 'recipe-id-02',
     name: 'sucre',
@@ -215,6 +228,16 @@ describe('hasSameName', () => {
     quantity: 1,
     nature: 'kg',
   }
+  const testedSameAccent = {
+    id: 'recipe-id-03',
+    name: 'sùcre',
+    quantity: 1,
+    nature: 'kg',
+  }
+  it('should return false when test.name !== tested.name', () => {
+    const result = hasSameName(test, testedDifferent)
+    expect(result).toEqual(false)
+  })
   it('should return true when test.name === tested.name', () => {
     const result = hasSameName(test, testedSame)
     expect(result).toEqual(true)
@@ -224,5 +247,74 @@ describe('hasSameName', () => {
     expect(result).toEqual(true)
     const resultUpper = hasSameName(testUpper, testedSame)
     expect(resultUpper).toEqual(true)
+  })
+  it('should return true when test.name === tested.name but with accent', () => {
+    const result = hasSameName(test, testedSameAccent)
+    expect(result).toEqual(true)
+    const resultUpper = hasSameName(testAccent, testedSame)
+    expect(resultUpper).toEqual(true)
+  })
+})
+
+describe.skip('sameNameIsInList', () => {
+  const list = [
+    {
+      id: 'ingredient-01-id',
+      name: 'Sùcre',
+      quantity: 200,
+      nature: 'g',
+    },
+    {
+      id: 'ingredient-02-id',
+      name: 'bànaNe',
+      quantity: 2,
+      nature: 'item',
+    },
+    {
+      id: 'ingredient-03-id',
+      name: 'bonjour',
+      quantity: 200,
+      nature: 'ml',
+    },
+    {
+      id: 'ingredient-04-id',
+      name: 'RéciPe',
+      quantity: 1,
+      nature: 'kg',
+    },
+    {
+      id: 'ingredient-05-id',
+      name: 'Sùcre',
+      quantity: 200,
+      nature: 'g',
+    },
+  ]
+  it('should return false if test has no item with same name in the list', () => {
+    const test = {
+      id: '01-id',
+      name: 'blabla',
+      quantity: 200,
+      nature: 'g',
+    }
+    const result = sameNameIsInList(test, list)
+    expect(result).toEqual(false)
+  })
+  it('should return true if test has same name as an item in the list', () => {
+    const test1 = {
+      id: '01-id',
+      name: 'sucre',
+      quantity: 200,
+      nature: 'g',
+    }
+    const test2 = {
+      id: '01-id',
+      name: 'banane',
+      quantity: 200,
+      nature: 'g',
+    }
+    const result1 = sameNameIsInList(test1, list)
+    expect(result1).toEqual(true)
+    const result2 = sameNameIsInList(test2, list)
+    expect(result2).toEqual(true)
   })
 })

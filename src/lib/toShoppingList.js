@@ -7,7 +7,7 @@ import {
   convertBackNature,
   flattenAddQuantity,
   sortByName,
-} from './shoppingListHelpers'
+} from './ingredientsHelpers'
 import type { Recipe } from './types'
 
 export default (recipes: Recipe[]) => {
