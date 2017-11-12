@@ -24,16 +24,13 @@ export default (recipes: Recipe[]) => {
       return isSameName(item.name, element.name) && item.nature === element.nature
     })
     if (sameIngredientList.length > 0) {
-      const shoppingItem = flattenAddQuantity(sameIngredientList)
-      const shoppingItemWithPlural = {
-        ...shoppingItem,
-        nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
+      const rawShoppingItem = flattenAddQuantity(sameIngredientList)
+      const shoppingItem = {
+        ...rawShoppingItem,
+        name: upperFirstChar(rawShoppingItem.name),
+        nature: handleIngredientNaturePlural(rawShoppingItem.nature, rawShoppingItem.quantity),
       }
-      const shippingItemWithPluralAndFirstCaseUpper = {
-        ...shoppingItemWithPlural,
-        name: upperFirstChar(shoppingItemWithPlural.name),
-      }
-      list.push(shippingItemWithPluralAndFirstCaseUpper)
+      list.push(shoppingItem)
     }
   })
 
