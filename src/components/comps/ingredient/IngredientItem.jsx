@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import palette from '../../../style/palette'
-import { handleIngredientNaturePlural } from '../../../lib/helpers'
+import { handleIngredientNaturePlural, upperFirstChar } from '../../../lib/helpers'
 import { FadeComp } from '../animations/Fade'
 
 import type { IngredientType } from '../../../lib/types'
@@ -69,7 +69,7 @@ type PropType = { status: string, ingredient: IngredientType, recipeId: string, 
 
 export default ({ status, ingredient, deleteIngredient }: PropType) => (
   <IngredientItemWrapper key={ingredient.id} status={status} ingredientId={ingredient.id}>
-    <IngredientName>{ingredient.name}</IngredientName>
+    <IngredientName>{upperFirstChar(ingredient.name)}</IngredientName>
     <IngredientInfo>
       <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
       <IngredientNature>{handleIngredientNaturePlural(ingredient.nature, ingredient.quantity)}</IngredientNature>
