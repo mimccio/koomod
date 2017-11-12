@@ -1,12 +1,11 @@
 // @flow
-import { handleIngredientNaturePlural, isSameName, upperFirstChar } from '../helpers'
+import { handleIngredientNaturePlural, isSameName, upperFirstChar, byNameAlphabetical } from '../helpers'
 import {
   extractIngredients,
   removeItem,
   convertDownNature,
   convertBackNature,
   flattenAddQuantity,
-  sortByName,
 } from './toShoppingListHelpers'
 
 import type { Recipe } from '../types'
@@ -35,5 +34,5 @@ export default (recipes: Recipe[]) => {
   })
 
   const shoppingList = list.map(ingredient => convertBackNature(ingredient))
-  return sortByName(shoppingList)
+  return shoppingList.sort((a, b) => byNameAlphabetical(a, b))
 }

@@ -4,7 +4,6 @@ import {
   convertDownNature,
   convertBackNature,
   flattenAddQuantity,
-  sortByName,
 } from './toShoppingListHelpers'
 
 describe('ingredientsHelpers test suite', () => {
@@ -328,52 +327,6 @@ describe('ingredientsHelpers test suite', () => {
       nature: 'g',
     }
     const result = flattenAddQuantity(ingredientsWithSameNameAndNature)
-    expect(result).toEqual(expected)
-  })
-
-  test('sortByName should sort the list by name', () => {
-    const list = [
-      {
-        name: 'zombi',
-        quantity: 1000,
-        nature: 'item',
-      },
-      {
-        name: 'Bonjour',
-        quantity: 200,
-        nature: 'ml',
-      },
-      {
-        name: 'hello',
-      },
-
-      {
-        name: 'banana',
-        quantity: 4,
-        nature: 'item',
-      },
-    ]
-    const expected = [
-      {
-        name: 'banana',
-        quantity: 4,
-        nature: 'item',
-      },
-      {
-        name: 'Bonjour',
-        quantity: 200,
-        nature: 'ml',
-      },
-      {
-        name: 'hello',
-      },
-      {
-        name: 'zombi',
-        quantity: 1000,
-        nature: 'item',
-      },
-    ]
-    const result = sortByName(list)
     expect(result).toEqual(expected)
   })
 

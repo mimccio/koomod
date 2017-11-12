@@ -28,12 +28,3 @@ export const convertBackNature = (ingredient: IngredientTypeWithNaturePlural) =>
 
 export const flattenAddQuantity = (list: IngredientType[]) =>
   list.reduce((prev: IngredientType, item: IngredientType) => ({ ...prev, quantity: prev.quantity + item.quantity }))
-
-export const sortByName = (list: IngredientTypeWithNaturePlural[]) =>
-  list.sort((a, b) => {
-    const nameA = a.name.toUpperCase()
-    const nameB = b.name.toUpperCase()
-    if (nameA < nameB) return -1
-    if (nameA > nameB) return 1
-    return 0
-  })
