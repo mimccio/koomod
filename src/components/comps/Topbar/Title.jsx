@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import { TransitionGroup } from 'react-transition-group'
 import { Route, Switch, matchPath } from 'react-router-dom'
 
-import { FadeTransition, FadeComp } from '../animations/Fade'
+import { upperFirstChar } from '../../../lib/helpers'
 import RecipeNameData from '../../containers/RecipeNameData'
+import { FadeTransition, FadeComp } from '../animations/Fade'
 
 const transitionDelay = 220
 
@@ -51,7 +52,7 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
                 <RecipeNameData match={match}>
                   {(recipeName: string) => (
                     <Title small status={status}>
-                      {recipeName}
+                      {upperFirstChar(recipeName)}
                     </Title>
                   )}
                 </RecipeNameData>
