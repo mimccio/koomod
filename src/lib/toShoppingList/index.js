@@ -1,5 +1,5 @@
 // @flow
-import { handleIngredientNaturePlural } from '../helpers'
+import { handleIngredientNaturePlural, isSameName } from '../helpers'
 import {
   extractIngredients,
   removeItem,
@@ -18,10 +18,10 @@ export default (recipes: Recipe[]) => {
 
   ingredients.forEach((element) => {
     const sameIngredientList = ingredients.filter((item) => {
-      if (item.name === element.name && item.nature === element.nature) {
+      if (isSameName(item.name, element.name) && item.nature === element.nature) {
         ingredients = removeItem(ingredients, item)
       }
-      return item.name === element.name && item.nature === element.nature
+      return isSameName(item.name, element.name) && item.nature === element.nature
     })
     if (sameIngredientList.length > 0) {
       const shoppingItem = flattenAddQuantity(sameIngredientList)
