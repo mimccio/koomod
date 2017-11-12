@@ -10,6 +10,8 @@ import { InputStyle } from '../inputs/Input'
 import SelectNature from './SelectNature'
 import palette from '../../../style/palette'
 
+import type { IngredientType } from '../../../lib/types'
+
 const Form = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,14 +77,6 @@ const Error = styled(FadeComp)`
   color: ${palette.danger.light};
   padding: 10px 0 0 10px;
 `
-
-type IngredientType = {
-  id: string,
-  name: string,
-  nature: 'g' | 'kg' | 'ml' | 'l' | 'item' | 'box',
-  quantity?: number,
-  key: number
-}
 
 type DataType = {
   ingredient: IngredientType,
