@@ -1,5 +1,5 @@
 // @flow
-import { handleIngredientNaturePlural } from './helpers'
+import { handleIngredientNaturePlural, isSameName, upperFirstChar } from '../helpers'
 import {
   extractIngredients,
   removeItem,
@@ -7,8 +7,9 @@ import {
   convertBackNature,
   flattenAddQuantity,
   sortByName,
-} from './shoppingListHelpers'
-import type { Recipe } from './types'
+} from './toShoppingListHelpers'
+
+import type { Recipe } from '../types'
 
 export default (recipes: Recipe[]) => {
   const rawIngredientList = extractIngredients(recipes)
@@ -17,18 +18,19 @@ export default (recipes: Recipe[]) => {
 
   ingredients.forEach((element) => {
     const sameIngredientList = ingredients.filter((item) => {
-      if (item.name === element.name && item.nature === element.nature) {
+      if (isSameName(item.name, element.name) && item.nature === element.nature) {
         ingredients = removeItem(ingredients, item)
       }
-      return item.name === element.name && item.nature === element.nature
+      return isSameName(item.name, element.name) && item.nature === element.nature
     })
     if (sameIngredientList.length > 0) {
-      const shoppingItem = flattenAddQuantity(sameIngredientList)
-      const shoppingItemWithPlural = {
-        ...shoppingItem,
-        nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
+      const rawShoppingItem = flattenAddQuantity(sameIngredientList)
+      const shoppingItem = {
+        ...rawShoppingItem,
+        name: upperFirstChar(rawShoppingItem.name),
+        nature: handleIngredientNaturePlural(rawShoppingItem.nature, rawShoppingItem.quantity),
       }
-      list.push(shoppingItemWithPlural)
+      list.push(shoppingItem)
     }
   })
 

@@ -1,4 +1,4 @@
-import toShoppingList from './toShoppingList'
+import toShoppingList from './index'
 
 describe('toShoppingList', () => {
   const recipes = [
@@ -106,61 +106,61 @@ describe('toShoppingList', () => {
     const expected = [
       {
         id: 'id-01-01',
-        name: 'ingredient-1',
+        name: 'Ingredient-1',
         quantity: 1.1,
         nature: 'kg',
       },
       {
         id: 'id-01-02',
-        name: 'ingredient-2',
+        name: 'Ingredient-2',
         quantity: 2.6,
         nature: 'kg',
       },
       {
         id: 'id-04-01',
-        name: 'ingredient-2',
+        name: 'Ingredient-2',
         quantity: 300,
         nature: 'ml',
       },
       {
         id: 'id-01-03',
-        name: 'ingredient-3',
+        name: 'Ingredient-3',
         quantity: 3.2,
         nature: 'l',
       },
       {
         id: 'id-02-02',
-        name: 'ingredient-3',
+        name: 'Ingredient-3',
         quantity: 2,
         nature: 'kg',
       },
       {
         id: 'id-01-04',
-        name: 'ingredient-4',
+        name: 'Ingredient-4',
         quantity: 1,
         nature: 'kg',
       },
       {
         id: 'id-02-01',
-        name: 'ingredient-5',
+        name: 'Ingredient-5',
         quantity: 3,
         nature: 'items',
       },
       {
         id: 'id-02-04',
-        name: 'ingredient-7',
+        name: 'Ingredient-7',
         quantity: 4,
         nature: 'boxes',
       },
       {
         id: 'id-03-01',
-        name: 'ingredient-7',
+        name: 'Ingredient-7',
         quantity: 30,
         nature: 'g',
       },
       {
         id: 'id-04-03',
-        name: 'ingredient-8',
+        name: 'Ingredient-8',
         quantity: 1,
         nature: 'item',
       },

@@ -8,6 +8,7 @@
 - flow-bin
 - react-transition-group 
 - facepaint
+- diacritics
 
 - enzyme
 - jest-styled-components

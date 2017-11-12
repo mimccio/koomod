@@ -1,5 +1,5 @@
 // @flow
-import type { IngredientType, IngredientTypeWithNaturePlural, Recipe } from './types'
+import type { IngredientType, IngredientTypeWithNaturePlural, Recipe } from '../types'
 
 export const extractIngredients = (recipes: Recipe[]): IngredientType[] => {
   const allIngredients = []
