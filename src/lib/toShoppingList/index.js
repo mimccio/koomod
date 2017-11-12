@@ -1,5 +1,5 @@
 // @flow
-import { handleIngredientNaturePlural, isSameName } from '../helpers'
+import { handleIngredientNaturePlural, isSameName, upperFirstChar } from '../helpers'
 import {
   extractIngredients,
   removeItem,
@@ -29,7 +29,11 @@ export default (recipes: Recipe[]) => {
         ...shoppingItem,
         nature: handleIngredientNaturePlural(shoppingItem.nature, shoppingItem.quantity),
       }
-      list.push(shoppingItemWithPlural)
+      const shippingItemWithPluralAndFirstCaseUpper = {
+        ...shoppingItemWithPlural,
+        name: upperFirstChar(shoppingItemWithPlural.name),
+      }
+      list.push(shippingItemWithPluralAndFirstCaseUpper)
     }
   })
 

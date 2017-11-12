@@ -1,4 +1,4 @@
-import { isSameName, handlePlural } from './stringHelpers'
+import { isSameName, handlePlural, upperFirstChar } from './stringHelpers'
 
 describe('isSameName', () => {
   const test = 'sucre'
@@ -53,4 +53,9 @@ describe('handlePlural', () => {
     const result = handlePlural(3.5)
     expect(result).toEqual(true)
   })
+})
+
+describe('upperFirstChar should set the first character to uppercase', () => {
+  const result = upperFirstChar('hello world')
+  expect(result).toEqual('Hello world')
 })
