@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { handlePlural, isInList } from '../../../lib/helpers'
+import { handlePlural, sameNameIsInList } from '../../../lib/helpers'
 import CreateIngredient from '../../containers/CreateIngredient'
 
 import { FadeTransition, FadeComp } from '../animations/Fade'
@@ -97,7 +97,7 @@ export default ({ recipeId, ingredients }: { recipeId: string, ingredients: Arra
  ingredient: { name, quantity, nature }, handleChange, createIngredient, handleKeyDown }:
 DataType) => {
       const handleNameKeyDown = (evt) => {
-        if (isInList(name, ingredients, 'name')) return
+        if (sameNameIsInList(name, ingredients)) return
         if (evt.keyCode === 13) {
           evt.target.nextElementSibling.firstChild.focus()
         }
@@ -111,11 +111,11 @@ DataType) => {
         handleKeyDown(evt)
       }
 
-      const isOpen = !!name && !isInList(name, ingredients, 'name')
+      const isOpen = !!name && !sameNameIsInList(name, ingredients)
 
       return (
         <Form>
-          <FadeTransition in={isInList(name, ingredients, 'name')} enter={0}>
+          <FadeTransition in={sameNameIsInList(name, ingredients)} enter={0}>
             {(status: string) => <Error status={status}>this ingredient is already in the list !</Error>}
           </FadeTransition>
           <ContentWrapper>

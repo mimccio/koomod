@@ -1,6 +1,5 @@
 // @flow
-import type { IngredientType, IngredientTypeWithNaturePlural, Recipe } from './types'
-// import { hasSameName } from './helpers'
+import type { IngredientType, IngredientTypeWithNaturePlural, Recipe } from '../types'
 
 export const extractIngredients = (recipes: Recipe[]): IngredientType[] => {
   const allIngredients = []
@@ -38,6 +37,3 @@ export const sortByName = (list: IngredientTypeWithNaturePlural[]) =>
     if (nameA > nameB) return 1
     return 0
   })
-
-// export const sameNameIsInList = (test: string, list: IngredientType[]): boolean =>
-//   Boolean(list.find((item: IngredientType) => hasSameName(test, item)))

@@ -19,25 +19,5 @@ declare module 'diacritics' {
 
 declare module 'remove' {
   // declare type removeType = (string: string) => string
-  declare module.exports: (string: string) => string
-}
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'diacritics/test/test' {
-  declare module.exports: any
-}
-
-// Filename aliases
-declare module 'diacritics/index' {
-  declare module.exports: $Exports<'diacritics'>
-}
-declare module 'diacritics/index.js' {
-  declare module.exports: $Exports<'diacritics'>
-}
-declare module 'diacritics/test/test.js' {
-  declare module.exports: $Exports<'diacritics/test/test'>
+  declare module.exports: (text: string) => string
 }

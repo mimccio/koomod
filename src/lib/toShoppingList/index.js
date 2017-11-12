@@ -1,5 +1,5 @@
 // @flow
-import { handleIngredientNaturePlural } from './helpers'
+import { handleIngredientNaturePlural } from '../helpers'
 import {
   extractIngredients,
   removeItem,
@@ -7,8 +7,9 @@ import {
   convertBackNature,
   flattenAddQuantity,
   sortByName,
-} from './ingredientsHelpers'
-import type { Recipe } from './types'
+} from './toShoppingListHelpers'
+
+import type { Recipe } from '../types'
 
 export default (recipes: Recipe[]) => {
   const rawIngredientList = extractIngredients(recipes)

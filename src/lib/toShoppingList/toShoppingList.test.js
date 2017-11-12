@@ -1,4 +1,4 @@
-import toShoppingList from './toShoppingList'
+import toShoppingList from './index'
 
 describe('toShoppingList', () => {
   const recipes = [
