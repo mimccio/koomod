@@ -103,4 +103,11 @@ export const withCreateIngredientMutation = graphql(CREATE_INGREDIENT_MUTATION, 
   name: 'createIngredientMutation',
 })
 
-export default compose(withRecipesIngredientsData, withCreateIngredientMutation)(CreateIngredientHOC)
+export const withRecipeIngredients = graphql(RECIPE_INGREDIENTS_QUERY, {
+  name: 'recipeIngredientsQuery',
+  options: ({ recipeId }) => ({ variables: { recipeId } }),
+})
+
+export default compose(withCreateIngredientMutation, withRecipesIngredientsData, withRecipeIngredients)(
+  CreateIngredientHOC
+)

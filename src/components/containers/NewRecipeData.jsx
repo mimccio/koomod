@@ -6,12 +6,12 @@ import { GC_USER_ID } from '../../lib/constants'
 
 export const NewRecipeHOC = ({ newRecipeQuery: { loading, error, User }, children }) => {
   if (loading) {
-    return children('loading...')
+    return 'loading...'
   }
   if (error) {
     return <p>{error.message}</p>
   }
-  console.log('new recipe data', User.recipes)
+  // console.log('new recipe data', User.recipes)
   return children(User.recipes[0])
 }
 
