@@ -69,7 +69,7 @@ export class CreateRecipeHOC extends React.Component {
       },
       update: (store, { data: { createRecipe } }) => {
         const data = store.readQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, variables: { userId } })
-        data.User.recipes.push(createRecipe)
+        data.User.recipes.unshift(createRecipe)
         store.writeQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, data })
       },
     })
