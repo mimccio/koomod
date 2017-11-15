@@ -35,6 +35,7 @@ export default ({ history, status }) => (
             <FormWrapper>
               <Label htmlFor="name">Recipe Name</Label>
               <Input
+                autoFocus
                 id="name"
                 type="text"
                 value={recipeState.name}

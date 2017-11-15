@@ -66,6 +66,7 @@ export class CreateFirstIngredient extends React.Component {
                 <FormWrapper>
                   <Label htmlFor='name'>Ingredient Name</Label>
                   <Input
+                    autoFocus
                     id='name'
                     type='text'
                     value={data.ingredient.name}
