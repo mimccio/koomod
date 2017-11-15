@@ -10,14 +10,16 @@ const Wrapper = styled.div`
   background-color: ${palette.grey.lighter};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  height: calc(100vh - 50px);
+  width: 100%;
+  max-width: 460px;
 `
 
 const Message = styled.p`
   text-align: center;
-  padding-top: 80px;
+  padding: 80px;
 `
 
 export default ({ message = 'add', children, to }: { message?: string, children?: React.Node, to?: string }) => (
