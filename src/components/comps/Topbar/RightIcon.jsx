@@ -95,6 +95,18 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
               />
 
               <Route
+                exact
+                path='/create-recipe'
+                render={() => (
+                  <Link to='/recipes'>
+                    <RightBarIcon status={status}>
+                      <i className='material-icons'>cancel</i>
+                    </RightBarIcon>
+                  </Link>
+                )}
+              />
+
+              <Route
                 render={() => (
                   <Link to='/recipes'>
                     <RightBarIcon status={status}>
