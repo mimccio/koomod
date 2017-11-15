@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Switch, Route, withRouter, matchPath } from 'react-router-dom'
+import { Switch, Route, withRouter, matchPath, Redirect } from 'react-router-dom'
 import { TransitionGroup } from 'react-transition-group'
 
 import { FadeTransition } from '../comps/animations/Fade'
@@ -11,6 +11,7 @@ import LoginPage from './LoginPage'
 import RecipePage from './RecipePage'
 import CreateRecipePage from './CreateRecipePage'
 import CreateFirstIngredientPage from './CreateFirstIngredientPage'
+import { GC_USER_ID } from '../../lib/constants'
 
 const Routes = withRouter(({ location }: { location: { key: string, pathname: string } }) => {
   const matchRecipePath = matchPath(location.pathname, {
@@ -24,7 +25,11 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
       <FadeTransition appear key={key}>
         {(status: string) => (
           <Switch location={location}>
-            <Route exact path='/' component={HomePage} />
+            <Route
+              exact
+              path='/'
+              render={() => (localStorage.getItem(GC_USER_ID) ? <Redirect to='/recipes' /> : <HomePage />)}
+            />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/sign-up' render={({ history }) => <LoginPage signUp history={history} />} />
             <Route exact path='/recipes' render={() => <UserRecipesPage status={status} />} />
