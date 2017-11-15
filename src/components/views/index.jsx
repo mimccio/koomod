@@ -9,7 +9,7 @@ import UserRecipesPage from './UserRecipesPage'
 import ShoppingListPage from './ShoppingListPage'
 import LoginPage from './LoginPage'
 import RecipePage from './RecipePage'
-import NewRecipePage from './NewRecipePage'
+import CreateRecipePage from './CreateRecipePage'
 
 const Routes = withRouter(({ location }: { location: { key: string, pathname: string } }) => {
   const matchRecipePath = matchPath(location.pathname, {
@@ -32,7 +32,10 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
               path='/recipe/:id'
               render={({ match, history }) => <RecipePage location={location} match={match} history={history} />}
             />
-            <Route path='/new-recipe' render={({ history }) => <NewRecipePage status={status} history={history} />} />
+            <Route
+              path='/create-recipe'
+              render={({ history }) => <CreateRecipePage status={status} history={history} />}
+            />
           </Switch>
         )}
       </FadeTransition>

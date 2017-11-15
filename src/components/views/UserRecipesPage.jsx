@@ -25,7 +25,7 @@ export default ({ status }: { status: string }) => (
         if (recipes.length < 1) {
           return (
             <ContentWrapper>
-              <EmptyList to='/new-recipe' message='add a new recipe' />
+              <EmptyList to='/create-recipe' message='add a new recipe' />
             </ContentWrapper>
           )
         }
@@ -36,7 +36,7 @@ export default ({ status }: { status: string }) => (
               <GlobalSelection recipes={recipes} updateRecipeSelect={updateRecipeSelect} />
               {recipes.map(recipe => <RecipeItem key={recipe.id} recipe={recipe} handleToggle={updateRecipeSelect} />)}
             </ListWrapper>
-            <FloatingButton name='add' to='/new-recipe' status={status} />
+            <FloatingButton name='add' to='/create-recipe' status={status} />
           </ContentWrapper>
         )
       }}

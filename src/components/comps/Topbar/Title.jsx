@@ -47,6 +47,15 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
             <Route exact path='/sign-up' render={() => <Title status={status}>Sign Up</Title>} />
             <Route exact path='/shopping-List' render={() => <Title status={status}>Shopping List</Title>} />
             <Route
+              exact
+              path='/create-recipe'
+              render={() => (
+                <Title small status={status}>
+                  New Recipe
+                </Title>
+              )}
+            />
+            <Route
               path='/recipe/:id'
               render={({ match }) => (
                 <RecipeNameData match={match}>
