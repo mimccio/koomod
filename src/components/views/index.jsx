@@ -10,6 +10,7 @@ import ShoppingListPage from './ShoppingListPage'
 import LoginPage from './LoginPage'
 import RecipePage from './RecipePage'
 import CreateRecipePage from './CreateRecipePage'
+import CreateFirstIngredientPage from './CreateFirstIngredientPage'
 
 const Routes = withRouter(({ location }: { location: { key: string, pathname: string } }) => {
   const matchRecipePath = matchPath(location.pathname, {
@@ -33,8 +34,14 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
               render={({ match, history }) => <RecipePage location={location} match={match} history={history} />}
             />
             <Route
+              exact
               path='/create-recipe'
               render={({ history }) => <CreateRecipePage status={status} history={history} />}
+            />
+            <Route
+              exact
+              path='/create-recipe/ingredient'
+              render={() => <CreateFirstIngredientPage status={status} />}
             />
           </Switch>
         )}

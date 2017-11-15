@@ -15,7 +15,7 @@ export const USER_RECIPES_QUERY = gql`
   query UserRecipesQuery($userId: ID) {
     User(id: $userId) {
       id
-      recipes(first: 500, orderBy: name_ASC) {
+      recipes(orderBy: name_ASC) {
         id
         name
         description
@@ -32,7 +32,7 @@ export const USER_RECIPES_WITH_INGREDIENTS_QUERY = gql`
   query UserRecipesWithIngredientsQuery($userId: ID) {
     User(id: $userId) {
       id
-      recipes(first: 500, orderBy: name_ASC) {
+      recipes(orderBy: name_ASC) {
         id
         name
         description
