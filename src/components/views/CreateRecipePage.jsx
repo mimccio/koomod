@@ -6,40 +6,70 @@ import CreateRecipe from '../containers/CreateRecipe'
 
 import { PageWrapper } from '../comps/layouts'
 import { FloatingButton } from '../comps/buttons'
+import { Input, Label } from '../comps/inputs/Form'
+import { TextareaStyle } from '../comps/inputs/Textarea'
 
 const Wrapper = styled.div`
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 `
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px 20px;
+  width: 100%;
+  max-width: 800px;
+`
+
+const FormWrapper = styled.div`padding: 20px;`
 
 export default ({ history, status }) => (
   <PageWrapper>
     <CreateRecipe history={history}>
       {({ recipeState, handleKeyDown, handleChangeRecipe, createRecipe }) => (
         <Wrapper onKeyDown={handleKeyDown}>
-          <label htmlFor="name">Recipe Name</label>
-          <input id="name" type="text" value={recipeState.name} onChange={evt => handleChangeRecipe(evt)} />
+          <ContentWrapper>
+            <FormWrapper>
+              <Label htmlFor="name">Recipe Name</Label>
+              <Input
+                id="name"
+                type="text"
+                value={recipeState.name}
+                onChange={evt => handleChangeRecipe(evt)}
+                placeholder={'add recipe name...'}
+              />
+            </FormWrapper>
+            <FormWrapper>
+              <Label htmlFor="pers">Number of Persons</Label>
+              <Input
+                id="pers"
+                type="number"
+                value={recipeState.pers}
+                onChange={evt => handleChangeRecipe(evt)}
+                placeholder={0}
+              />
+            </FormWrapper>
+            <FormWrapper>
+              <Label htmlFor="description">Description</Label>
+              <TextareaStyle
+                id="description"
+                type="text"
+                value={recipeState.description}
+                onChange={evt => handleChangeRecipe(evt)}
+                placeholder="add a recipe description if you want..."
+              />
+            </FormWrapper>
 
-          <label htmlFor="pers">pers</label>
-          <input
-            id="pers"
-            name="pers"
-            type="number"
-            value={recipeState.pers}
-            onChange={evt => handleChangeRecipe(evt)}
-          />
-
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            type="text"
-            value={recipeState.description}
-            onChange={evt => handleChangeRecipe(evt)}
-          />
-          <FloatingButton name="check" onClick={createRecipe} status={status} />
+            <FloatingButton
+              name="check"
+              onClick={() => Boolean(recipeState.name) && createRecipe()}
+              hide={!recipeState.name}
+              status={status}
+            />
+          </ContentWrapper>
         </Wrapper>
       )}
     </CreateRecipe>

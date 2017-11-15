@@ -6,7 +6,7 @@ import { handlePlural, sameNameIsInList } from '../../../lib/helpers'
 import CreateIngredient from '../../containers/CreateIngredient'
 
 import { FadeTransition, FadeComp } from '../animations/Fade'
-import { InputStyle } from '../inputs/Input'
+import { Input } from '../inputs/Form'
 import SelectNature from './SelectNature'
 import palette from '../../../style/palette'
 
@@ -30,7 +30,7 @@ const ContentWrapper = styled.div`
   align-items: center;
 `
 
-const NameInput = styled(InputStyle)`
+const NameInput = styled(Input)`
   //width: 100%;
   margin-left: 4px;
 `
@@ -44,7 +44,7 @@ const InfoWrapper = styled(FadeComp)`
   height: 100%;
 `
 
-const QuantityInput = styled(InputStyle)`
+const QuantityInput = styled(Input)`
   margin-right: 10px;
   padding: 3px;
   &::placeholder {
