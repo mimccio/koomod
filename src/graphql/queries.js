@@ -119,3 +119,21 @@ export const RECIPE_STEPS_QUERY = gql`
     }
   }
 `
+
+export const NEW_RECIPE_QUERY = gql`
+  query NewRecipeQuery($userId: ID) {
+    User(id: $userId) {
+      id
+      recipes(first: 1, orderBy: createdAt_DESC) {
+        id
+        name
+        ingredients {
+          id
+          name
+          quantity
+          nature
+        }
+      }
+    }
+  }
+`
