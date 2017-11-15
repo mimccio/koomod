@@ -112,7 +112,7 @@ export const RECIPE_STEPS_QUERY = gql`
   query RecipeStepsQuery($recipeId: ID) {
     Recipe(id: $recipeId) {
       id
-      steps(first: 100, orderBy: name_ASC) {
+      steps(first: 100) {
         id
         text
       }
