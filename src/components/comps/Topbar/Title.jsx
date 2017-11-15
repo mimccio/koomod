@@ -6,6 +6,8 @@ import { Route, Switch, matchPath } from 'react-router-dom'
 
 import { upperFirstChar } from '../../../lib/helpers'
 import RecipeNameData from '../../containers/RecipeNameData'
+import NewRecipeData from '../../containers/NewRecipeData'
+
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
 const transitionDelay = 220
@@ -35,7 +37,13 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
     strict: false,
   })
 
-  const key = matchRecipePath ? 'title-recipe-key' : `title-${location.key}`
+  const matchFirsIngredientPath = matchPath(location.pathname, {
+    path: '/create-recipe/ingredient',
+    exact: false,
+    strict: false,
+  })
+
+  const key = matchRecipePath || matchFirsIngredientPath ? 'title-recipe-key' : `title-${location.key}`
   return (
     <TransitionGroup>
       <FadeTransition key={key} enter={transitionDelay} exit={transitionDelay}>
@@ -53,6 +61,19 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
                 <Title small status={status}>
                   new Recipe
                 </Title>
+              )}
+            />
+            <Route
+              exact
+              path='/create-recipe/ingredient'
+              render={() => (
+                <NewRecipeData>
+                  {({ name }: { name: string }) => (
+                    <Title small status={status}>
+                      {upperFirstChar(name)}
+                    </Title>
+                  )}
+                </NewRecipeData>
               )}
             />
             <Route
