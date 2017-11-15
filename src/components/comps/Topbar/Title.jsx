@@ -11,7 +11,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 const transitionDelay = 220
 
 const Title = styled(FadeComp)`
-  transform-origin: left;
+  transform-origin: top;
   transition: all ${transitionDelay}ms ease-in-out;
   color: white;
   position: absolute;
@@ -51,7 +51,7 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
               path='/create-recipe'
               render={() => (
                 <Title small status={status}>
-                  New Recipe
+                  new Recipe
                 </Title>
               )}
             />
