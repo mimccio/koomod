@@ -8,6 +8,7 @@ exports[`"Fade" animation test suite "FadeComp" should match snapshot 1`] = `
   -ms-transform: scale( 1 );
   transform: scale( 1 );
   opacity: 1;
+  visibility: visible;
 }
 
 <div
@@ -23,6 +24,7 @@ exports[`"Fade" animation test suite "FadeTransition" should match snapshot 1`] 
   -ms-transform: scale( 0.2 );
   transform: scale( 0.2 );
   opacity: 0;
+  visibility: hidden;
 }
 
 <div

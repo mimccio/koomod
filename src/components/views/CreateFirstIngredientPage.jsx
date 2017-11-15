@@ -97,14 +97,14 @@ export class CreateFirstIngredient extends React.Component {
                 </FormWrapper>
                 {this.state.creating ? (
                   <FloatingButton
+                    inProgress
                     name='hourglass_empty'
                     onClick={() => console.log('creating recipe')}
-                    hide={data.ingredient.name}
+                    hide={!data.ingredient.name}
                     status={this.props.status}
                   />
                 ) : (
                   <FloatingButton
-                    inProgress
                     name='check'
                     onClick={() => this.handleSave(data)}
                     hide={!data.ingredient.name}
