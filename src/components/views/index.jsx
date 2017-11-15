@@ -41,7 +41,7 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
             <Route
               exact
               path='/create-recipe/ingredient'
-              render={() => <CreateFirstIngredientPage status={status} />}
+              render={({ history }) => <CreateFirstIngredientPage status={status} history={history} />}
             />
           </Switch>
         )}

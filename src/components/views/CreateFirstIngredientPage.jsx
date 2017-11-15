@@ -49,6 +49,13 @@ export class CreateFirstIngredient extends React.Component {
     }
   }
 
+  handleSave = (data) => {
+    if (data.ingredient.name) {
+      data.createIngredient()
+      this.props.history.replace(`/recipe/${this.props.recipe.id}/ingredients`)
+    }
+  }
+
   render() {
     return (
       <PageWrapper>
@@ -99,7 +106,7 @@ export class CreateFirstIngredient extends React.Component {
                   <FloatingButton
                     inProgress
                     name='check'
-                    onClick={() => Boolean(data.ingredient.name) && data.createIngredient()}
+                    onClick={() => this.handleSave(data)}
                     hide={!data.ingredient.name}
                     status={this.props.status}
                   />
@@ -113,8 +120,8 @@ export class CreateFirstIngredient extends React.Component {
   }
 }
 
-export default ({ status }) => (
-  <NewRecipeData>{recipe => <CreateFirstIngredient recipe={recipe} status={status} />}</NewRecipeData>
+export default ({ status, history }) => (
+  <NewRecipeData>{recipe => <CreateFirstIngredient recipe={recipe} status={status} history={history} />}</NewRecipeData>
 )
 
 // <p>{data.ingredient.name && data.ingredient.name}</p>
