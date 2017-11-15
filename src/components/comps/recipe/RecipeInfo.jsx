@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import facepaint from 'facepaint'
 
 import palette from '../../../style/palette'
-import Input from '../inputs/Input'
+import Form from '../inputs/Form'
 import Textarea from '../inputs/Textarea'
 import DeleteRecipeBtn from './DeleteRecipeBtn'
 
@@ -44,7 +44,7 @@ const PersWrapper = styled.div`
 export default ({ recipe, updateRecipe }) => (
   <Wrapper>
     <ContentWrapper>
-      <Input
+      <Form
         type='text'
         id='name'
         val={recipe.name}
@@ -54,7 +54,7 @@ export default ({ recipe, updateRecipe }) => (
         placeholder='add name...'
       />
       <PersWrapper>
-        <Input
+        <Form
           type='number'
           id='pers'
           val={recipe.pers}
@@ -64,7 +64,7 @@ export default ({ recipe, updateRecipe }) => (
           maxNumber={999}
         />
         {/* change pers to shopFor */}
-        <Input
+        <Form
           disabled
           type='number'
           id='shopFor'

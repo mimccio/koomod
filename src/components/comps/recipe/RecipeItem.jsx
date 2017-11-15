@@ -18,10 +18,18 @@ const RecipeItem = styled.div`
 
 const sideWidth = '60px'
 
-const Main = styled(Link)`
+const MainLink = styled(Link)`
   width: calc(100% - ${sideWidth});
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+`
+
+const Main = styled.div`
+  width: calc(100% - ${sideWidth});
+  display: flex;
+  flex-direction: column;
+  cursor: progress;
 `
 
 const Side = styled.div`
@@ -78,13 +86,23 @@ export default ({ recipe, handleToggle }: { recipe: Recipe, handleToggle: Functi
 
   return (
     <RecipeItem>
-      <Main to={`recipe/${recipe.id}/ingredients`}>
-        <RecipeName recipeId={recipe.id}>{upperFirstChar(recipe.name)}</RecipeName>
-        <RecipeInfoWrapper recipeId={recipe.id}>
-          <p>{recipe.pers || 4} pers</p>
-          <p>{recipe.description}</p>
-        </RecipeInfoWrapper>
-      </Main>
+      {Number(recipe.id) < 0 ? (
+        <Main>
+          <RecipeName recipeId={recipe.id}>{upperFirstChar(recipe.name)}</RecipeName>
+          <RecipeInfoWrapper recipeId={recipe.id}>
+            <p>{recipe.pers || 4} pers</p>
+            <p>{recipe.description}</p>
+          </RecipeInfoWrapper>
+        </Main>
+      ) : (
+        <MainLink to={`/recipe/${recipe.id}/ingredients`}>
+          <RecipeName recipeId={recipe.id}>{upperFirstChar(recipe.name)}</RecipeName>
+          <RecipeInfoWrapper recipeId={recipe.id}>
+            <p>{recipe.pers || 4} pers</p>
+            <p>{recipe.description}</p>
+          </RecipeInfoWrapper>
+        </MainLink>
+      )}
 
       <Side
         onTouchEnd={(evt: SyntheticTouchEvent<HTMLInputElement>) => {

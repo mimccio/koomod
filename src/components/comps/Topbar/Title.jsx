@@ -11,7 +11,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 const transitionDelay = 220
 
 const Title = styled(FadeComp)`
-  transform-origin: left;
+  transform-origin: top;
   transition: all ${transitionDelay}ms ease-in-out;
   color: white;
   position: absolute;
@@ -46,6 +46,15 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
             <Route exact path='/login' render={() => <Title status={status}>Login</Title>} />
             <Route exact path='/sign-up' render={() => <Title status={status}>Sign Up</Title>} />
             <Route exact path='/shopping-List' render={() => <Title status={status}>Shopping List</Title>} />
+            <Route
+              exact
+              path='/create-recipe'
+              render={() => (
+                <Title small status={status}>
+                  new Recipe
+                </Title>
+              )}
+            />
             <Route
               path='/recipe/:id'
               render={({ match }) => (

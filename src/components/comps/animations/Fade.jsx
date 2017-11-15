@@ -35,7 +35,10 @@ export const FadeComp = styled.div`
   transition: all 100ms ease-in-out;
 
   transform: scale(
-    ${({ status }: { status: string }) => {
+    ${({ status, hide }: { status: string, hide: boolean }) => {
+    if (hide === true) {
+      return 0.2
+    }
     if (status === 'entering') {
       return 0.2
     }
@@ -51,7 +54,10 @@ export const FadeComp = styled.div`
     return 1
   }}
   );
-  opacity: ${({ status }: { status: string }) => {
+  opacity: ${({ status, hide }: { status: string, hide: boolean }) => {
+    if (hide === true) {
+      return 0
+    }
     if (status === 'entering') {
       return 0
     }
@@ -65,5 +71,23 @@ export const FadeComp = styled.div`
       return 0
     }
     return 1
+  }};
+  visibility: ${({ status, hide }: { status: string, hide: boolean }) => {
+    if (hide === true) {
+      return 'hidden'
+    }
+    if (status === 'entering') {
+      return 'hidden'
+    }
+    if (status === 'entered') {
+      return 'visible'
+    }
+    if (status === 'exiting') {
+      return 'visible'
+    }
+    if (status === 'exited') {
+      return 'hidden'
+    }
+    return 'visible'
   }};
 `

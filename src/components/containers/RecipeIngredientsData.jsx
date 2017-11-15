@@ -20,21 +20,36 @@ export const RecipeIngredientsHOC = ({
   }
   const props = {
     ingredients: Recipe.ingredients,
-    deleteIngredient: async (ingredientId) => {
+    deleteIngredient: async (ingredientId, ingredientKey) => {
       await deleteIngredientMutation({
         variables: {
           id: ingredientId,
         },
-        update: (store) => {
+
+        optimisticResponse: {
+          deleteIngredient: {
+            __typename: 'Ingredient',
+
+            id: ingredientId,
+            key: ingredientKey,
+            recipe: {
+              __typename: 'Recipe',
+              id: Recipe.id,
+            },
+          },
+        },
+
+        update: (store, { data: { deleteIngredient } }) => {
           const data = store.readQuery({
             query: RECIPE_INGREDIENTS_QUERY,
             variables: { recipeId: Recipe.id },
           })
 
-          const index = Recipe.ingredients.findIndex(ingredient => ingredient.id === ingredientId)
+          const index = data.Recipe.ingredients.findIndex(ingredient => ingredient.id === deleteIngredient.id)
           data.Recipe.ingredients.splice(index, 1)
           store.writeQuery({ query: RECIPE_INGREDIENTS_QUERY, data })
         },
+
         refetchQueries: [
           {
             query: USER_RECIPES_WITH_INGREDIENTS_QUERY,

@@ -74,7 +74,7 @@ export default ({ status, ingredient, deleteIngredient }: PropType) => (
       <IngredientQuantity>{ingredient.quantity}</IngredientQuantity>
       <IngredientNature>{handleIngredientNaturePlural(ingredient.nature, ingredient.quantity)}</IngredientNature>
     </IngredientInfo>
-    <CancelButton onClick={() => deleteIngredient(ingredient.id)}>
+    <CancelButton onClick={() => !ingredient.isOptimistic && deleteIngredient(ingredient.id, ingredient.key)}>
       <i className='material-icons'>cancel</i>
     </CancelButton>
   </IngredientItemWrapper>

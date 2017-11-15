@@ -6,7 +6,7 @@ import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
-export const InputStyle = styled.input`
+export const Input = styled.input`
   background-color: ${palette.primary.lighter};
   width: ${({ type }: { type: string }) => (type === 'number' ? '50px' : '120px')};
   border: none;
@@ -39,7 +39,7 @@ export const InputStyle = styled.input`
     color: ${palette.textSecondary};
     font-style: italic;
     font-size: ${fontSize.bodySmall};
-    padding-left: 6px;
+    padding-left: 4px;
   }
 
   &:focus {
@@ -48,14 +48,14 @@ export const InputStyle = styled.input`
   }
 `
 
-const Label = styled.div`
+export const Label = styled.div`
   color: ${palette.primary.light};
   font-style: italic;
   padding-bottom: 8px;
   font-size: ${fontSize.bodySmall};
 `
 
-const Form = styled.form`
+const FormWrapper = styled.form`
   padding-bottom: 20px;
   width: 100%;
 `
@@ -110,7 +110,7 @@ type StateType = {
   edit: boolean
 }
 
-export default class Input extends React.Component<PropsType, StateType> {
+export default class Form extends React.Component<PropsType, StateType> {
   static defaultProps = {
     maxNumber: 99999,
   }
@@ -195,10 +195,10 @@ export default class Input extends React.Component<PropsType, StateType> {
     const step = this.defineStep()
     const isIn = this.isDifferent()
     return (
-      <Form onBlur={evt => this.handleBlur(evt)}>
+      <FormWrapper onBlur={evt => this.handleBlur(evt)}>
         {this.props.label && <Label htmlFor={this.props.id}>{this.props.label}</Label>}
         <Wrapper>
-          <InputStyle
+          <Input
             isOptimistic={this.props.isOptimistic}
             id={this.props.id}
             value={this.state.value}
@@ -228,7 +228,7 @@ export default class Input extends React.Component<PropsType, StateType> {
             )}
           </FadeTransition>
         </Wrapper>
-      </Form>
+      </FormWrapper>
     )
   }
 }

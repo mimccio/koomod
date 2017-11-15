@@ -1,7 +1,7 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 
-import { USER_RECIPES_WITH_INGREDIENTS_QUERY } from '../../graphql/queries'
+import { USER_RECIPES_WITH_INGREDIENTS_QUERY, NEW_RECIPE_QUERY } from '../../graphql/queries'
 import { CREATE_RECIPE_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
 
@@ -40,7 +40,8 @@ export class CreateRecipeHOC extends React.Component {
 
   createRecipe = async () => {
     const { name, pers, description } = this.state
-    this.props.history.push('/recipes')
+    // this.props.history.push('/recipes')
+    this.props.history.push('/create-recipe/ingredient')
     await this.props.createRecipeMutation({
       variables: {
         name,
@@ -69,8 +70,15 @@ export class CreateRecipeHOC extends React.Component {
       },
       update: (store, { data: { createRecipe } }) => {
         const data = store.readQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, variables: { userId } })
-        data.User.recipes.push(createRecipe)
+        data.User.recipes.unshift(createRecipe)
         store.writeQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, data })
+        const newRecipeData = store.readQuery({
+          query: NEW_RECIPE_QUERY,
+          variables: { userId: localStorage.getItem(GC_USER_ID) },
+        })
+        newRecipeData.User.recipes[0] = createRecipe
+        console.log('newRecipeData', newRecipeData)
+        store.writeQuery({ query: NEW_RECIPE_QUERY, data: newRecipeData })
       },
     })
   }
@@ -86,6 +94,18 @@ export class CreateRecipeHOC extends React.Component {
   }
 }
 
-export default graphql(CREATE_RECIPE_MUTATION, {
+export const withCreateRecipeMutation = graphql(CREATE_RECIPE_MUTATION, {
   name: 'createRecipeMutation',
-})(CreateRecipeHOC)
+})
+
+export const withNewRecipeQuery = graphql(NEW_RECIPE_QUERY, {
+  name: 'newRecipeQuery',
+  options: () => ({
+    variables: { userId: localStorage.getItem(GC_USER_ID) },
+    fetchPolicy: 'cache-first',
+  }),
+})
+
+export default compose(withNewRecipeQuery, withCreateRecipeMutation)(CreateRecipeHOC)
+
+// withRecipesIngredientsData,
