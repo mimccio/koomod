@@ -67,7 +67,7 @@ export const withUserRecipesData = graphql(USER_RECIPES_QUERY, {
 })
 
 export const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, {
-  name: 'UserRecipesWithIngredientsData',
+  name: 'userRecipesWithIngredientsData',
   options: () => ({
     variables: { userId: localStorage.getItem(GC_USER_ID) },
     fetchPolicy: 'cache-first',

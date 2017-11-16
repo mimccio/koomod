@@ -79,7 +79,7 @@ const LoginBtn = styled.div`
   width: 140px;
   height: 40px;
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   outline: none;
   cursor: pointer;
   background-color: ${palette.primary.main};
@@ -98,7 +98,7 @@ const LoginBtn = styled.div`
 const SignUpToggler = styled.div`
   transition: all 200ms ease-in-out;
   padding: 10px;
-  margin-top: 50px;
+  margin-top: 20px;
   border-bottom: 1px solid transparent;
   &:hover {
     border-bottom: 1px solid ${palette.primary.light};
