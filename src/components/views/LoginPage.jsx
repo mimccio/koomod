@@ -85,13 +85,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 <FormWrapper>
                   <Label htmlFor='email'>Your email adress</Label>
                   <FormWrapperValidation>
-                    <Input
-                      name='email'
-                      type='text'
-                      value={email}
-                      onChange={onChange}
-                      placeholder='eg: michaeljordan@komi.com'
-                    />
+                    <Input name='email' type='text' value={email} onChange={onChange} placeholder='eg: mail@site.com' />
                     <Validation checked={isEmail(email)}>
                       <i className='material-icons'>{isEmail(email) ? 'check' : 'clear'}</i>
                     </Validation>
@@ -124,7 +118,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                     type='text'
                     value={email}
                     onChange={onChange}
-                    placeholder='eg: michaeljordan@komi.com'
+                    placeholder='eg: mail@site.com'
                   />
                 </FormWrapper>
                 <FormWrapper>
