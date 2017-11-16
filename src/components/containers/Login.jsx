@@ -39,12 +39,12 @@ class Login extends Component {
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
+        this.props.history.push('/recipes')
       } catch (error) {
         console.log('error', error)
         this.setState({ error: error.message })
         evt.target.blur()
       }
-      this.props.history.push('/recipes')
     } else if (name.length < 3) {
       this.setState({ error: 'Your name must be at least 3 characters' })
     } else if (password !== passwordConfirmation) {
@@ -61,13 +61,12 @@ class Login extends Component {
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
+        this.props.history.push('/create-recipe')
       } catch (error) {
         console.log('error', error)
         this.setState({ error: error.message })
         evt.target.blur()
       }
-
-      this.props.history.push('/create-recipe')
     }
   }
 

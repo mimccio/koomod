@@ -6,7 +6,7 @@ import { GC_USER_ID } from '../../lib/constants'
 
 export const NewRecipeHOC = ({ newRecipeQuery: { loading, error, User }, children }) => {
   if (loading) {
-    return <p>loading...</p>
+    return children({ name: 'loading...' })
   }
   if (error) {
     return <p>{error.message}</p>
