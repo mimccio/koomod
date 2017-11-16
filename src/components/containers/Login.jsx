@@ -25,8 +25,6 @@ class Login extends Component {
       this.setState({ error: 'Your email must be an email adress' })
     } else if (password.length < 8) {
       this.setState({ error: 'Your password must be at least 8 characters' })
-    } else if (name.length < 3) {
-      this.setState({ error: 'Your name must be at least 3 characters' })
     } else {
       try {
         if (!this.props.newUser) {
@@ -40,6 +38,8 @@ class Login extends Component {
           const { token } = result.data.signinUser
           this.saveUserData(id, token)
           this.props.history.push('/recipes')
+        } else if (name.length < 3) {
+          this.setState({ error: 'Your name must be at least 3 characters' })
         } else {
           const result = await this.props.createUserMutation({
             variables: {
