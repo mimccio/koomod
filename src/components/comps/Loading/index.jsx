@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: ${palette.grey.lighter};
 `
 
 const Message = styled.p`

@@ -15,6 +15,7 @@ type Data = {
   name: string,
   email: string,
   password: string,
+  passwordConfirmation: string,
   error: string,
   onChange: Function,
   signUp: string,
@@ -108,7 +109,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
   <Login history={history} newUser={newUser}>
     {(data: Data) => {
       const {
- email, name, password, error, onChange, confirm,
+ email, name, password, passwordConfirmation, error, onChange, confirm,
 } = data
 
       const handleKeyDown = (evt) => {
@@ -119,13 +120,16 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
           if (evt.target.name === 'name') {
             evt.target.parentNode.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
           }
-          if (evt.target.name === 'email' && newUser) {
+          if (newUser && (evt.target.name === 'email' || evt.target.name === 'password')) {
             evt.target.parentNode.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
           }
           if (evt.target.name === 'email' && !newUser) {
             evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.focus()
           }
-          if (evt.target.name === 'password' || evt.target.id === 'login') {
+          if (evt.target.name === 'password' && !newUser) {
+            confirm(evt)
+          }
+          if (evt.target.name === 'passwordConfirmation' || evt.target.id === 'login') {
             confirm(evt)
           }
         }
@@ -157,7 +161,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 </FormWrapper>
 
                 <FormWrapper>
-                  <Label htmlFor='email'>Your email adress</Label>
+                  <Label htmlFor='email'>Your email address</Label>
                   <FormWrapperValidation>
                     <Input
                       onKeyDown={evt => handleKeyDown(evt)}
@@ -189,11 +193,30 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                     </Validation>
                   </FormWrapperValidation>
                 </FormWrapper>
+
+                <FormWrapper>
+                  <Label htmlFor='passwordConfirmation'>Confirm Password</Label>
+                  <FormWrapperValidation>
+                    <Input
+                      onKeyDown={evt => handleKeyDown(evt)}
+                      name='passwordConfirmation'
+                      type='password'
+                      value={passwordConfirmation}
+                      onChange={onChange}
+                      placeholder='confirm your password'
+                    />
+                    <Validation checked={password === passwordConfirmation && passwordConfirmation}>
+                      <i className='material-icons'>
+                        {password === passwordConfirmation && passwordConfirmation ? 'check' : 'clear'}
+                      </i>
+                    </Validation>
+                  </FormWrapperValidation>
+                </FormWrapper>
               </ContentWrapper>
             ) : (
               <ContentWrapper>
                 <FormWrapper>
-                  <Label htmlFor='email'>Your email adress</Label>
+                  <Label htmlFor='email'>Your email address</Label>
                   <Input
                     onKeyDown={evt => handleKeyDown(evt)}
                     autoFocus
