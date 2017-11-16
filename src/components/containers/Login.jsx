@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
+import isEmail from 'validator/lib/isEmail'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../lib/constants'
 import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../graphql/mutations'
@@ -20,35 +21,41 @@ class Login extends Component {
   confirm = async (evt) => {
     evt.persist()
     const { name, email, password } = this.state
-    try {
-      if (!this.props.newUser) {
-        const result = await this.props.signinUserMutation({
-          variables: {
-            email,
-            password,
-          },
-        })
-        const { id } = result.data.signinUser.user
-        const { token } = result.data.signinUser
-        this.saveUserData(id, token)
-        this.props.history.push('/recipes')
-      } else {
-        const result = await this.props.createUserMutation({
-          variables: {
-            name,
-            email,
-            password,
-          },
-        })
-        const { id } = result.data.signinUser.user
-        const { token } = result.data.signinUser
-        this.saveUserData(id, token)
-        this.props.history.push('/create-recipe')
+    if (!isEmail(email)) {
+      this.setState({ error: 'Your email must be an email adress' })
+      // } else if (password.length < 8) {
+      // this.setState({ error: 'Your password must be at least 8 characters' })
+    } else {
+      try {
+        if (!this.props.newUser) {
+          const result = await this.props.signinUserMutation({
+            variables: {
+              email,
+              password,
+            },
+          })
+          const { id } = result.data.signinUser.user
+          const { token } = result.data.signinUser
+          this.saveUserData(id, token)
+          this.props.history.push('/recipes')
+        } else {
+          const result = await this.props.createUserMutation({
+            variables: {
+              name,
+              email,
+              password,
+            },
+          })
+          const { id } = result.data.signinUser.user
+          const { token } = result.data.signinUser
+          this.saveUserData(id, token)
+          this.props.history.push('/create-recipe')
+        }
+      } catch (error) {
+        console.log('error', error)
+        this.setState({ error: error.message })
+        evt.target.blur()
       }
-    } catch (error) {
-      console.log('error', error)
-      this.setState({ error: error.message })
-      evt.target.blur()
     }
   }
 

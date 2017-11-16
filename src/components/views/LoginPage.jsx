@@ -44,8 +44,9 @@ const FormWrapperValidation = styled.div`
 const FormWrapper = styled.div`padding: 10px;`
 
 const ErrorWrapper = styled.div`
-  padding: 10px;
+  padding-top: 20px;
   color: ${palette.danger.light};
+  height: 30px;
 `
 
 const Validation = styled.div`
@@ -65,12 +66,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
       return (
         <PageWrapper>
           <Wrapper>
-            {error &&
-              (error === 'GraphQL error: User already exists with that information' ? (
-                <ErrorWrapper>User already exist with that email</ErrorWrapper>
-              ) : (
-                <ErrorWrapper>{error}</ErrorWrapper>
-              ))}
+            <ErrorWrapper>{error && <p>{error.replace('GraphQL error: ', '')}</p>}</ErrorWrapper>
 
             {newUser ? (
               <ContentWrapper>
@@ -103,14 +99,19 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 </FormWrapper>
 
                 <FormWrapper>
-                  <Label htmlFor='email'>Password</Label>
-                  <Input
-                    name='password'
-                    type='password'
-                    value={password}
-                    onChange={onChange}
-                    placeholder='choose a safe password'
-                  />
+                  <Label htmlFor='password'>Password (min 8 characters)</Label>
+                  <FormWrapperValidation>
+                    <Input
+                      name='password'
+                      type='password'
+                      value={password}
+                      onChange={onChange}
+                      placeholder='choose a safe password'
+                    />
+                    <Validation checked={password.length >= 8}>
+                      <i className='material-icons'>{password.length >= 8 ? 'check' : 'clear'}</i>
+                    </Validation>
+                  </FormWrapperValidation>
                 </FormWrapper>
               </ContentWrapper>
             ) : (
@@ -147,7 +148,10 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 {!newUser ? (
                   <Link to='/sign-up'>need to create an account?</Link>
                 ) : (
-                  <Link to='/login'>{error && '⇾'} already have an account ?</Link>
+                  <Link to='/login'>
+                    {error === 'GraphQL error: User already exists with that information' && '⇾'} already have an
+                    account ?
+                  </Link>
                 )}
               </div>
             </div>
