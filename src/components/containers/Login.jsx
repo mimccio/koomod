@@ -14,7 +14,7 @@ class Login extends Component {
   }
 
   onChange = (evt) => {
-    if (evt.target.name === 'email') this.setState({ error: '' })
+    // if (evt.target.name === 'email') this.setState({ error: '' })
     this.setState({ [evt.target.name]: evt.target.value })
   }
 
@@ -23,8 +23,10 @@ class Login extends Component {
     const { name, email, password } = this.state
     if (!isEmail(email)) {
       this.setState({ error: 'Your email must be an email adress' })
-      // } else if (password.length < 8) {
-      // this.setState({ error: 'Your password must be at least 8 characters' })
+    } else if (password.length < 8) {
+      this.setState({ error: 'Your password must be at least 8 characters' })
+    } else if (name.length < 3) {
+      this.setState({ error: 'Your name must be at least 3 characters' })
     } else {
       try {
         if (!this.props.newUser) {

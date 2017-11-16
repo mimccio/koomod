@@ -113,8 +113,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
         }
         if (evt.keyCode === 13) {
           if (evt.target.name === 'name') {
-            console.log(evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild)
-            evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
+            evt.target.parentNode.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
           }
           if (evt.target.name === 'email' && newUser) {
             evt.target.parentNode.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
@@ -122,7 +121,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
           if (evt.target.name === 'email' && !newUser) {
             evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.focus()
           }
-          if (evt.target.name === 'password' || evt.target.name === 'login') {
+          if (evt.target.name === 'password' || evt.target.id === 'login') {
             confirm(evt)
           }
         }
@@ -137,15 +136,20 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
               <ContentWrapper>
                 <FormWrapper>
                   <Label htmlFor='name'>Your name</Label>
-                  <Input
-                    onKeyDown={evt => handleKeyDown(evt)}
-                    autoFocus
-                    name='name'
-                    type='text'
-                    value={name}
-                    onChange={onChange}
-                    placeholder='eg: Michael Jordan'
-                  />
+                  <FormWrapperValidation>
+                    <Input
+                      onKeyDown={evt => handleKeyDown(evt)}
+                      autoFocus
+                      name='name'
+                      type='text'
+                      value={name}
+                      onChange={onChange}
+                      placeholder='eg: Michael Jordan'
+                    />
+                    <Validation checked={name.length >= 3}>
+                      <i className='material-icons'>{name.length >= 3 ? 'check' : 'clear'}</i>
+                    </Validation>
+                  </FormWrapperValidation>
                 </FormWrapper>
 
                 <FormWrapper>
@@ -212,7 +216,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
 
             <LoginWrapper>
               <LoginBtn
-                name='login'
+                id='login'
                 onKeyDown={evt => handleKeyDown(evt)}
                 onClick={confirm}
                 role='switch'
