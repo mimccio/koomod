@@ -63,11 +63,9 @@ export class CreateFirstIngredient extends React.Component {
     if (evt.keyCode === 13) {
       if (evt.target.id === 'name') {
         evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
-        console.log(evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.id)
       }
       if (evt.target.id === 'quantity') {
-        // evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
-        console.log(evt.target.nextElementSibling.firstChild.id)
+        evt.target.nextElementSibling.firstChild.focus()
       }
     }
   }
