@@ -4,9 +4,11 @@ import { graphql } from 'react-apollo'
 import { NEW_RECIPE_QUERY } from '../../graphql/queries'
 import { GC_USER_ID } from '../../lib/constants'
 
+import TitleLoading from '../comps/Topbar/TitleLoading'
+
 export const NewRecipeHOC = ({ newRecipeQuery: { loading, error, User }, children }) => {
   if (loading) {
-    return <p>loading...</p>
+    return <TitleLoading />
   }
   if (error) {
     return <p>{error.message}</p>

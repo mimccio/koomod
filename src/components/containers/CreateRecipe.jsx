@@ -2,10 +2,11 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 
 import { USER_RECIPES_WITH_INGREDIENTS_QUERY, NEW_RECIPE_QUERY } from '../../graphql/queries'
+// import { USER_RECIPES_WITH_INGREDIENTS_QUERY } from '../../graphql/queries'
 import { CREATE_RECIPE_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
 
-const userId = localStorage.getItem(GC_USER_ID)
+// const userId = localStorage.getItem(GC_USER_ID)
 
 export class CreateRecipeHOC extends React.Component {
   state = {
@@ -48,7 +49,7 @@ export class CreateRecipeHOC extends React.Component {
         pers,
         description,
         isSelected: false,
-        userId,
+        userId: localStorage.getItem(GC_USER_ID),
         ingredients: [],
       },
       optimisticResponse: {
@@ -64,20 +65,30 @@ export class CreateRecipeHOC extends React.Component {
           ingredients: [],
           user: {
             __typename: 'User',
-            id: userId,
+            id: localStorage.getItem(GC_USER_ID),
           },
         },
       },
       update: (store, { data: { createRecipe } }) => {
-        const data = store.readQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, variables: { userId } })
+        console.log('1', createRecipe)
+        const data = store.readQuery({
+          query: USER_RECIPES_WITH_INGREDIENTS_QUERY,
+          variables: { userId: localStorage.getItem(GC_USER_ID) },
+        })
+        console.log('2', data)
+        if (!data.User.recipes) data.User.recipes = []
+        console.log('3', data)
         data.User.recipes.unshift(createRecipe)
+        console.log('4', data)
         store.writeQuery({ query: USER_RECIPES_WITH_INGREDIENTS_QUERY, data })
+        console.log('before newRecipeData query', createRecipe)
         const newRecipeData = store.readQuery({
           query: NEW_RECIPE_QUERY,
           variables: { userId: localStorage.getItem(GC_USER_ID) },
         })
+        console.log('newRecipeData before', newRecipeData)
         newRecipeData.User.recipes[0] = createRecipe
-        console.log('newRecipeData', newRecipeData)
+        console.log('newRecipeData after', newRecipeData)
         store.writeQuery({ query: NEW_RECIPE_QUERY, data: newRecipeData })
       },
     })
@@ -106,6 +117,14 @@ export const withNewRecipeQuery = graphql(NEW_RECIPE_QUERY, {
   }),
 })
 
-export default compose(withNewRecipeQuery, withCreateRecipeMutation)(CreateRecipeHOC)
+export const withRecipesIngredientsData = graphql(USER_RECIPES_WITH_INGREDIENTS_QUERY, {
+  name: 'userRecipesWithIngredientsData',
+  options: () => ({
+    variables: { userId: localStorage.getItem(GC_USER_ID) },
+    fetchPolicy: 'cache-first',
+  }),
+})
+
+export default compose(withCreateRecipeMutation, withNewRecipeQuery, withRecipesIngredientsData)(CreateRecipeHOC)
 
 // withRecipesIngredientsData,

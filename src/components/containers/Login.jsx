@@ -9,50 +9,59 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
+    passwordConfirmation: '',
     name: '',
     error: '',
   }
 
   onChange = (evt) => {
-    // if (evt.target.name === 'email') this.setState({ error: '' })
+    this.setState({ error: '' })
     this.setState({ [evt.target.name]: evt.target.value })
   }
 
   confirm = async (evt) => {
     evt.persist()
-    const { name, email, password } = this.state
+    const {
+      name, email, password, passwordConfirmation,
+    } = this.state
     if (!isEmail(email)) {
       this.setState({ error: 'Your email must be an email adress' })
     } else if (password.length < 8) {
       this.setState({ error: 'Your password must be at least 8 characters' })
+    } else if (!this.props.newUser) {
+      try {
+        const result = await this.props.signinUserMutation({
+          variables: {
+            email,
+            password,
+          },
+        })
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
+        this.saveUserData(id, token)
+        this.props.history.push('/recipes')
+      } catch (error) {
+        console.log('error', error)
+        this.setState({ error: error.message })
+        evt.target.blur()
+      }
     } else if (name.length < 3) {
       this.setState({ error: 'Your name must be at least 3 characters' })
+    } else if (password !== passwordConfirmation) {
+      this.setState({ error: 'passwords are different' })
     } else {
       try {
-        if (!this.props.newUser) {
-          const result = await this.props.signinUserMutation({
-            variables: {
-              email,
-              password,
-            },
-          })
-          const { id } = result.data.signinUser.user
-          const { token } = result.data.signinUser
-          this.saveUserData(id, token)
-          this.props.history.push('/recipes')
-        } else {
-          const result = await this.props.createUserMutation({
-            variables: {
-              name,
-              email,
-              password,
-            },
-          })
-          const { id } = result.data.signinUser.user
-          const { token } = result.data.signinUser
-          this.saveUserData(id, token)
-          this.props.history.push('/create-recipe')
-        }
+        const result = await this.props.createUserMutation({
+          variables: {
+            name,
+            email,
+            password,
+          },
+        })
+        const { id } = result.data.signinUser.user
+        const { token } = result.data.signinUser
+        this.saveUserData(id, token)
+        this.props.history.push('/create-recipe')
       } catch (error) {
         console.log('error', error)
         this.setState({ error: error.message })
@@ -72,6 +81,7 @@ class Login extends Component {
       login: this.state.login,
       email: this.state.email,
       password: this.state.password,
+      passwordConfirmation: this.state.passwordConfirmation,
       name: this.state.name,
       onChange: this.onChange,
       toggleLogin: this.toggleLogin,
