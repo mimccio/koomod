@@ -10,7 +10,7 @@ import NewRecipeData from '../../containers/NewRecipeData'
 
 import { FadeTransition, FadeComp } from '../animations/Fade'
 
-const transitionDelay = 220
+const transitionDelay = 150
 
 const Title = styled(FadeComp)`
   transform-origin: top;
