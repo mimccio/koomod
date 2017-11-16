@@ -41,6 +41,16 @@ const FormWrapperValidation = styled.div`
   align-items: center;
 `
 
+const LoginWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 10px 10px;
+  width: 100%;
+  max-width: 300px;
+`
+
 const FormWrapper = styled.div`padding: 10px;`
 
 const ErrorWrapper = styled.div`
@@ -56,12 +66,55 @@ const Validation = styled.div`
 
 const Input = styled(InputStyle)`width: 200px;`
 
+const LoginBtn = styled.div`
+  transition: all 200ms ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 20px;
+  outline: none;
+  cursor: pointer;
+  background-color: ${palette.primary.main};
+  color: white;
+  box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.25);
+  border: 2px solid transparent;
+  &:hover {
+    box-shadow: 3px 6px 8px rgba(0, 0, 0, 0.4);
+  }
+  &:focus {
+    border: 2px solid ${palette.primary.dark};
+    box-shadow: 3px 6px 8px rgba(0, 0, 0, 0.4);
+  }
+`
+
+const SignUpToggler = styled.div`
+  transition: all 200ms ease-in-out;
+  padding: 10px;
+  margin-top: 50px;
+  border-bottom: 1px solid transparent;
+  &:hover {
+    border-bottom: 1px solid ${palette.primary.light};
+  }
+`
+
 export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
   <Login history={history} newUser={newUser}>
     {(data: Data) => {
       const {
  email, name, password, error, onChange, confirm,
 } = data
+
+      const handleKeyDown = (evt) => {
+        if (evt.keyCode === 27) {
+          evt.target.blur()
+        }
+        if (evt.keyCode === 13 || evt.keyCode === 32) {
+          confirm(evt)
+        }
+      }
 
       return (
         <PageWrapper>
@@ -134,21 +187,29 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
               </ContentWrapper>
             )}
 
-            <div>
-              <div onClick={confirm} onKeyDown={() => {}} role='switch' aria-checked='false' tabIndex='0'>
+            <LoginWrapper>
+              <LoginBtn
+                onKeyDown={evt => handleKeyDown(evt)}
+                onClick={confirm}
+                role='switch'
+                aria-checked='false'
+                tabIndex='0'
+              >
                 {newUser ? 'create account' : 'login'}
-              </div>
-              <div>
+              </LoginBtn>
+              <SignUpToggler>
                 {!newUser ? (
-                  <Link to='/sign-up'>need to create an account?</Link>
+                  <Link to='/sign-up'>
+                    {error === 'GraphQL error: No user found with that information' && '⇾ '}need to create an account?
+                  </Link>
                 ) : (
                   <Link to='/login'>
-                    {error === 'GraphQL error: User already exists with that information' && '⇾'} already have an
+                    {error === 'GraphQL error: User already exists with that information' && '⇾ '} already have an
                     account ?
                   </Link>
                 )}
-              </div>
-            </div>
+              </SignUpToggler>
+            </LoginWrapper>
           </Wrapper>
         </PageWrapper>
       )
