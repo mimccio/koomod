@@ -9,6 +9,7 @@
 - react-transition-group 
 - facepaint
 - diacritics
+- validator
 
 - enzyme
 - jest-styled-components

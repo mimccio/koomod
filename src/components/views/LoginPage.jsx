@@ -2,6 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import isEmail from 'validator/lib/isEmail'
 
 import Login from '../containers/Login'
 import { PageWrapper } from '../comps/layouts'
@@ -33,11 +34,23 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 300px;
 `
+
+const FormWrapperValidation = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
 const FormWrapper = styled.div`padding: 10px;`
 
 const ErrorWrapper = styled.div`
   padding: 10px;
   color: ${palette.danger.light};
+`
+
+const Validation = styled.div`
+  padding: 10px;
+  color: ${({ checked }) => (checked ? palette.success.light : palette.danger.light)};
 `
 
 const Input = styled(InputStyle)`width: 200px;`
@@ -72,16 +85,23 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                     placeholder='eg: Michael Jordan'
                   />
                 </FormWrapper>
+
                 <FormWrapper>
                   <Label htmlFor='email'>Your email adress</Label>
-                  <Input
-                    name='email'
-                    type='text'
-                    value={email}
-                    onChange={onChange}
-                    placeholder='eg: michaeljordan@komi.com'
-                  />
+                  <FormWrapperValidation>
+                    <Input
+                      name='email'
+                      type='text'
+                      value={email}
+                      onChange={onChange}
+                      placeholder='eg: michaeljordan@komi.com'
+                    />
+                    <Validation checked={isEmail(email)}>
+                      <i className='material-icons'>{isEmail(email) ? 'check' : 'clear'}</i>
+                    </Validation>
+                  </FormWrapperValidation>
                 </FormWrapper>
+
                 <FormWrapper>
                   <Label htmlFor='email'>Password</Label>
                   <Input
