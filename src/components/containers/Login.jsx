@@ -21,7 +21,7 @@ class Login extends Component {
     evt.persist()
     const { name, email, password } = this.state
     try {
-      if (this.props.newUser) {
+      if (!this.props.newUser) {
         const result = await this.props.signinUserMutation({
           variables: {
             email,
@@ -31,6 +31,7 @@ class Login extends Component {
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
+        this.props.history.push('/recipes')
       } else {
         const result = await this.props.createUserMutation({
           variables: {
@@ -42,8 +43,8 @@ class Login extends Component {
         const { id } = result.data.signinUser.user
         const { token } = result.data.signinUser
         this.saveUserData(id, token)
+        this.props.history.push('/create-recipe')
       }
-      this.props.history.push('/recipes')
     } catch (error) {
       console.log('error', error)
       this.setState({ error: error.message })

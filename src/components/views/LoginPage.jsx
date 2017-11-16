@@ -62,30 +62,6 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
             {newUser ? (
               <ContentWrapper>
                 <FormWrapper>
-                  <Label htmlFor='email'>Your email adress</Label>
-                  <Input
-                    autoFocus
-                    name='email'
-                    type='text'
-                    value={email}
-                    onChange={onChange}
-                    placeholder='eg: michaeljordan@komi.com'
-                  />
-                </FormWrapper>
-                <FormWrapper>
-                  <Label htmlFor='email'>Password</Label>
-                  <Input
-                    name='password'
-                    type='password'
-                    value={password}
-                    onChange={onChange}
-                    placeholder='your password'
-                  />
-                </FormWrapper>
-              </ContentWrapper>
-            ) : (
-              <ContentWrapper>
-                <FormWrapper>
                   <Label htmlFor='name'>Your name</Label>
                   <Input
                     autoFocus
@@ -96,7 +72,6 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                     placeholder='eg: Michael Jordan'
                   />
                 </FormWrapper>
-
                 <FormWrapper>
                   <Label htmlFor='email'>Your email adress</Label>
                   <Input
@@ -118,14 +93,38 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                   />
                 </FormWrapper>
               </ContentWrapper>
+            ) : (
+              <ContentWrapper>
+                <FormWrapper>
+                  <Label htmlFor='email'>Your email adress</Label>
+                  <Input
+                    autoFocus
+                    name='email'
+                    type='text'
+                    value={email}
+                    onChange={onChange}
+                    placeholder='eg: michaeljordan@komi.com'
+                  />
+                </FormWrapper>
+                <FormWrapper>
+                  <Label htmlFor='email'>Password</Label>
+                  <Input
+                    name='password'
+                    type='password'
+                    value={password}
+                    onChange={onChange}
+                    placeholder='your password'
+                  />
+                </FormWrapper>
+              </ContentWrapper>
             )}
 
             <div>
               <div onClick={confirm} onKeyDown={() => {}} role='switch' aria-checked='false' tabIndex='0'>
-                {newUser ? 'login' : 'create account'}
+                {newUser ? 'create account' : 'login'}
               </div>
               <div>
-                {newUser ? (
+                {!newUser ? (
                   <Link to='/sign-up'>need to create an account?</Link>
                 ) : (
                   <Link to='/login'>{error && '⇾'} already have an account ?</Link>
