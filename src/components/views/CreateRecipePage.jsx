@@ -26,11 +26,33 @@ const ContentWrapper = styled.div`
 
 const FormWrapper = styled.div`padding: 20px;`
 
+const handleKeyDown = evt => {
+  if (evt.keyCode === 27) {
+    evt.target.blur()
+  }
+  if (evt.keyCode === 13) {
+    if (evt.target.id === 'name' || evt.target.id === 'pers') {
+      evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.focus()
+      console.log(evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.id)
+    }
+  }
+}
+
+const handleSaveKeyDown = (evt, recipeName, createRecipe) => {
+  console.log(evt)
+  if (evt.keyCode === 27) {
+    evt.target.blur()
+  }
+  if (Boolean(recipeName) && (evt.keyCode === 13 || evt.keyCode === 32)) {
+    createRecipe()
+  }
+}
+
 export default ({ history, status }) => (
   <PageWrapper>
     <CreateRecipe history={history}>
-      {({ recipeState, handleKeyDown, handleChangeRecipe, createRecipe }) => (
-        <Wrapper onKeyDown={handleKeyDown}>
+      {({ recipeState, handlePageKeyDown, handleChangeRecipe, createRecipe }) => (
+        <Wrapper onKeyDown={handlePageKeyDown}>
           <ContentWrapper>
             <FormWrapper>
               <Label htmlFor="name">Recipe Name</Label>
@@ -40,6 +62,7 @@ export default ({ history, status }) => (
                 type="text"
                 value={recipeState.name}
                 onChange={evt => handleChangeRecipe(evt)}
+                onKeyDown={evt => handleKeyDown(evt)}
                 placeholder={'add recipe name...'}
               />
             </FormWrapper>
@@ -50,6 +73,7 @@ export default ({ history, status }) => (
                 type="number"
                 value={recipeState.pers}
                 onChange={evt => handleChangeRecipe(evt)}
+                onKeyDown={evt => handleKeyDown(evt)}
                 placeholder={0}
               />
             </FormWrapper>
@@ -67,6 +91,7 @@ export default ({ history, status }) => (
             <FloatingButton
               name="check"
               onClick={() => Boolean(recipeState.name) && createRecipe()}
+              onKeyDown={evt => handleSaveKeyDown(evt, recipeState.name, createRecipe)}
               hide={!recipeState.name}
               status={status}
             />

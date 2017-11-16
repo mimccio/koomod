@@ -13,8 +13,8 @@ const RoundButton = styled.div`
   border: none;
   border-radius: 50%;
   padding: 0;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.5s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 0 0 rgba(0, 0, 0, 0);
+  transition: all 0.5s ease;
   transform: scale(1);
 
   i {
@@ -51,6 +51,7 @@ const RoundButton = styled.div`
 
   &:focus {
     outline: none;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4), 1px 3px 12px rgba(0, 0, 0, 0.3);
   }
 
   &:active:after {
