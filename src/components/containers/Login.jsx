@@ -14,7 +14,7 @@ class Login extends Component {
   }
 
   onChange = (evt) => {
-    // if (evt.target.name === 'email') this.setState({ error: '' })
+    this.setState({ error: '' })
     this.setState({ [evt.target.name]: evt.target.value })
   }
 
