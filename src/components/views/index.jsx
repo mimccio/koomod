@@ -31,7 +31,7 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
               render={() => (localStorage.getItem(GC_USER_ID) ? <Redirect to='/recipes' /> : <HomePage />)}
             />
             <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/sign-up' render={({ history }) => <LoginPage signUp history={history} />} />
+            <Route exact path='/sign-up' render={({ history }) => <LoginPage newUser history={history} />} />
             <Route exact path='/recipes' render={() => <UserRecipesPage status={status} />} />
             <Route exact path='/shopping-list' component={ShoppingListPage} />
             <Route
