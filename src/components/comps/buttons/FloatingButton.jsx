@@ -40,6 +40,7 @@ const Btn = styled(RoundButton)`
 
 export default ({
   onClick,
+  onKeyDown,
   to,
   status,
   hide = false,
@@ -48,6 +49,7 @@ export default ({
   inProgress,
 }: {
   onClick?: Function,
+  onKeyDown?: Function,
   to?: string,
   status: string,
   hide?: boolean,
@@ -77,7 +79,15 @@ export default ({
   }
   return (
     <TransitionComp status={status} hide={hide}>
-      <Btn color={btnColor} onClick={onClick} inProgress={inProgress}>
+      <Btn
+        color={btnColor}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        inProgress={inProgress}
+        role='switch'
+        aria-checked='false'
+        tabIndex='0'
+      >
         {icon}
       </Btn>
     </TransitionComp>

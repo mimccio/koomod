@@ -56,6 +56,29 @@ export class CreateFirstIngredient extends React.Component {
     }
   }
 
+  handleInputKeyDown = (evt) => {
+    if (evt.keyCode === 27) {
+      evt.target.blur()
+    }
+    if (evt.keyCode === 13) {
+      if (evt.target.id === 'name') {
+        evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
+      }
+      if (evt.target.id === 'quantity') {
+        evt.target.nextElementSibling.firstChild.focus()
+      }
+    }
+  }
+
+  handleSaveKeyDown = (evt, data) => {
+    if (evt.keyCode === 27) {
+      evt.target.blur()
+    }
+    if (evt.keyCode === 13 || evt.keyCode === 32) {
+      this.handleSave(data)
+    }
+  }
+
   render() {
     return (
       <PageWrapper>
@@ -71,6 +94,7 @@ export class CreateFirstIngredient extends React.Component {
                     type='text'
                     value={data.ingredient.name}
                     onChange={evt => data.handleChange(evt)}
+                    onKeyDown={evt => this.handleInputKeyDown(evt)}
                     placeholder='add recipe name...'
                   />
                 </FormWrapper>
@@ -84,6 +108,7 @@ export class CreateFirstIngredient extends React.Component {
                       value={data.ingredient.quantity}
                       onChange={evt => data.handleChange(evt)}
                       placeholder={0}
+                      onKeyDown={evt => this.handleInputKeyDown(evt)}
                     />
 
                     <SelectNature
@@ -110,6 +135,7 @@ export class CreateFirstIngredient extends React.Component {
                     onClick={() => this.handleSave(data)}
                     hide={!data.ingredient.name}
                     status={this.props.status}
+                    onKeyDown={evt => this.handleSaveKeyDown(evt, data)}
                   />
                 )}
               </ContentWrapper>

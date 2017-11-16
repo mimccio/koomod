@@ -33,7 +33,7 @@ export class CreateRecipeHOC extends React.Component {
     })
   }
 
-  handleKeyDown = (evt) => {
+  handlePageKeyDown = (evt) => {
     if (evt.keyCode === 27) {
       this.props.history.push('/recipes')
     }
@@ -98,7 +98,7 @@ export class CreateRecipeHOC extends React.Component {
     const data = {
       recipeState: this.state,
       createRecipe: this.createRecipe,
-      handleKeyDown: this.handleKeyDown,
+      handlePageKeyDown: this.handlePageKeyDown,
       handleChangeRecipe: this.handleChangeRecipe,
     }
     return this.props.children(data)
