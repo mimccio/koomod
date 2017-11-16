@@ -21,7 +21,7 @@ class Login extends Component {
     evt.persist()
     const { name, email, password } = this.state
     try {
-      if (!this.props.signUp) {
+      if (this.props.newUser) {
         const result = await this.props.signinUserMutation({
           variables: {
             email,
