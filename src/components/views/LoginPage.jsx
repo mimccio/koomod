@@ -8,6 +8,7 @@ import Login from '../containers/Login'
 import { PageWrapper } from '../comps/layouts'
 import { Input as InputStyle, Label } from '../comps/inputs/Form'
 import palette from '../../style/palette'
+import { fontSize } from '../../style/config'
 
 type Data = {
   login: boolean,
@@ -62,6 +63,9 @@ const ErrorWrapper = styled.div`
 const Validation = styled.div`
   padding: 10px;
   color: ${({ checked }) => (checked ? palette.success.light : palette.danger.light)};
+  i {
+    font-size: ${fontSize.body};
+  }
 `
 
 const Input = styled(InputStyle)`width: 200px;`
