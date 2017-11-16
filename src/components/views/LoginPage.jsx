@@ -111,8 +111,20 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
         if (evt.keyCode === 27) {
           evt.target.blur()
         }
-        if (evt.keyCode === 13 || evt.keyCode === 32) {
-          confirm(evt)
+        if (evt.keyCode === 13) {
+          if (evt.target.name === 'name') {
+            console.log(evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild)
+            evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
+          }
+          if (evt.target.name === 'email' && newUser) {
+            evt.target.parentNode.parentNode.nextElementSibling.firstChild.nextElementSibling.firstChild.focus()
+          }
+          if (evt.target.name === 'email' && !newUser) {
+            evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.focus()
+          }
+          if (evt.target.name === 'password' || evt.target.name === 'login') {
+            confirm(evt)
+          }
         }
       }
 
@@ -126,6 +138,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 <FormWrapper>
                   <Label htmlFor='name'>Your name</Label>
                   <Input
+                    onKeyDown={evt => handleKeyDown(evt)}
                     autoFocus
                     name='name'
                     type='text'
@@ -138,7 +151,14 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 <FormWrapper>
                   <Label htmlFor='email'>Your email adress</Label>
                   <FormWrapperValidation>
-                    <Input name='email' type='text' value={email} onChange={onChange} placeholder='eg: mail@site.com' />
+                    <Input
+                      onKeyDown={evt => handleKeyDown(evt)}
+                      name='email'
+                      type='text'
+                      value={email}
+                      onChange={onChange}
+                      placeholder='eg: mail@site.com'
+                    />
                     <Validation checked={isEmail(email)}>
                       <i className='material-icons'>{isEmail(email) ? 'check' : 'clear'}</i>
                     </Validation>
@@ -149,6 +169,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                   <Label htmlFor='password'>Password (min 8 characters)</Label>
                   <FormWrapperValidation>
                     <Input
+                      onKeyDown={evt => handleKeyDown(evt)}
                       name='password'
                       type='password'
                       value={password}
@@ -166,6 +187,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                 <FormWrapper>
                   <Label htmlFor='email'>Your email adress</Label>
                   <Input
+                    onKeyDown={evt => handleKeyDown(evt)}
                     autoFocus
                     name='email'
                     type='text'
@@ -175,8 +197,9 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
                   />
                 </FormWrapper>
                 <FormWrapper>
-                  <Label htmlFor='email'>Password</Label>
+                  <Label htmlFor='password'>Password</Label>
                   <Input
+                    onKeyDown={evt => handleKeyDown(evt)}
                     name='password'
                     type='password'
                     value={password}
@@ -189,6 +212,7 @@ export default ({ history, newUser }: { history?: {}, newUser?: boolean }) => (
 
             <LoginWrapper>
               <LoginBtn
+                name='login'
                 onKeyDown={evt => handleKeyDown(evt)}
                 onClick={confirm}
                 role='switch'
