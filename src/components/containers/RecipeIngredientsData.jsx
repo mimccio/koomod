@@ -4,6 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { RECIPE_INGREDIENTS_QUERY, USER_RECIPES_WITH_INGREDIENTS_QUERY } from '../../graphql/queries'
 import { DELETE_INGREDIENT_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
+import ErrorMessage from '../comps/ErrorMessage'
 
 export const RecipeIngredientsHOC = ({
   recipeIngredientsQuery: { loading, error, Recipe },
@@ -15,8 +16,7 @@ export const RecipeIngredientsHOC = ({
     return loadingComp
   }
   if (error) {
-    console.log(error)
-    return <p>{error.message}</p>
+    return <ErrorMessage>{error.message}</ErrorMessage>
   }
   const props = {
     ingredients: Recipe.ingredients,

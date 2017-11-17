@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 
 import { RECIPE_STEPS_QUERY } from '../../graphql/queries'
+import ErrorMessage from '../comps/ErrorMessage'
 
 export const RecipeStepsHOC = ({ recipeStepsQuery: { loading, error, Recipe }, children, loadingComp }) => {
   console.log('recipe', Recipe)
@@ -9,7 +10,7 @@ export const RecipeStepsHOC = ({ recipeStepsQuery: { loading, error, Recipe }, c
     return loadingComp
   }
   if (error) {
-    return <p>{error.message}</p>
+    return <ErrorMessage>{error.message}</ErrorMessage>
   }
   return children(Recipe.steps)
 }
