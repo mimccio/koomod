@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import styled from 'styled-components'
-import { Transition } from 'react-transition-group'
+import { Transition, TransitionGroup } from 'react-transition-group'
 import { Link } from 'react-router-dom'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
@@ -17,7 +17,7 @@ const Slider = styled.div`
   width: 240px;
   background-color: ${palette.grey.light};
   padding: 60px 10px 20px 20px;
-  transition: all 300ms ease-in-out;
+  transition: all 3000ms ease-in-out;
   visibility: ${({ status }: { status: string }) => {
     if (status === 'entering') {
       return 'hidden'
@@ -46,6 +46,8 @@ const Slider = styled.div`
 const Fade = styled(FadeComp)`
   transform-origin: left;
   transition: all 200ms ease-in-out;
+  position: absolute;
+  top: 70px;
 `
 
 const Wrapper = styled.div`
@@ -90,33 +92,40 @@ export default ({
   location: { pathname: string }
 }) => {
   const userId = localStorage.getItem(GC_USER_ID)
+  const loginKey = () => {
+    if (!menuIsOpen) return 'closed'
+    return location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : 'not-login'
+  }
   const login = (
     <Wrapper>
-      <FadeTransition enter={300} in={location.pathname === '/login' || location.pathname === '/sign-up'}>
-        {status => (
-          <Fade status={status}>
-            <StyledLink onClick={toggleMenu} to='/'>
-              <Icon color={palette.info.main}>
-                <i className='material-icons'>home</i>
-              </Icon>
-              Home
-            </StyledLink>
-          </Fade>
-        )}
-      </FadeTransition>
-
-      <FadeTransition enter={300} in={location.pathname !== '/login' && location.pathname !== '/sign-up'}>
-        {status => (
-          <Fade status={status} exit={200}>
-            <StyledLink onClick={toggleMenu} to='/login'>
-              <Icon color={palette.success.main}>
-                <i className='material-icons'>account_box</i>
-              </Icon>
-              Login
-            </StyledLink>
-          </Fade>
-        )}
-      </FadeTransition>
+      <TransitionGroup>
+        <FadeTransition
+          exit={2000}
+          enter={2000}
+          key={loginKey()}
+        >
+          {status =>
+            (location.pathname === '/login' || location.pathname === '/sign-up' ? (
+              <Fade status={status}>
+                <StyledLink onClick={toggleMenu} to='/'>
+                  <Icon color={palette.info.main}>
+                    <i className='material-icons'>home</i>
+                  </Icon>
+                  Home
+                </StyledLink>
+              </Fade>
+            ) : (
+              <Fade status={status} exit={200}>
+                <StyledLink onClick={toggleMenu} to='/login'>
+                  <Icon color={palette.success.main}>
+                    <i className='material-icons'>account_box</i>
+                  </Icon>
+                  Login
+                </StyledLink>
+              </Fade>
+            ))}
+        </FadeTransition>
+      </TransitionGroup>
     </Wrapper>
   )
 
