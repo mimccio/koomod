@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
 import palette from '../../../style/palette'
+import { fontSize } from '../../../style/config'
 
 const Slider = styled.div`
-  // display: flex;
-  // align-self: self-start;
   position: fixed;
   z-index: 9;
-  //margin-top: 50px;
+  font-size: ${fontSize.bodyBig};
   height: 100%;
   width: 240px;
   background-color: ${palette.grey.light};
@@ -43,27 +42,63 @@ const Slider = styled.div`
   );
 `
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-centent: flex-start;
+`
+
+const StyledLink = styled(Link)`
+  color: ${({ matched }) => (matched ? palette.primary.light : palette.text)};
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+`
+
+const Icon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  //border: 2px solid red;
+  background-color: ${({ color }) => color};
+  margin-right: 20px;
+  color: white;
+  i {
+    font-size: ${fontSize.bodyHuge};
+  }
+`
+
 export default ({
   menuIsOpen,
-  history,
+
   location,
   toggleMenu,
 }: {
   menuIsOpen: boolean,
   toggleMenu: Function,
-  location: { pathname: string },
-  history: { push: (path: string) => mixed }
+  location: { pathname: string }
 }) => {
   const userId = localStorage.getItem(GC_USER_ID)
   const login =
     location.pathname === '/login' || location.pathname === '/sign-up' ? (
-      <Link onClick={toggleMenu} to='/'>
+      <StyledLink onClick={toggleMenu} to='/'>
+        <Icon color={palette.info.main}>
+          <i className='material-icons'>home</i>
+        </Icon>
         Home
-      </Link>
+      </StyledLink>
     ) : (
-      <Link onClick={toggleMenu} to='/login'>
+      <StyledLink onClick={toggleMenu} to='/login'>
+        <Icon color={palette.success.main}>
+          <i className='material-icons'>account_box</i>
+        </Icon>
         Login
-      </Link>
+      </StyledLink>
     )
   return (
     <div onBlur={() => console.log('blur')}>
@@ -71,19 +106,30 @@ export default ({
         {(status: string) => (
           <Slider status={status}>
             {userId ? (
-              <button
-                onClick={() => {
-                  toggleMenu()
-                  localStorage.removeItem(GC_USER_ID)
-                  localStorage.removeItem(GC_AUTH_TOKEN)
+              <Wrapper>
+                <StyledLink to='/recipes' onClick={toggleMenu}>
+                  <Icon color={palette.primary.accent.main}>
+                    <i className='material-icons'>restaurant_menu</i>
+                  </Icon>
+                  My recipes
+                </StyledLink>
 
-                  history.push('/')
-                }}
-              >
-                logout
-              </button>
+                <StyledLink
+                  to='/'
+                  onClick={() => {
+                    toggleMenu()
+                    localStorage.removeItem(GC_USER_ID)
+                    localStorage.removeItem(GC_AUTH_TOKEN)
+                  }}
+                >
+                  <Icon color={palette.warning.main}>
+                    <i className='material-icons'>account_box</i>
+                  </Icon>
+                  Logout
+                </StyledLink>
+              </Wrapper>
             ) : (
-              login
+              <Wrapper>{login}</Wrapper>
             )}
           </Slider>
         )}
