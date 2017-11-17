@@ -12,6 +12,7 @@ const mq = facepaint(['@media(min-width: 420px)', '@media(min-width: 920px)'])
 
 const Login = styled(FadeComp)`
   right: 0;
+  position: absolute;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -47,8 +48,8 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
     strict: false,
   })
 
-  const recipePageKeykey = matchRecipePath ? 'icon-recipe-key' : `icon-${location.key}`
-  const key = userId ? recipePageKeykey : loginKey
+  const recipePageKey = matchRecipePath ? 'icon-recipe-key' : `icon-${location.key}`
+  const key = userId ? recipePageKey : loginKey
   return (
     <TransitionGroup>
       <FadeTransition key={key}>
