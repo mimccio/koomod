@@ -9,6 +9,7 @@ import {
 import { UPDATE_RECIPE_SELECT_MUTATION } from '../../graphql/mutations'
 import { withSelectedRecipesData } from './UserSelectedRecipesData'
 import { GC_USER_ID } from '../../lib/constants'
+import ErrorMessage from '../comps/ErrorMessage'
 
 export class UserRecipesHOC extends React.Component {
   updateRecipeSelect = async (id, isSelected) => {
@@ -52,7 +53,7 @@ export class UserRecipesHOC extends React.Component {
       return loadingComp
     }
     if (error) {
-      return <p>{error.message}</p>
+      return <ErrorMessage>{error.message}</ErrorMessage>
     }
     return children(User.recipes, this.updateRecipeSelect)
   }

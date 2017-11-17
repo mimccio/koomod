@@ -5,6 +5,7 @@ import { RECIPE_INFO_QUERY } from '../../graphql/queries'
 import { UPDATE_RECIPE_INFO_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
 import { maxCheck } from '../../lib/helpers'
+import ErrorMessage from '../comps/ErrorMessage'
 
 export class RecipeInfoHOC extends React.Component {
   updateRecipeInfo = async ({ value, select }) => {
@@ -56,7 +57,7 @@ export class RecipeInfoHOC extends React.Component {
       return this.props.loadingComp
     }
     if (error) {
-      return <p>{error.message}</p>
+      return <ErrorMessage>{error.message}</ErrorMessage>
     }
     const data = {
       recipe: Recipe,

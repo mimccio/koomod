@@ -4,14 +4,15 @@ import { graphql } from 'react-apollo'
 import { NEW_RECIPE_QUERY } from '../../graphql/queries'
 import { GC_USER_ID } from '../../lib/constants'
 
-import TitleLoading from '../comps/Topbar/TitleLoading'
+import TitleMessage from '../comps/Topbar/TitleMessage'
+import handleErrors from '../../lib/handleErrors'
 
 export const NewRecipeHOC = ({ newRecipeQuery: { loading, error, User }, children }) => {
   if (loading) {
-    return <TitleLoading />
+    return <TitleMessage>loading...</TitleMessage>
   }
   if (error) {
-    return <p>{error.message}</p>
+    return <TitleMessage>{handleErrors(error.message, true)}</TitleMessage>
   }
   console.log('new recipe data', User)
   return children(User.recipes[0])

@@ -3,13 +3,14 @@ import { graphql } from 'react-apollo'
 
 import { USER_SELECTED_RECIPES_QUERY } from '../../graphql/queries'
 import { GC_USER_ID } from '../../lib/constants'
+import ErrorMessage from '../comps/ErrorMessage'
 
 export const SelectedRecipesHOC = ({ selectedRecipesQuery: { loading, error, User }, children, loadingComp }) => {
   if (loading) {
     return loadingComp
   }
   if (error) {
-    return <p>{error.message}</p>
+    return <ErrorMessage>{error.message}</ErrorMessage>
   }
 
   return children(User.recipes)
