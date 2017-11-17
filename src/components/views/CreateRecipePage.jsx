@@ -31,8 +31,10 @@ const handleKeyDown = evt => {
     evt.target.blur()
   }
   if (evt.keyCode === 13) {
+    evt.preventDefault()
     if (evt.target.id === 'name' || evt.target.id === 'pers') {
       evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.focus()
+      console.log('evt.keyCode', evt.keyCode)
       console.log(evt.target.parentNode.nextElementSibling.firstChild.nextElementSibling.id)
     }
   }
