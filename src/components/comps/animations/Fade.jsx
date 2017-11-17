@@ -8,7 +8,7 @@ const delay = 100
 export const FadeTransition = ({
   children,
   enter = delay,
-  exit = 0,
+  exit = delay,
   appear,
   ...props
 }: {

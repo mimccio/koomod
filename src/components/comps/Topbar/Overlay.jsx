@@ -15,7 +15,7 @@ const Overlay = styled.div`
   visibility: ${({ menuIsOpen }: { menuIsOpen: boolean }) => (menuIsOpen ? 'visible ' : 'hidden')};
   background-color: ${({ menuIsOpen }: { menuIsOpen: boolean }) =>
     (menuIsOpen ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0)')};
-  transition: all 300ms ease;
+  transition: all 250ms ease;
 `
 
 const closeMenu = (menuIsOpen, toggleMenu) => {

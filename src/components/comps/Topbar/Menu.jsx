@@ -2,7 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Transition, TransitionGroup } from 'react-transition-group'
-import { Link } from 'react-router-dom'
+import { Link, matchPath } from 'react-router-dom'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
 import palette from '../../../style/palette'
@@ -16,8 +16,8 @@ const Slider = styled.div`
   height: 100%;
   width: 240px;
   background-color: ${palette.grey.light};
-  padding: 60px 10px 20px 20px;
-  transition: all 3000ms ease-in-out;
+  padding-top: 60px;
+  transition: all 250ms ease-in-out;
   visibility: ${({ status }: { status: string }) => {
     if (status === 'entering') {
       return 'hidden'
@@ -47,8 +47,9 @@ const Fade = styled(FadeComp)`
   transform-origin: left;
   transition: all 200ms ease-in-out;
   position: absolute;
-  top: 70px;
 `
+
+const FadeLogin = styled(Fade)`top: 50px;`
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,12 +58,14 @@ const Wrapper = styled.div`
 `
 
 const StyledLink = styled(Link)`
-  color: ${({ matched }) => (matched ? palette.primary.light : palette.text)};
+  color: ${({ matched }) => (matched ? palette.grey.main : palette.text)};
   padding: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-top: 10px;
+  transition: all 200ms ease-in-out;
+  font-style: ${({ matched }) => (matched ? 'italic' : 'normal')};
 `
 
 const Icon = styled.div`
@@ -72,12 +75,13 @@ const Icon = styled.div`
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  //border: 2px solid red;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color, matched }) => (matched ? palette.grey.main : color)};
   margin-right: 20px;
-  color: white;
+  transition: all 200ms ease-in-out;
+
   i {
     font-size: ${fontSize.bodyHuge};
+    color: white;
   }
 `
 
@@ -92,42 +96,52 @@ export default ({
   location: { pathname: string }
 }) => {
   const userId = localStorage.getItem(GC_USER_ID)
-  const loginKey = () => {
-    if (!menuIsOpen) return 'closed'
-    return location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : 'not-login'
-  }
+  const loginKey = () =>
+    // if (!menuIsOpen) return 'closed'
+    (location.pathname === '/login' || location.pathname === '/sign-up' ? 'login' : 'not-login')
+
   const login = (
     <Wrapper>
       <TransitionGroup>
-        <FadeTransition
-          exit={2000}
-          enter={2000}
-          key={loginKey()}
-        >
+        <FadeTransition exit={200} enter={200} key={loginKey()}>
           {status =>
             (location.pathname === '/login' || location.pathname === '/sign-up' ? (
-              <Fade status={status}>
+              <FadeLogin status={status}>
                 <StyledLink onClick={toggleMenu} to='/'>
                   <Icon color={palette.info.main}>
                     <i className='material-icons'>home</i>
                   </Icon>
                   Home
                 </StyledLink>
-              </Fade>
+              </FadeLogin>
             ) : (
-              <Fade status={status} exit={200}>
+              <FadeLogin status={status} exit={200}>
                 <StyledLink onClick={toggleMenu} to='/login'>
                   <Icon color={palette.success.main}>
                     <i className='material-icons'>account_box</i>
                   </Icon>
                   Login
                 </StyledLink>
-              </Fade>
+              </FadeLogin>
             ))}
         </FadeTransition>
       </TransitionGroup>
     </Wrapper>
   )
+
+  const matchUserRecipesPage = matchPath(location.pathname, {
+    path: '/recipes',
+    exact: false,
+    strict: false,
+  })
+
+  const matchShoppingListPage = matchPath(location.pathname, {
+    path: '/shopping-list',
+    exact: false,
+    strict: false,
+  })
+
+  console.log(matchUserRecipesPage)
 
   return (
     <div onBlur={() => console.log('blur')}>
@@ -136,11 +150,17 @@ export default ({
           <Slider status={status}>
             {userId ? (
               <Wrapper>
-                <StyledLink to='/recipes' onClick={toggleMenu}>
-                  <Icon color={palette.primary.accent.main}>
+                <StyledLink to='/recipes' onClick={toggleMenu} matched={matchUserRecipesPage}>
+                  <Icon matched={matchUserRecipesPage} color={palette.primary.accent.main}>
                     <i className='material-icons'>restaurant_menu</i>
                   </Icon>
                   My recipes
+                </StyledLink>
+                <StyledLink to='/shopping-list' onClick={toggleMenu} matched={matchShoppingListPage}>
+                  <Icon matched={matchShoppingListPage} color={palette.info.main}>
+                    <i className='material-icons'>shopping_cart</i>
+                  </Icon>
+                  Shopping List
                 </StyledLink>
 
                 <StyledLink
