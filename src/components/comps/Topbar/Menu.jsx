@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../../lib/constants'
 import palette from '../../../style/palette'
 import { fontSize } from '../../../style/config'
+import { FadeTransition, FadeComp } from '../animations/Fade'
 
 const Slider = styled.div`
   position: fixed;
@@ -40,6 +41,11 @@ const Slider = styled.div`
     0,
     0
   );
+`
+
+const Fade = styled(FadeComp)`
+  transform-origin: left;
+  transition: all 200ms ease-in-out;
 `
 
 const Wrapper = styled.div`
@@ -84,22 +90,36 @@ export default ({
   location: { pathname: string }
 }) => {
   const userId = localStorage.getItem(GC_USER_ID)
-  const login =
-    location.pathname === '/login' || location.pathname === '/sign-up' ? (
-      <StyledLink onClick={toggleMenu} to='/'>
-        <Icon color={palette.info.main}>
-          <i className='material-icons'>home</i>
-        </Icon>
-        Home
-      </StyledLink>
-    ) : (
-      <StyledLink onClick={toggleMenu} to='/login'>
-        <Icon color={palette.success.main}>
-          <i className='material-icons'>account_box</i>
-        </Icon>
-        Login
-      </StyledLink>
-    )
+  const login = (
+    <Wrapper>
+      <FadeTransition enter={300} in={location.pathname === '/login' || location.pathname === '/sign-up'}>
+        {status => (
+          <Fade status={status}>
+            <StyledLink onClick={toggleMenu} to='/'>
+              <Icon color={palette.info.main}>
+                <i className='material-icons'>home</i>
+              </Icon>
+              Home
+            </StyledLink>
+          </Fade>
+        )}
+      </FadeTransition>
+
+      <FadeTransition enter={300} in={location.pathname !== '/login' && location.pathname !== '/sign-up'}>
+        {status => (
+          <Fade status={status} exit={200}>
+            <StyledLink onClick={toggleMenu} to='/login'>
+              <Icon color={palette.success.main}>
+                <i className='material-icons'>account_box</i>
+              </Icon>
+              Login
+            </StyledLink>
+          </Fade>
+        )}
+      </FadeTransition>
+    </Wrapper>
+  )
+
   return (
     <div onBlur={() => console.log('blur')}>
       <Transition in={menuIsOpen} timeout={0}>
@@ -129,7 +149,7 @@ export default ({
                 </StyledLink>
               </Wrapper>
             ) : (
-              <Wrapper>{login}</Wrapper>
+              login
             )}
           </Slider>
         )}
