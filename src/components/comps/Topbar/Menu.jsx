@@ -12,7 +12,7 @@ import { FadeTransition, FadeComp } from '../animations/Fade'
 const Slider = styled.div`
   position: fixed;
   z-index: 9;
-  font-size: ${fontSize.bodyBig};
+  font-size: ${fontSize.body};
   height: 100%;
   width: 240px;
   background-color: ${palette.grey.light};
@@ -68,26 +68,30 @@ const StyledLink = styled(Link)`
   font-style: ${({ matched }) => (matched ? 'italic' : 'normal')};
 `
 
+const LogoutLink = styled(StyledLink)`
+  position: absolute;
+  bottom: 20px;
+`
+
 const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
   background-color: ${({ color, matched }) => (matched ? palette.grey.main : color)};
   margin-right: 20px;
   transition: all 200ms ease-in-out;
 
   i {
-    font-size: ${fontSize.bodyHuge};
+    font-size: ${fontSize.bodyBig};
     color: white;
   }
 `
 
 export default ({
   menuIsOpen,
-
   location,
   toggleMenu,
 }: {
@@ -163,7 +167,7 @@ export default ({
                   Shopping List
                 </StyledLink>
 
-                <StyledLink
+                <LogoutLink
                   to='/'
                   onClick={() => {
                     toggleMenu()
@@ -175,7 +179,7 @@ export default ({
                     <i className='material-icons'>account_box</i>
                   </Icon>
                   Logout
-                </StyledLink>
+                </LogoutLink>
               </Wrapper>
             ) : (
               login
