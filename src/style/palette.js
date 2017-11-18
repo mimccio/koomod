@@ -54,6 +54,16 @@ const dangerAccent = '#ff1744' // RedA400
 const dangerAccentLight = '#ff5252' // RedA200
 const dangerAccentDark = '#d50000' // RedA700
 
+const sexy = '#E91E63' // Pink500
+const sexyLight = '#F06292 ' // Pink300
+const sexyLighter = '#F8BBD0 ' // Pink100
+const sexyDark = '#AD1457' // Pink800
+const sexyDarker = '#880E4F' // Pink890
+
+const sexyAccent = '#F50057' // PinkA400
+const sexyAccentLight = '#FF4081' // PinkA200
+const sexyAccentDark = '#C51162' // PinkA700
+
 const grey = '#9E9E9E' // Grey500
 const greyLight = '#eeeeee' // Grey300
 const greyLighter = '#fafafa' // Grey50
@@ -67,7 +77,7 @@ const divider = 'rgba(0,0,0,.12)'
 
 const palette = {
   primary: {
-    name: 'Primary',
+    name: 'primary',
     main: primary,
     light: primaryLight,
     lighter: primaryLighter,
@@ -80,7 +90,7 @@ const palette = {
     },
   },
   info: {
-    name: 'Info',
+    name: 'info',
     main: info,
     light: infoLight,
     lighter: infoLighter,
@@ -93,7 +103,7 @@ const palette = {
     },
   },
   warning: {
-    name: 'Warning',
+    name: 'warning',
     main: warning,
     light: warningLight,
     lighter: warningLighter,
@@ -106,7 +116,7 @@ const palette = {
     },
   },
   success: {
-    name: 'Success',
+    name: 'success',
     main: success,
     light: successLight,
     lighter: successLighter,
@@ -119,7 +129,7 @@ const palette = {
     },
   },
   danger: {
-    name: 'Danger',
+    name: 'danger',
     main: danger,
     light: dangerLight,
     lighter: dangerLighter,
@@ -129,6 +139,19 @@ const palette = {
       main: dangerAccent,
       light: dangerAccentLight,
       dark: dangerAccentDark,
+    },
+  },
+  sexy: {
+    name: 'sexy',
+    main: sexy,
+    light: sexyLight,
+    lighter: sexyLighter,
+    dark: sexyDark,
+    darker: sexyDarker,
+    accent: {
+      main: sexyAccent,
+      light: sexyAccentLight,
+      dark: sexyAccentDark,
     },
   },
   grey: {

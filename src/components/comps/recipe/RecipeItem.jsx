@@ -54,7 +54,8 @@ const RecipeName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-bottom: 6px;
+  padding-bottom: 6px;
+  //margin-bottom: 6px;
   color: ${({ recipeId }: { recipeId?: number | string }) =>
     (typeof recipeId === 'number' && recipeId < 0 ? palette.textSecondary : palette.text)};
 `
