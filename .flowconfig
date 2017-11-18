@@ -1,11 +1,15 @@
 [ignore]
 .*/node_modules/cypress/.*
+.*/node_modules/graphql/.*
+.*/node_modules/graphql-tag/.*
+.*/node_modules/apollo-client/.*
+.*/node_modules/react-apollo/.*
 .*/build/.*
 
 [include]
 
 [libs]
-
+facepaint
 [lints]
 
 [options]

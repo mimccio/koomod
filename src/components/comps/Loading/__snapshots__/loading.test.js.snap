@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loading test suite "Spinner" should match snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  margin: 100px auto;
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.c2 {
+  background-color: #7E57C2;
+  border-radius: 25%;
+  width: 14px;
+  height: 16px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  -webkit-animation: dWlLJE 2s infinite ease-in-out;
+  animation: dWlLJE 2s infinite ease-in-out;
+}
+
+.c3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+  width: 16px;
+  height: 14px;
+}
+
+.c4 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+.c5 {
+  -webkit-animation-delay: -1.5s;
+  animation-delay: -1.5s;
+  width: 16px;
+  height: 14px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    />
+    <div
+      className="c3 c2"
+    />
+    <div
+      className="c4 c2"
+    />
+    <div
+      className="c5 c2"
+    />
+  </div>
+</div>
+`;
