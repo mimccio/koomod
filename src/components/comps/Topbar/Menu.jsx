@@ -145,10 +145,8 @@ export default ({
     strict: false,
   })
 
-  console.log(matchUserRecipesPage)
-
   return (
-    <div onBlur={() => console.log('blur')}>
+    <div>
       <Transition in={menuIsOpen} timeout={0}>
         {(status: string) => (
           <Slider status={status}>

@@ -41,10 +41,8 @@ export class CreateFirstIngredient extends React.Component {
 
   componentWillReceiveProps(nextProp) {
     if (typeof nextProp.recipe.id === 'number' && nextProp.recipe.id < 0) {
-      console.log('nextProp.recipe.id is number', nextProp)
       this.setState({ creating: true })
     } else {
-      console.log('nextProp.recipe.id is not number', nextProp)
       this.setState({ creating: false })
     }
   }
@@ -125,7 +123,6 @@ export class CreateFirstIngredient extends React.Component {
                   <FloatingButton
                     inProgress
                     name='hourglass_empty'
-                    onClick={() => console.log('creating recipe')}
                     hide={!data.ingredient.name}
                     status={this.props.status}
                   />

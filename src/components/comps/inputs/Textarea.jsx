@@ -119,7 +119,6 @@ export default class Input extends React.Component<PropsType, StateType> {
     if (!evt.relatedTarget || evt.relatedTarget.id !== 'save') {
       this.setState({ value: this.props.val, edit: false })
     }
-    console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
   }
 
   render() {

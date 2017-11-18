@@ -50,7 +50,6 @@ export class UserRecipesHOC extends React.Component {
         },
       })
     } catch (e) {
-      console.log('updateError', e.message)
       this.setState({ updateError: e.message })
     }
   }
