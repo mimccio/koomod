@@ -1,15 +1,18 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import { PageWrapper } from '../comps/layouts'
 import palette from '../../style/palette'
 import { fontSize } from '../../style/config'
 
+const footerHeight = '80px'
+
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
 `
@@ -19,6 +22,8 @@ const ContentWrapper = styled.section`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  height: calc(100% - ${footerHeight});
+  padding-bottom: 40px;
 `
 
 const LoginBtn = styled.div`
@@ -45,12 +50,11 @@ const LoginBtn = styled.div`
   }
 `
 
-const Section = styled.section`
+const Step = styled.div`
   padding: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
 `
 
 const IconWrapper = styled.div`
@@ -68,30 +72,62 @@ const IconWrapper = styled.div`
   }
 `
 
+const Footer = styled.section`
+  //background-color: ${palette.primary.light};
+  font-size: ${fontSize.bodyTiny};
+  display: flex;
+  justify-content: center;
+  padding: 14px;
+  width: 100%;
+  height: ${footerHeight};
+  color: white;
+  color: ${palette.textSecondary};
+  border-top: 2px solid ${palette.grey.light};
+`
+
+const FooterContent = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  //width: 300px;
+`
+
 export default () => (
   <PageWrapper>
     <Wrapper>
       <ContentWrapper>
-        <Section>
-          <IconWrapper color={palette.info.accent.main}>
-            <i className='material-icons'>restaurant_menu</i>
-          </IconWrapper>
-          <p>Create your recipes</p>
-        </Section>
-        <Section>
-          <IconWrapper color={palette.sexy.accent.main}>
-            <i className='material-icons'>add_shopping_cart</i>
-          </IconWrapper>
-          <p>Select the recipes you want to shop for</p>
-        </Section>
-        <Section>
-          <IconWrapper color={palette.success.accent.main}>
-            <i className='material-icons'>shopping_cart</i>
-          </IconWrapper>
-          <p>Use your shopping list</p>
-        </Section>
+        <section>
+          <Step>
+            <IconWrapper color={palette.info.accent.main}>
+              <i className='material-icons'>restaurant_menu</i>
+            </IconWrapper>
+            <p>Create your recipes</p>
+          </Step>
+          <Step>
+            <IconWrapper color={palette.sexy.accent.main}>
+              <i className='material-icons'>add_shopping_cart</i>
+            </IconWrapper>
+            <p>Select the recipes you want to shop for</p>
+          </Step>
+          <Step>
+            <IconWrapper color={palette.success.accent.main}>
+              <i className='material-icons'>shopping_cart</i>
+            </IconWrapper>
+            <p>Use your shopping list</p>
+          </Step>
+        </section>
+        <LoginBtn>login</LoginBtn>
       </ContentWrapper>
-      <LoginBtn>login</LoginBtn>
+      <Footer>
+        <FooterContent>
+          <Link to='/tos'>Terms of Service</Link>
+          <Link to='https://www.flaticon.com' target='_blank' rel='noopener noreferrer'>
+            Logo from flaticon
+          </Link>
+          <p>© 2017-2018 Michael Maccio</p>
+        </FooterContent>
+      </Footer>
     </Wrapper>
   </PageWrapper>
 )

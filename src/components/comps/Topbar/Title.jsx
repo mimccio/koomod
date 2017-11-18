@@ -50,6 +50,15 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
         {(status: string) => (
           <Switch location={location}>
             <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />
+            <Route
+              exact
+              path='/tos'
+              render={() => (
+                <Title small status={status}>
+                  Terms of Service
+                </Title>
+              )}
+            />
             <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
             <Route exact path='/login' render={() => <Title status={status}>Login</Title>} />
             <Route exact path='/sign-up' render={() => <Title status={status}>Sign Up</Title>} />
