@@ -11,7 +11,7 @@ const RecipeItem = styled.div`
   border-bottom: 1px solid ${palette.divider};
   color: ${palette.text};
   display: flex;
-  height: 80px;
+  height: 64px;
   padding: 10px;
   width: 100%;
 `
