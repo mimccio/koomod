@@ -14,7 +14,6 @@ export const NewRecipeHOC = ({ newRecipeQuery: { loading, error, User }, childre
   if (error) {
     return <TitleMessage>{handleErrors(error.message, true)}</TitleMessage>
   }
-  console.log('new recipe data', User)
   return children(User.recipes[0])
 }
 

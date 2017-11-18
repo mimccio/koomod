@@ -44,8 +44,6 @@ export class RecipeInfoHOC extends React.Component {
         data.Recipe = updateRecipe
         data.Recipe.pers = maxCheck(Number(updatedRecipe.pers), 999)
         data.Recipe.pers = maxCheck(Number(updatedRecipe.pers), 999)
-        console.log('data', data)
-        console.log('updateRecipe', updateRecipe)
         store.writeQuery({ query: RECIPE_INFO_QUERY, data })
       },
     })

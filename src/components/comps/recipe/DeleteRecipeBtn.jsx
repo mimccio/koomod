@@ -105,11 +105,10 @@ export default class DeleteRecipeBtn extends React.Component {
 
   handleBlur = (evt) => {
     evt.stopPropagation()
-    if (evt.relatedTarget && evt.relatedTarget.id === 'confirm-delete-recipe') {
-      console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
-    } else if (evt.relatedTarget && evt.relatedTarget.id === 'delete-recipe-question') {
-      console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
-    } else {
+    if (
+      !evt.relatedTarget ||
+      (evt.relatedTarget.id !== 'confirm-delete-recipe' && evt.relatedTarget.id !== 'delete-recipe-question')
+    ) {
       this.setState({ isOpen: false })
     }
   }
