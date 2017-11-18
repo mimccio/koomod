@@ -26,7 +26,7 @@ const ContentWrapper = styled.section`
   padding-bottom: 40px;
 `
 
-const LoginBtn = styled.div`
+const LoginBtn = styled(Link)`
   transition: all 200ms ease-in-out;
   display: flex;
   justify-content: center;
@@ -117,7 +117,7 @@ export default () => (
             <p>Use your shopping list</p>
           </Step>
         </section>
-        <LoginBtn>login</LoginBtn>
+        <LoginBtn to='/login' >login</LoginBtn>
       </ContentWrapper>
       <Footer>
         <FooterContent>

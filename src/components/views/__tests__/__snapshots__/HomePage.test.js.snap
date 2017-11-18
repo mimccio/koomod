@@ -290,11 +290,13 @@ exports[`HomePage should match snapshot 1`] = `
             </p>
           </div>
         </section>
-        <div
+        <a
           className="c8"
+          href="/login"
+          onClick={[Function]}
         >
           login
-        </div>
+        </a>
       </section>
       <section
         className="c9"
