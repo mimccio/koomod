@@ -5,7 +5,6 @@ import { RECIPE_STEPS_QUERY } from '../../graphql/queries'
 import ErrorMessage from '../comps/ErrorMessage'
 
 export const RecipeStepsHOC = ({ recipeStepsQuery: { loading, error, Recipe }, children, loadingComp }) => {
-  console.log('recipe', Recipe)
   if (loading) {
     return loadingComp
   }

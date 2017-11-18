@@ -34,7 +34,7 @@
     "react/require-default-props": 0,
     "react/no-unused-prop-types": 0,
     "import/prefer-default-export": 1,
-    "no-console": 0,
+    "no-console": 1,
     "function-paren-newline": 0,
     "jsx-a11y/anchor-is-valid": [
       "error",

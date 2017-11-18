@@ -41,7 +41,6 @@ class Login extends Component {
         this.saveUserData(id, token)
         this.props.history.push('/recipes')
       } catch (error) {
-        console.log('error', error)
         this.setState({ error: error.message })
         evt.target.blur()
       }
@@ -63,7 +62,6 @@ class Login extends Component {
         this.saveUserData(id, token)
         this.props.history.push('/create-recipe')
       } catch (error) {
-        console.log('error', error)
         this.setState({ error: error.message })
         evt.target.blur()
       }
@@ -73,7 +71,6 @@ class Login extends Component {
   saveUserData = (id, token) => {
     localStorage.setItem(GC_USER_ID, id)
     localStorage.setItem(GC_AUTH_TOKEN, token)
-    console.log(id)
   }
 
   render() {

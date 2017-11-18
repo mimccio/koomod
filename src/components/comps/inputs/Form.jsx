@@ -160,9 +160,7 @@ export default class Form extends React.Component<PropsType, StateType> {
 
   handleBlur = (evt: SyntheticEvent<HTMLInputElement>) => {
     evt.stopPropagation()
-    if (evt.relatedTarget && evt.relatedTarget.id === 'save') {
-      console.log('blur', evt.relatedTarget && evt.relatedTarget.id && evt.relatedTarget.id)
-    } else {
+    if (!evt.relatedTarget || evt.relatedTarget.id !== 'save') {
       this.setState({ value: this.props.val, edit: false })
     }
   }
