@@ -6,7 +6,7 @@ import palette from '../../../style/palette'
 
 const ItemWrapper = styled.div`
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border-bottom: 1px solid ${palette.divider};
   display: flex;
   justify-content: space-between;
@@ -39,7 +39,6 @@ export default class ShoppingItem extends React.Component<Props, State> {
     return (
       <ItemWrapper isDone={this.state.isDone} onClick={() => this.setState({ isDone: !this.state.isDone })}>
         <p>{name}</p>
-
         <p>
           {quantity} {nature}
         </p>
