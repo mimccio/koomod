@@ -30,7 +30,7 @@ type State = {
   isDone: boolean
 }
 
-export default class ShoppingListItem extends React.Component<Props, State> {
+export default class ShoppingItem extends React.Component<Props, State> {
   state = {
     isDone: false,
   }
