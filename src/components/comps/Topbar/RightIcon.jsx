@@ -54,7 +54,7 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
     <TransitionGroup>
       <FadeTransition key={key}>
         {(status: string) => {
-          if (location.pathname === '/login' || location.pathname === '/sign-up') {
+          if (location.pathname === '/login' || location.pathname === '/sign-up' || location.pathname === '/tos') {
             return (
               <Link to='/'>
                 <RightBarIcon status={status}>
