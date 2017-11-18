@@ -59,7 +59,7 @@ const Wrapper = styled.div`
 
 const StyledLink = styled(Link)`
   color: ${({ matched }) => (matched ? palette.grey.main : palette.text)};
-  padding: 10px;
+  padding: 10px 16px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
