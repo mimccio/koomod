@@ -117,7 +117,7 @@ export default () => (
             <p>Use your shopping list</p>
           </Step>
         </section>
-        <LoginBtn to='/login' >login</LoginBtn>
+        <LoginBtn to='/login'>login</LoginBtn>
       </ContentWrapper>
       <Footer>
         <FooterContent>
@@ -125,6 +125,7 @@ export default () => (
           <Link to='https://www.flaticon.com' target='_blank' rel='noopener noreferrer'>
             Logo from flaticon
           </Link>
+          <a href='mailto:support@komi.recipes'>Support</a>
           <p>© 2017-2018 Michael Maccio</p>
         </FooterContent>
       </Footer>

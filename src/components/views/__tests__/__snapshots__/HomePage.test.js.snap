@@ -318,6 +318,11 @@ exports[`HomePage should match snapshot 1`] = `
           >
             Logo from flaticon
           </a>
+          <a
+            href="mailto:support@komi.recipes"
+          >
+            Support
+          </a>
           <p>
             © 2017-2018 Michael Maccio
           </p>
