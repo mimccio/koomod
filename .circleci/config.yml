@@ -38,7 +38,7 @@ jobs:
           name: Deploy branch Master, Develop or Feature (komi, komi-dev, komi-feature)
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ./node_modules/.bin/surge --project ./build --domain https://komi.surge.sh
+              ./node_modules/.bin/surge --project ./build --domain https://komi.recipes
             else
               if [ "${CIRCLE_BRANCH}" == "develop" ]; then
                 ./node_modules/.bin/surge --project ./build --domain https://komi-dev.surge.sh
