@@ -11,7 +11,8 @@ import LoginPage from './LoginPage'
 import RecipePage from './RecipePage'
 import CreateRecipePage from './CreateRecipePage'
 import CreateFirstIngredientPage from './CreateFirstIngredientPage'
-import Tos from './Tos'
+import TosPage from './TosPage'
+import CreditsPage from './CreditsPage'
 // import NoMatchPage from './NoMatchPage'
 import { GC_USER_ID } from '../../lib/constants'
 
@@ -32,7 +33,8 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
               path='/'
               render={() => (localStorage.getItem(GC_USER_ID) ? <Redirect to='/recipes' /> : <HomePage />)}
             />
-            <Route exact path='/tos' component={Tos} />
+            <Route exact path='/tos' component={TosPage} />
+            <Route exact path='/credits' component={CreditsPage} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/sign-up' render={({ history }) => <LoginPage newUser history={history} />} />
             <Route exact path='/recipes' render={() => <UserRecipesPage status={status} />} />

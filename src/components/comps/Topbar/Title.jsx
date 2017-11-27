@@ -59,6 +59,15 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
                 </Title>
               )}
             />
+            <Route
+              exact
+              path='/credits'
+              render={() => (
+                <Title small status={status}>
+                  Credits
+                </Title>
+              )}
+            />
             <Route exact path='/recipes' render={() => <Title status={status}>My Recipes</Title>} />
             <Route exact path='/login' render={() => <Title status={status}>Login</Title>} />
             <Route exact path='/sign-up' render={() => <Title status={status}>Sign Up</Title>} />
