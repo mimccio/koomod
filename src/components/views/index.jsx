@@ -13,7 +13,7 @@ import CreateRecipePage from './CreateRecipePage'
 import CreateFirstIngredientPage from './CreateFirstIngredientPage'
 import TosPage from './TosPage'
 import CreditsPage from './CreditsPage'
-// import NoMatchPage from './NoMatchPage'
+import NoMatchPage from './NoMatchPage'
 import { GC_USER_ID } from '../../lib/constants'
 
 const Routes = withRouter(({ location }: { location: { key: string, pathname: string } }) => {
@@ -53,6 +53,7 @@ const Routes = withRouter(({ location }: { location: { key: string, pathname: st
               path='/create-recipe/ingredient'
               render={({ history }) => <CreateFirstIngredientPage status={status} history={history} />}
             />
+            <Route component={NoMatchPage} />
           </Switch>
         )}
       </FadeTransition>

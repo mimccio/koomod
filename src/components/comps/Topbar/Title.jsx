@@ -106,6 +106,13 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
                 </RecipeNameData>
               )}
             />
+            <Route
+              render={() => (
+                <Title small status={status}>
+                  page not found
+                </Title>
+              )}
+            />
           </Switch>
         )}
       </FadeTransition>
