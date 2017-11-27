@@ -215,6 +215,19 @@ exports[`HomePage should match snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
@@ -223,6 +236,19 @@ exports[`HomePage should match snapshot 1`] = `
   -ms-flex-pack: space-around;
   justify-content: space-around;
   height: 100%;
+}
+
+.c11 a {
+  -webkit-transition: color 400ms ease;
+  transition: color 400ms ease;
+}
+
+.c11 a:hover {
+  color: rgba(0,0,0,.87);
+}
+
+.c12 {
+  padding: 2px;
 }
 
 <div
@@ -301,32 +327,58 @@ exports[`HomePage should match snapshot 1`] = `
       <section
         className="c9"
       >
-        <section
+        <div
           className="c10"
         >
-          <a
-            href="/tos"
-            onClick={[Function]}
+          <section
+            className="c11"
           >
-            Terms of Service
-          </a>
+            <p
+              className="c12"
+            >
+              <a
+                href="/credits"
+                onClick={[Function]}
+              >
+                Credits
+              </a>
+            </p>
+            <p
+              className="c12"
+            >
+              <a
+                href="/tos"
+                onClick={[Function]}
+              >
+                Terms of Service
+              </a>
+            </p>
+            <p
+              className="c12"
+            >
+              <a
+                href="mailto:support@komi.recipes"
+              >
+                Support
+              </a>
+            </p>
+            <p
+              className="c12"
+            >
+              © 2017-2018 Michael Maccio
+            </p>
+          </section>
           <a
-            href="/https://www.flaticon.com"
-            onClick={[Function]}
+            href="https://www.graph.cool"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Logo from flaticon
+            <img
+              alt="Backen by graphcool"
+              src="https://www.graph.cool/static/media/badge.10d1f6dd.svg"
+            />
           </a>
-          <a
-            href="mailto:support@komi.recipes"
-          >
-            Support
-          </a>
-          <p>
-            © 2017-2018 Michael Maccio
-          </p>
-        </section>
+        </div>
       </section>
     </section>
   </div>

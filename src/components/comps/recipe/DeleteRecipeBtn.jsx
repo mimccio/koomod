@@ -145,7 +145,7 @@ export default class DeleteRecipeBtn extends React.Component {
             <i className='material-icons'>delete_forever</i>
           )} */}
         </QuestionWtapper>
-        <DeleteRecipe recipeId={this.props.recipeId}>
+        <DeleteRecipe recipeId={this.props.recipeId} ingredients={this.props.ingredients} >
           {deleteRecipe => (
             <FadeTransition in={this.state.isOpen} enter={0}>
               {status => (

@@ -88,6 +88,9 @@ export const RECIPE_INFO_QUERY = gql`
       pers
       shopFor
       isOptimistic
+      ingredients {
+        id
+      }
     }
   }
 `

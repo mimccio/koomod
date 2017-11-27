@@ -5,7 +5,7 @@
 // https://material.io/guidelines/style/color.html#color-color-palette
 
 const primary = '#673ab7' // DeepPurple500
-const primaryLight = '#7E57C2 ' // DeepPurple400
+const primaryLight = '#9575CD' // DeepPurple300
 const primaryLighter = '#f3e5f5' // DeepPurple50
 const primaryDark = '#4527a0' // DeepPurple800
 const primaryDarker = '#311b92' // DeepPurple900
