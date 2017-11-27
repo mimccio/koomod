@@ -84,7 +84,7 @@ export default ({ recipe, updateRecipe }) => (
         isOptimistic={recipe.isOptimistic}
         placeholder='add recipe description...'
       />
-      <DeleteRecipeBtn recipeId={recipe.id} />
+      <DeleteRecipeBtn recipeId={recipe.id} ingredients={recipe.ingredients} />
     </ContentWrapper>
   </Wrapper>
 )

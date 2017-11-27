@@ -7,12 +7,25 @@ import {
   USER_RECIPES_WITH_INGREDIENTS_QUERY,
   USER_SELECTED_RECIPES_QUERY,
 } from '../../graphql/queries'
-import { DELETE_RECIPE_MUTATION } from '../../graphql/mutations'
+import { DELETE_RECIPE_MUTATION, DELETE_INGREDIENT_MUTATION } from '../../graphql/mutations'
 import { GC_USER_ID } from '../../lib/constants'
 
 const DeleteRecipeHOC = ({
-  deleteRecipeMutation, recipeId, children, history,
+  deleteRecipeMutation,
+  deleteIngredientMutation,
+  recipeId,
+  ingredients,
+  children,
+  history,
 }) => {
+  const deleteIngredient = async (ingredientId) => {
+    await deleteIngredientMutation({
+      variables: {
+        id: ingredientId,
+      },
+    })
+  }
+
   const deleteRecipe = async () => {
     history.push('/recipes')
     await deleteRecipeMutation({
@@ -23,7 +36,7 @@ const DeleteRecipeHOC = ({
         deleteRecipe: {
           __typename: 'Recipe',
           id: recipeId,
-          ingredients: [],
+          ingredients: null,
         },
       },
       update: (store) => {
@@ -47,6 +60,7 @@ const DeleteRecipeHOC = ({
         },
       ],
     })
+    ingredients.map(ingredient => deleteIngredient(ingredient.id))
   }
   return children(deleteRecipe)
 }
@@ -58,4 +72,8 @@ export const withDeleteRecipeMutation = graphql(DELETE_RECIPE_MUTATION, {
   }),
 })
 
-export default compose(withRouter, withDeleteRecipeMutation)(DeleteRecipeHOC)
+export const withDeleteIngredientMutation = graphql(DELETE_INGREDIENT_MUTATION, {
+  name: 'deleteIngredientMutation',
+})
+
+export default compose(withRouter, withDeleteIngredientMutation, withDeleteRecipeMutation)(DeleteRecipeHOC)
