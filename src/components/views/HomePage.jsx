@@ -85,12 +85,30 @@ const Footer = styled.section`
   border-top: 2px solid ${palette.grey.light};
 `
 
+const FooterWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+`
+
 const FooterContent = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
   //width: 300px;
+
+  a {
+    transition: color 400ms ease;
+    &:hover {
+      color: ${palette.text};
+    }
+  }
+`
+
+const FooterInfo = styled.p`
+  padding: 2px;
 `
 
 export default () => (
@@ -120,14 +138,23 @@ export default () => (
         <LoginBtn to='/login'>login</LoginBtn>
       </ContentWrapper>
       <Footer>
-        <FooterContent>
-          <Link to='/tos'>Terms of Service</Link>
-          <Link to='https://www.flaticon.com' target='_blank' rel='noopener noreferrer'>
-            Logo from flaticon
-          </Link>
-          <a href='mailto:support@komi.recipes'>Support</a>
-          <p>© 2017-2018 Michael Maccio</p>
-        </FooterContent>
+        <FooterWrapper>
+          <FooterContent>
+            <FooterInfo>
+              <Link to='/credits'>Credits</Link>
+            </FooterInfo>
+            <FooterInfo>
+              <Link to='/tos'>Terms of Service</Link>
+            </FooterInfo>
+            <FooterInfo>
+              <a href='mailto:support@komi.recipes'>Support</a>
+            </FooterInfo>
+            <FooterInfo>© 2017-2018 Michael Maccio</FooterInfo>
+          </FooterContent>
+          <a href='https://www.graph.cool' target='_blank' rel='noopener noreferrer'>
+            <img src='https://www.graph.cool/static/media/badge.10d1f6dd.svg' alt='Backen by graphcool' />
+          </a>
+        </FooterWrapper>
       </Footer>
     </Wrapper>
   </PageWrapper>
