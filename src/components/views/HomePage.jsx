@@ -147,7 +147,7 @@ export default () => (
               <Link to='/tos'>Terms of Service</Link>
             </FooterInfo>
             <FooterInfo>
-              <a href='mailto:support@komi.recipes'>Support</a>
+              <a href='mailto:appkomi@gmail.com'>Support</a>
             </FooterInfo>
             <FooterInfo>© 2017-2018 Michael Maccio</FooterInfo>
           </FooterContent>
