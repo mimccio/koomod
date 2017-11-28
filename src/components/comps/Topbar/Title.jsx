@@ -49,7 +49,7 @@ export default ({ location }: { location: { pathname: string, key: string } }) =
       <FadeTransition key={key} enter={transitionDelay} exit={transitionDelay}>
         {(status: string) => (
           <Switch location={location}>
-            <Route exact path='/' render={() => <Title status={status}>Komi</Title>} />
+            <Route exact path='/' render={() => <Title status={status}>Koomod</Title>} />
             <Route
               exact
               path='/tos'
