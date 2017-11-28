@@ -357,7 +357,7 @@ exports[`HomePage should match snapshot 1`] = `
               className="c12"
             >
               <a
-                href="mailto:support@komi.recipes"
+                href="mailto:appkomi@gmail.com"
               >
                 Support
               </a>
