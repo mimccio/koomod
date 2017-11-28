@@ -14,7 +14,7 @@ import Routes from '../views'
 import Topbar from '../comps/Topbar'
 
 const networkInterface = createNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/komi-app',
+  uri: 'https://api.graph.cool/simple/v1/koomod',
 })
 
 networkInterface.use([

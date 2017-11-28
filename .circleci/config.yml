@@ -35,16 +35,16 @@ jobs:
           name: Create build if tests pass
           command: npm run build
       - deploy:
-          name: Deploy branch Master, Develop or Feature (komi, komi-dev, komi-feature)
+          name: Deploy branch Master, Develop or Feature (koomod, koomod-dev, koomod-feature)
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ./node_modules/.bin/surge --project ./build --domain https://komi.recipes
+              ./node_modules/.bin/surge --project ./build --domain https://koomod.com
             else
               if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-                ./node_modules/.bin/surge --project ./build --domain https://komi-dev.surge.sh
+                ./node_modules/.bin/surge --project ./build --domain https://koomod-dev.surge.sh
               else
                 if [ "${CIRCLE_BRANCH}" == "feature" ]; then
-                  ./node_modules/.bin/surge --project ./build --domain https://komi-feature.surge.sh
+                  ./node_modules/.bin/surge --project ./build --domain https://koomod-feature.surge.sh
                 fi
               fi
             fi
