@@ -31,10 +31,6 @@ const Section = styled.section`
   padding: 20px;
 `
 
-const Footer = styled.section`
-  padding: 20px;
-`
-
 const Link = styled.a`
   color: ${({ color }) => color};
   transition: color 400ms ease;
@@ -90,11 +86,6 @@ export default () => (
           </p>
         </Section>
       </ContentWrapper>
-      <Footer>
-        <a href='https://www.graph.cool' target='_blank' rel='noopener noreferrer'>
-          <img src='https://www.graph.cool/static/media/badge.10d1f6dd.svg' alt='Backen by graphcool' />
-        </a>
-      </Footer>
     </Wrapper>
   </PageWrapper>
 )

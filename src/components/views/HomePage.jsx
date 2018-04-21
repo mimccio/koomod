@@ -151,9 +151,6 @@ export default () => (
             </FooterInfo>
             <FooterInfo>© 2017-2018 Michael Maccio</FooterInfo>
           </FooterContent>
-          <a href='https://www.graph.cool' target='_blank' rel='noopener noreferrer'>
-            <img src='https://www.graph.cool/static/media/badge.10d1f6dd.svg' alt='Backen by graphcool' />
-          </a>
         </FooterWrapper>
       </Footer>
     </Wrapper>
