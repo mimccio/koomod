@@ -368,16 +368,6 @@ exports[`HomePage should match snapshot 1`] = `
               © 2017-2018 Michael Maccio
             </p>
           </section>
-          <a
-            href="https://www.graph.cool"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img
-              alt="Backen by graphcool"
-              src="https://www.graph.cool/static/media/badge.10d1f6dd.svg"
-            />
-          </a>
         </div>
       </section>
     </section>
