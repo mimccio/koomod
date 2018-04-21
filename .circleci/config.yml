@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       # the Docker image with Cypress preinstalled
-      - image: cypress/internal:cy-0.19.2
+      - image: cypress/base:6
         environment:
           ## this enables colors in the output
           TERM: xterm
@@ -24,7 +24,7 @@ jobs:
           command: yarn test
       - run:
           name: Running Cypress E2E and integration tests
-          command: cypress run --reporter junit --reporter-options "mochaFile=results/my-test-output.xml"
+          command: $(npm bin)/cypress run --reporter junit --reporter-options "mochaFile=results/my-test-output.xml"
       - store_test_results:
           path: results
       - store_artifacts:
@@ -38,13 +38,11 @@ jobs:
           name: Deploy branch Master, Develop or Feature (koomod, koomod-dev, koomod-feature)
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ./node_modules/.bin/surge --project ./build --domain https://koomod.com
+              ./node_modules/.bin/surge --project ./build --domain https://koomod.surge.sh
             else
               if [ "${CIRCLE_BRANCH}" == "develop" ]; then
                 ./node_modules/.bin/surge --project ./build --domain https://koomod-dev.surge.sh
               else
-                if [ "${CIRCLE_BRANCH}" == "feature" ]; then
                   ./node_modules/.bin/surge --project ./build --domain https://koomod-feature.surge.sh
-                fi
               fi
             fi
